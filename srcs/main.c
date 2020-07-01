@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:39:32 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/01 16:43:28 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/01 18:44:38 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	main(int argc, char **argv, char **env)
 			ft_lstclear(&token_list, free);
 			exit(0);
 		}
+		if (!tokens_syntax_check(token_list))
+			return (ft_perror(ERR_UNFINISHED_QUOTE));
 		token_list = expand_tokens(&token_list, env);
 		if (!(args = list_to_argv(token_list)))
 			return (0);

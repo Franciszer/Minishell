@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_exit.c                                   :+:      :+:    :+:   */
+/*   tokens_syntax_check.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/26 10:06:24 by franciszer        #+#    #+#             */
-/*   Updated: 2020/07/01 18:45:08 by frthierr         ###   ########.fr       */
+/*   Created: 2020/07/01 18:43:38 by frthierr          #+#    #+#             */
+/*   Updated: 2020/07/01 18:43:41 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		minishell_exit(t_list *token_list)
+int		tokens_syntax_check(t_list *token_list)
 {
-	char	*token;
+	t_list	*nav;
 
-	if (!token_list)
-		return (0);
-	token = (char*)token_list->content;
-	if ((!ft_strncmp(token, "exit", (ft_strlen("exit") + 1)) ||
-		!ft_strncmp(token, "\"exit\"", (ft_strlen("\"exit\"") + 1)) ||
-		!ft_strncmp(token, "\'exit\'", (ft_strlen("\'exit\'") + 1))))
-		return (1);
-	return (0);
+	nav = token_list;
+	while (nav)
+	{
+		if (!ft_strlen((char*)nav->content) ||\
+			((((char*)nav->content)[0] == '\''	&& ((char*)nav->content)[ft_strlen((char*)nav->content) -1] != '\'') ||\
+			(((char*)nav->content)[0] == '\"'	&& ((char*)nav->content)[ft_strlen((char*)nav->content) -1] != '\"')))
+			return (0);
+		nav = nav->next;
+	}
+	return (1);
 }

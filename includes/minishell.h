@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:40:30 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/01 15:24:17 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/01 18:44:08 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ size_t	tokenLenDQuote(char *tokenStart);
 size_t	token_len_special(char *token_start);
 int		free_argv(char **argv, int max_index);
 char	**list_to_argv(t_list *token_list);
+int		tokens_syntax_check(t_list *token_list);
 
 /*
 **       ______TOKEN_EXPANSION_____

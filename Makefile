@@ -11,6 +11,7 @@ SRCS=	srcs/parsing/prompt_loop.c\
 		srcs/parsing/tokenLen.c\
 		srcs/parsing/tokenize.c\
 		srcs/parsing/argv_functions.c\
+		srcs/parsing/tokens_syntax_check.c\
 		srcs/commands/minishell_exit.c\
 		srcs/token_expansion/get_env.c\
 		srcs/token_expansion/expand_tokens.c\

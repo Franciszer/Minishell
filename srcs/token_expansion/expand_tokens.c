@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 11:57:50 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/01 17:04:04 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/01 18:43:15 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,8 @@ t_list	*expand_tokens(t_list **token_list, char **env)
 	t_list	*expanded_list;
 
 	// CHECK FOR UNFINISHED QUOTES
-	expanded_list = ft_lstfilter_data(token_list, get_final_token, free, (void*)env);
+	if (!(expanded_list = ft_lstfilter_data(token_list, get_final_token, free, (void*)env)))
+		return (NULL);
 	ft_lstclear(token_list, free);
 	return (expanded_list);
 }
