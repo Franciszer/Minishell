@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:40:30 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/02 16:30:42 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/02 18:12:42 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <errno.h>
 
 /*
 **	DEFINES
@@ -27,6 +28,10 @@
 
 # define PROMPT_START_MSG "minishell$ "
 # define MINISHELL_PATH "./minishell"
+
+# define NB_BUILTINS 1
+
+# define BUILTIN_CD 0
 
 /*
 ** ________FUNCTIONS________

@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 16:17:09 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/02 17:00:08 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/02 18:25:22 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int		execute_commands(t_list *commandlist, char **env)
 	t_list	*nav;
 	t_list	*token_list;
 	char	**args;
+	int		exit_status;
 
 	nav = commandlist;
 	while (nav)
@@ -61,7 +62,7 @@ int		execute_commands(t_list *commandlist, char **env)
 		token_list = expand_tokens(&token_list, env);
 		if (!(args = list_to_argv(token_list)))
 			return (0);
-		minishell_launch(args, env);
+		exit_status = minishell_launch(args, env);
 		free_argv(args, INT_MAX);
 		nav = nav->next;
 	}
