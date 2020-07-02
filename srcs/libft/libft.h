@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 14:42:29 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/01 15:06:35 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/02 12:10:43 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 # include "ft_printf/ft_printf.h"
 # define BUFFER_SIZE 512
 

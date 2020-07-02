@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 11:57:50 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/01 18:43:15 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/02 11:46:30 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,6 @@ char	*expand_token_noquote(char *token, char **env)
 	return (final_token);
 }
 
-// \ $ "
-
-int		is_specialchar_dquote(char c)
-{
-	if (c == '\\' || c == '$' || c == '\"')
-		return (1);
-	else
-		return (0);
-}
-
 char	*expand_token_dquote(char *token, char **env)
 {
 	int		i;
@@ -79,7 +69,7 @@ char	*expand_token_dquote(char *token, char **env)
 	i = 0;
 	j = 0;
 	prev_is_backslash = 0;
-	if (!(final_token = (char*)malloc(sizeof(char) * 100)))
+	if (!(final_token = (char*)malloc(sizeof(char) * ft_strlen_etokens(token, env))))
 		return (NULL);
 	while (token[i])
 	{
@@ -146,7 +136,6 @@ t_list	*expand_tokens(t_list **token_list, char **env)
 {
 	t_list	*expanded_list;
 
-	// CHECK FOR UNFINISHED QUOTES
 	if (!(expanded_list = ft_lstfilter_data(token_list, get_final_token, free, (void*)env)))
 		return (NULL);
 	ft_lstclear(token_list, free);

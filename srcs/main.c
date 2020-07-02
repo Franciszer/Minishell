@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:39:32 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/01 18:44:38 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/02 17:02:15 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,23 @@
 int	main(int argc, char **argv, char **env)
 {
 	t_list	*token_list;
-	char	**args;
+	t_list	*command_list;
 
 	(void)argc;
 	argv = NULL;
 	while (1)
 	{
 		token_list = prompt_loop();
-		if (minishell_exit(token_list))
-		{
-			ft_lstclear(&token_list, free);
-			exit(0);
-		}
 		if (!tokens_syntax_check(token_list))
-			return (ft_perror(ERR_UNFINISHED_QUOTE));
-		token_list = expand_tokens(&token_list, env);
-		if (!(args = list_to_argv(token_list)))
-			return (0);
-		print_argv(args);
-		ft_lstclear(&token_list, free);
-		free_argv(args, INT_MAX);
+			ft_perror(ERR_UNFINISHED_QUOTE);
+		else
+		{
+			command_list = get_command_list(token_list);
+			if (command_list)
+			{
+				if (!execute_commands(command_list, env))
+					return (0);
+			}
+		}
 	}
 }

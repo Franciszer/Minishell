@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 12:17:48 by frthierr          #+#    #+#             */
-/*   Updated: 2020/06/29 12:21:29 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/02 15:55:07 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,16 @@ int		free_argv(char **argv, int max_index)
 {
 	int	i;
 
-	i = 0;
-	while (i < max_index && argv[i])
+	if (argv)
 	{
-		free(argv[i]);
-		i++;
+		i = 0;
+		while (i < max_index && argv[i])
+		{
+			free(argv[i]);
+			i++;
+		}
+		free(argv);
 	}
-	free(argv);
 	return (0);
 }
 

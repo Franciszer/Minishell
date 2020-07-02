@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 16:41:59 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/01 17:58:56 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/02 14:56:32 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,5 @@
 
 int	main(int argc, char **argv, char **env)
 {
-	 char str[] = "\"\"";
-	printf("%zu\n", ft_strlen(str));
+	printf("%s\n", ERR_PID);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_loop.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/26 10:35:07 by franciszer        #+#    #+#             */
-/*   Updated: 2020/06/28 14:14:04 by franciszer       ###   ########.fr       */
+/*   Created: 2020/07/02 14:48:38 by frthierr          #+#    #+#             */
+/*   Updated: 2020/07/02 14:48:40 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -6,26 +6,30 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 14:37:03 by franciszer        #+#    #+#             */
-/*   Updated: 2020/06/29 13:34:57 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/02 15:28:16 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		minishell_launch(char **argv)
+int		minishell_launch(char **argv, char **env)
 {
-	t_commands	*commands;
-	int			index;
+	pid_t	pid;
+	char	*tmp;
 
-	if (!(commands = init_commands()))
-		return (0);
-	if ((index = get_command_index(argv[0], commands)) >= 0)
+	tmp = search_path(argv[0], env);
+	free(argv[0]);
+	argv[0] = tmp;
+	if (!(pid = fork()))
 	{
-		if ((execve((const char*)commands->command_paths[index], NULL, NULL)) == -1)
-			ft_printf("ERROR\n");
+		if (execve(argv[0], argv, env) == -1)
+			ft_perror(ERR_EXECVE);
 	}
+	else if (pid < 0)
+		ft_perror(ERR_PID);
 	else
-		ft_perror(ERR_UNKNOWN_COMMAND);
-	free_commands(commands);
+	{
+		wait(&pid);
+	}
 	return (1);
 }

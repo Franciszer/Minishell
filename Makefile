@@ -13,11 +13,13 @@ SRCS=	srcs/parsing/prompt_loop.c\
 		srcs/parsing/argv_functions.c\
 		srcs/parsing/tokens_syntax_check.c\
 		srcs/commands/minishell_exit.c\
+		srcs/commands/search_path.c\
 		srcs/token_expansion/get_env.c\
 		srcs/token_expansion/expand_tokens.c\
 		srcs/token_expansion/token_expansion_utils.c\
-		srcs/launch_commands/command_functions.c\
 		srcs/launch_commands/minishell_launch.c\
+		srcs/launch_commands/execute_commands.c\
+		srcs/launch_commands/command_utils.c\
 		srcs/utils/print_tokens.c
 INCLUDE_DIRS = -I srcs/libft\
 			-I includes	
@@ -43,6 +45,7 @@ $(NAME):	${OBJECTS}
 			@cc ${FLAGS} -fsanitize=address ${MAIN} ${OBJECTS} ${INCLUDE_DIRS} ${LIB} -o ${NAME}
 			@echo "${GREEN}✓  minishell successfully compiled${NC}"
 start: all
+	@@echo "${GREEN}✓  minishell launched${NC}"
 	@./${NAME}
 	@rm -rf ${NAME}
 

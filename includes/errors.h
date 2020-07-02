@@ -6,11 +6,11 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 14:12:42 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/01 18:22:37 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/02 14:56:28 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef ERRORS_H
+#ifndef ERRORS_H
 
 # define ERRORS_H
 
@@ -20,8 +20,10 @@
 
 # define ERR_UNEXPECTED_TOKEN "syntax error near unexpected token"
 
-// # define ERR_TOKENLEN 222222222222222222
-
 # define ERR_UNKNOWN_COMMAND "unknown command"
+
+# define ERR_PID "error creating new process"
+
+# define ERR_EXECVE "error executing command"
 
 #endif

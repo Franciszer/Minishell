@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 15:04:43 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/01 17:04:39 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/02 11:46:41 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,37 @@ char	*remove_quotes_free(char *str, char quote)
 	if (!(new = ft_strndup(&str[i], len)))
 		return (NULL);
 	return (new);
+}
+
+int		is_specialchar_dquote(char c)
+{
+	if (c == '\\' || c == '$' || c == '\"')
+		return (1);
+	else
+		return (0);
+}
+
+size_t	ft_strlen_etokens(char *s, char **env)
+{
+	int		i;
+	size_t	maxlen;
+	size_t	evar_count;
+	
+	i = 0;
+	maxlen = 0;
+	evar_count = 0;
+	while (env[i])
+	{
+		if (ft_strlen(env[i]) > maxlen)
+			maxlen = ft_strlen(env[i]);
+		i++;
+	}
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == '$')
+			evar_count++;
+		i++;
+	}
+	return (ft_strlen(s) + (evar_count * maxlen) + 1);
 }
