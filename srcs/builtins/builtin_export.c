@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:25:27 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/03 16:29:14 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/03 17:13:39 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,21 @@ static int	export_check_syntax(char **argv)
 
 int		modify_env_var(int index, char **argv, char **env)
 {
+	t_list	*env_list;
+	t_list	*new;
+	t_list	*nav;
+	char	*cmp;
+
+	if (!(env_list = ft_argv_to_list(env)))
+		return (1);
+	nav = env_list;
+	while (nav)
+	{
+		if (!ft_strncmp((char*)nav->content, argv[index], ft_strlen_char((char*)nav->content, '=')))
+		{
+			
+		}
+	}
 	
 }
 
