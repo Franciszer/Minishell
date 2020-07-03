@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:40:30 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/02 18:12:42 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/03 14:58:41 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,14 @@
 # define PROMPT_START_MSG "minishell$ "
 # define MINISHELL_PATH "./minishell"
 
-# define NB_BUILTINS 1
-
 # define BUILTIN_CD 0
+# define BUILTIN_EXIT 1
+# define BUILTIN_PWD 2
+# define BUILTIN_ENV 3
+# define BUILTIN_ECHO 4	
+
+# define SAVE_POINTERS_TO_EXIT 0
+# define EXIT_NOW 1
 
 /*
 ** ________FUNCTIONS________
@@ -53,8 +58,6 @@ size_t			tokenLen(char *tokenStart);
 size_t			tokenLenSQuote(char *tokenStart);
 size_t			tokenLenDQuote(char *tokenStart);
 size_t			token_len_special(char *token_start);
-int				free_argv(char **argv, int max_index);
-char			**list_to_argv(t_list *token_list);
 int				tokens_syntax_check(t_list *token_list);
 
 /*
@@ -75,11 +78,24 @@ int				is_specialchar_dquote(char c);
 */
 
 t_list			*get_command_list(t_list *token_list);
-int				execute_commands(t_list *commandlist, char **env);
+int				execute_commands(t_list **commandlist, char **env);
 void			free_commandlist(t_list *commandlist);
-int				minishell_exit(t_list *token_list);
+void			exit_minishell(int exit_code, int action, t_list **commandlist, char ***args);
 int				minishell_launch(char **argv, char **env);
 char			*search_path(char *command, char **env);
+
+/*
+**		_____BUILTINS_____
+*/
+
+int				is_builtin(char *command);
+int				launch_builtin(int builtin_id, char **argv, char **env);
+int				builtin_cd(char **args, char **env);
+int				builtin_exit(char **args);
+int				builtin_pwd(char **env);
+int				builtin_env(char **env);
+int				builtin_echo(char **argv);
+
 
 /*
 **		______UTILS______

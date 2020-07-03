@@ -7,6 +7,7 @@ ft_bzero.c\
 ft_calloc.c\
 ft_isalnum.c\
 ft_isalpha.c\
+ft_is_strdigit.c\
 ft_isspace.c\
 ft_is_stralpha.c\
 ft_isascii.c\
@@ -50,6 +51,9 @@ ft_tolower.c\
 ft_toupper.c\
 gnl/get_next_line_utils.c\
 gnl/get_next_line.c\
+ft_argv_to_list.c\
+list_to_argv.c\
+free_argv.c\
 ft_lstadd_back.c\
 ft_lstadd_front.c\
 ft_lstclear.c\

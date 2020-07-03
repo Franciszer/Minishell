@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 14:42:29 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/02 12:10:43 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/03 14:40:07 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void			*ft_calloc(size_t nmemb, size_t size);
 int				ft_isalnum(int c);
 int				ft_isalpha(int c);
 int				ft_is_stralpha(char *s);
+int				ft_is_strdigit(char *str);
 int				ft_isascii(int c);
 int				ft_isdigit(int c);
 int				ft_isprint(int c);
@@ -74,6 +75,9 @@ char			*ft_strtrim(char const *s, char const *set);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 int				ft_tolower(int c);
 int				ft_toupper(int c);
+t_list			*ft_argv_to_list(char **argv);
+char			**list_to_argv(t_list *token_list);
+int				free_argv(char **argv, int max_index);
 t_list			*ft_lstnew(void *content);
 void			ft_lstadd_front(t_list **alst, t_list *new);
 t_list			*ft_lstfilter(t_list **list, void *(*f)(void *), void (*del)(void *));

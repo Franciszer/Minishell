@@ -1,36 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_argv_to_list.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/24 13:39:32 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/03 12:23:28 by frthierr         ###   ########.fr       */
+/*   Created: 2020/07/03 14:27:08 by frthierr          #+#    #+#             */
+/*   Updated: 2020/07/03 14:38:42 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	main(int argc, char **argv, char **env)
+t_list	*ft_argv_to_list(char **argv)
 {
-	t_list	*token_list;
-	t_list	*command_list;
+	int		i;
+	t_list	*list;
+	t_list	*new;
+	char	*tmp;
 
-	(void)argc;
-	argv = NULL;
-	while (1)
+	if (!argv)
+		return (NULL);
+	i = 0;
+	list = NULL;
+	while (argv[i])
 	{
-		token_list = prompt_loop();
-		if (!tokens_syntax_check(token_list))
-			ft_perror(ERR_UNFINISHED_QUOTE);
+		if (!(tmp = ft_strdup(argv[i])))
+			return (NULL);
+		if (!(new = ft_lstnew((void*)tmp)))
+			return (NULL);
+		if (!list)
+			ft_lstadd_back(&list, new);
 		else
-		{
-			if ((command_list = get_command_list(token_list)))
-			{
-				if (!execute_commands(&command_list, env))
-					return (0);
-			}
-		}
+			list = new;
+		i++;
 	}
+	return (list);
 }

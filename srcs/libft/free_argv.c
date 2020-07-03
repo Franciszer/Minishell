@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_exit.c                                   :+:      :+:    :+:   */
+/*   free_argv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/26 10:06:24 by franciszer        #+#    #+#             */
-/*   Updated: 2020/07/01 18:45:08 by frthierr         ###   ########.fr       */
+/*   Created: 2020/07/03 14:38:58 by frthierr          #+#    #+#             */
+/*   Updated: 2020/07/03 14:39:39 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int		minishell_exit(t_list *token_list)
+int		free_argv(char **argv, int max_index)
 {
-	char	*token;
+	int	i;
 
-	if (!token_list)
-		return (0);
-	token = (char*)token_list->content;
-	if ((!ft_strncmp(token, "exit", (ft_strlen("exit") + 1)) ||
-		!ft_strncmp(token, "\"exit\"", (ft_strlen("\"exit\"") + 1)) ||
-		!ft_strncmp(token, "\'exit\'", (ft_strlen("\'exit\'") + 1))))
-		return (1);
+	if (argv)
+	{
+		i = 0;
+		while (i < max_index && argv[i])
+		{
+			free(argv[i]);
+			i++;
+		}
+		free(argv);
+	}
 	return (0);
 }

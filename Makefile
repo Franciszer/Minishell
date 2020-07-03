@@ -10,9 +10,7 @@ SRCS=	srcs/parsing/prompt_loop.c\
 		srcs/parsing/parsingUtils.c\
 		srcs/parsing/tokenLen.c\
 		srcs/parsing/tokenize.c\
-		srcs/parsing/argv_functions.c\
 		srcs/parsing/tokens_syntax_check.c\
-		srcs/commands/minishell_exit.c\
 		srcs/commands/search_path.c\
 		srcs/token_expansion/get_env.c\
 		srcs/token_expansion/expand_tokens.c\
@@ -20,6 +18,12 @@ SRCS=	srcs/parsing/prompt_loop.c\
 		srcs/launch_commands/minishell_launch.c\
 		srcs/launch_commands/execute_commands.c\
 		srcs/launch_commands/command_utils.c\
+		srcs/builtins/builtin_cd.c\
+		srcs/builtins/builtin_exit.c\
+		srcs/builtins/builtin_pwd.c\
+		srcs/builtins/builtin_env.c\
+		srcs/builtins/builtin_echo.c\
+		srcs/builtins/launch_builtin.c\
 		srcs/utils/print_tokens.c
 INCLUDE_DIRS = -I srcs/libft\
 			-I includes	

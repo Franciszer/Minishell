@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/24 13:39:32 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/03 12:23:28 by frthierr         ###   ########.fr       */
+/*   Created: 2020/07/03 11:30:42 by frthierr          #+#    #+#             */
+/*   Updated: 2020/07/03 13:40:28 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **env)
+int		builtin_exit(char **args)
 {
-	t_list	*token_list;
-	t_list	*command_list;
+	int		i;
+	int		exit_code;
 
-	(void)argc;
-	argv = NULL;
-	while (1)
+	i = 0;
+	while (args[i])
+		i++;
+	exit_code = 0;
+	if (i > 1 && !ft_is_strdigit(args[1]))
+		exit_code = 255;
+	else if (i > 2)
 	{
-		token_list = prompt_loop();
-		if (!tokens_syntax_check(token_list))
-			ft_perror(ERR_UNFINISHED_QUOTE);
-		else
-		{
-			if ((command_list = get_command_list(token_list)))
-			{
-				if (!execute_commands(&command_list, env))
-					return (0);
-			}
-		}
-	}
+		ft_perror(ERR_TOO_MANY_ARGS);
+		return (1);
+	}		
+	exit_minishell(exit_code, EXIT_NOW, NULL, NULL);
+	return (0);
 }
+

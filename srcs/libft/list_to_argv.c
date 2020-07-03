@@ -1,34 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   argv_functions.c                                   :+:      :+:    :+:   */
+/*   list_to_argv.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/29 12:17:48 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/02 15:55:07 by frthierr         ###   ########.fr       */
+/*   Created: 2020/07/03 14:36:34 by frthierr          #+#    #+#             */
+/*   Updated: 2020/07/03 14:36:48 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-
-int		free_argv(char **argv, int max_index)
-{
-	int	i;
-
-	if (argv)
-	{
-		i = 0;
-		while (i < max_index && argv[i])
-		{
-			free(argv[i]);
-			i++;
-		}
-		free(argv);
-	}
-	return (0);
-}
+#include "libft.h"
 
 char	**list_to_argv(t_list *token_list)
 {

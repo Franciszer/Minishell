@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/24 13:39:32 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/03 12:23:28 by frthierr         ###   ########.fr       */
+/*   Created: 2020/07/03 13:56:49 by frthierr          #+#    #+#             */
+/*   Updated: 2020/07/03 14:05:13 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **env)
+int	builtin_pwd(char **env)
 {
-	t_list	*token_list;
-	t_list	*command_list;
+	char	*pwd;
 
-	(void)argc;
-	argv = NULL;
-	while (1)
-	{
-		token_list = prompt_loop();
-		if (!tokens_syntax_check(token_list))
-			ft_perror(ERR_UNFINISHED_QUOTE);
-		else
-		{
-			if ((command_list = get_command_list(token_list)))
-			{
-				if (!execute_commands(&command_list, env))
-					return (0);
-			}
-		}
-	}
+	if (!(pwd=get_env("PWD", env)))
+		return (1);
+	ft_putendl_fd(pwd, STDOUT_FILENO);
+	free(pwd);
+	return (0);
 }
