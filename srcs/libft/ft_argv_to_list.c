@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 14:27:08 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/03 14:38:42 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/03 15:34:43 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ t_list	*ft_argv_to_list(char **argv)
 		if (!(new = ft_lstnew((void*)tmp)))
 			return (NULL);
 		if (!list)
-			ft_lstadd_back(&list, new);
-		else
 			list = new;
+		else
+			ft_lstadd_back(&list, new);
 		i++;
 	}
 	return (list);

@@ -23,6 +23,7 @@ SRCS=	srcs/parsing/prompt_loop.c\
 		srcs/builtins/builtin_pwd.c\
 		srcs/builtins/builtin_env.c\
 		srcs/builtins/builtin_echo.c\
+		srcs/builtins/builtin_export.c\
 		srcs/builtins/launch_builtin.c\
 		srcs/utils/print_tokens.c
 INCLUDE_DIRS = -I srcs/libft\
@@ -39,7 +40,7 @@ NC=\033[0m
 all: $(NAME)
 
 .c.o:
-	@${CC} ${FLAGS} ${INCLUDE_DIRS} -c $< -o ${<:.c=.o}
+	@${CC} ${INCLUDE_DIRS} -c $< -o ${<:.c=.o}
 
 $(NAME):	${OBJECTS}
 			@rm -rf logs

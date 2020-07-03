@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 11:20:05 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/03 15:01:06 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/03 15:28:54 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int		is_builtin(char *command)
 		return (BUILTIN_ENV);
 	else if (!ft_strncmp(command, "echo", ft_strlen("echo") + 1))
 		return (BUILTIN_ECHO);
+	else if (!ft_strncmp(command, "export", ft_strlen("export") + 1))
+		return (BUILTIN_EXPORT);
 	else
 		return (-1);
 }
@@ -40,6 +42,8 @@ int		launch_builtin(int builtin_id, char **argv, char **env)
 		return (builtin_env(env));
 	else if (builtin_id == BUILTIN_ECHO)
 		return (builtin_echo(argv));
+	else if (builtin_id == BUILTIN_EXPORT)
+		return (builtin_export(argv, env));
 	else
 		return (-1);
 }
