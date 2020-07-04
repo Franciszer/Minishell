@@ -6,11 +6,13 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 16:17:09 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/04 19:58:02 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/04 20:20:40 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int		g_exit_status;
 
 t_list	*copy_command(t_list *command_start)
 {
@@ -67,43 +69,11 @@ t_list	*get_command_list(t_list *token_list)
 	return (command_list);
 }
 
-// t_list	*get_command_list(t_list *token_list)
-// {
-// 	t_list	*command_list;
-// 	t_list	*nav;
-// 	t_list	*tmp;
-
-// 	nav = token_list;
-// 	tmp = NULL;
-// 	if (!(command_list = ft_lstnew(token_list)))
-// 		return (NULL);
-// 	while (nav)
-// 	{
-// 		if (tmp && (nav->content && ((char*)nav->content)[0] == ';'))
-// 		{
-// 			tmp->next = NULL;
-// 			tmp = nav;
-// 			nav = nav->next;
-// 			ft_lstdelone(tmp, free);
-// 			if (!(tmp = ft_lstnew(nav)))
-// 				return (NULL);
-// 			ft_lstadd_back(&command_list, tmp);
-// 		}
-// 		else
-// 		{
-// 			tmp = nav;
-// 			nav = nav->next;
-// 		}
-// 	}
-// 	return (command_list);
-// }
-
 int		execute_commands(t_list **commandlist, char **env)
 {
 	t_list	*nav;
 	char	**args;
 	t_list	*tmp_list;
-	int		exit_status;
 
 	nav = *commandlist;
 	while (nav)
@@ -117,7 +87,7 @@ int		execute_commands(t_list **commandlist, char **env)
 		if (!(args = list_to_argv((t_list*)nav->content)))
 			return (0);
 		exit_minishell(0, SAVE_POINTERS_TO_EXIT, commandlist, &args);
-		exit_status = minishell_launch(args, env);
+		g_exit_status = minishell_launch(args, env);
 		free_argv(args, INT_MAX);
 		nav = nav->next;
 	}

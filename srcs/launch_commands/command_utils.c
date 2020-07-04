@@ -6,7 +6,7 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 16:21:03 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/04 15:47:53 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/04 20:15:00 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void		free_commandlist(t_list **commandlist)
 {
 	t_list	*nav;
 	t_list	*tmp;
-	t_list	*token_list;
 
 	if (!commandlist)
 		return ;

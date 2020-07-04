@@ -6,7 +6,7 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 14:37:03 by franciszer        #+#    #+#             */
-/*   Updated: 2020/07/04 19:34:45 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/04 20:33:08 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ int		minishell_launch(char **argv, char **env)
 	else if (builtin_id == -2)
 		return (-1);
 	if (!(tmp = search_path(argv[0], env)))
-		return (0);
+	{
+		ft_perror(ERR_UNKNOWN_COMMAND);
+		return (1);
+	}
 	free(argv[0]);
 	argv[0] = tmp;
 	if (!(pid = fork()))

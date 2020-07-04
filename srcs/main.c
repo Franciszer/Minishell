@@ -6,7 +6,7 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:39:32 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/04 19:08:08 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/04 20:20:07 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ int	main(int argc, char **argv, char **env)
 	t_list	*token_list;
 	t_list	*command_list;
 
-	(void)argc;
-	argv = NULL;
+	if (argc > 1 || argv[1])
+	{
+		ft_perror(ERR_TOO_MANY_ARGS);
+		return (1);
+	}
 	while (1)
 	{
 		token_list = prompt_loop();
