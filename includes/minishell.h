@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:40:30 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/03 15:27:25 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/04 16:35:53 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char			*get_env(char *key, char **env);
 int				ft_strlen_key(char *key_start);
 char			*expand_env(char *token, int *i, int *j, char **env);
 void			*get_final_token(void *content, void *env);
-t_list			*expand_tokens(t_list **token_list, char **env);
+t_list			*expand_tokens(t_list *token_list, char **env);
 char			*expand_token_noquote(char *token, char **env);
 size_t			ft_strlen_etokens(char *s, char **env);
 int				is_specialchar_dquote(char c);
@@ -80,7 +80,7 @@ int				is_specialchar_dquote(char c);
 
 t_list			*get_command_list(t_list *token_list);
 int				execute_commands(t_list **commandlist, char **env);
-void			free_commandlist(t_list *commandlist);
+void			free_commandlist(t_list **commandlist);
 void			exit_minishell(int exit_code, int action, t_list **commandlist, char ***args);
 int				minishell_launch(char **argv, char **env);
 char			*search_path(char *command, char **env);
@@ -91,7 +91,7 @@ char			*search_path(char *command, char **env);
 
 int				is_builtin(char *command);
 int				launch_builtin(int builtin_id, char **argv, char **env);
-int				builtin_cd(char **args, char **env);
+int				builtin_cd(char **args);
 int				builtin_exit(char **args);
 int				builtin_pwd(char **env);
 int				builtin_env(char **env);

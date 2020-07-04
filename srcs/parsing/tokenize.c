@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 16:27:14 by frthierr          #+#    #+#             */
-/*   Updated: 2020/06/30 12:25:37 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/04 15:54:56 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ size_t	get_token(char *tokenStart, t_list **tokenlist)
 		token_len = tokenLen(tokenStart);
 	if (!(token = ft_strndup((const char*)tokenStart, token_len)))
 		return (0);
-	add_to_token_list(token, tokenlist);
+	if (!add_to_token_list(token, tokenlist))
+		return (0);
 	return (token_len);
 }
 

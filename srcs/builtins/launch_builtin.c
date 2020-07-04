@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 11:20:05 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/03 15:28:54 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/04 14:26:08 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		is_builtin(char *command)
 int		launch_builtin(int builtin_id, char **argv, char **env)
 {
 	if (builtin_id == BUILTIN_CD)
-		return (builtin_cd(argv, env));
+		return (builtin_cd(argv));
 	else if (builtin_id == BUILTIN_EXIT)
 		return (builtin_exit(argv));
 	else if (builtin_id == BUILTIN_PWD)

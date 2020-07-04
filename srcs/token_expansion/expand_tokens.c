@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 11:57:50 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/03 12:49:18 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/04 16:53:55 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char	*expand_token_noquote(char *token, char **env)
 	int		j;
 	int		prev_is_backslash;
 	char	*final_token;
+	char	*tmp;
 	
 
 	i = 0;
@@ -36,8 +37,10 @@ char	*expand_token_noquote(char *token, char **env)
 			}
 			else if (token[i] == '$' && token[i + 1] && ft_isalnum(token[i + 1]))
 			{
+				tmp = final_token;
 				if (!(final_token = expand_env(token, &i, &j, env)))
 					return (NULL);
+				free(tmp);
 			}
 			else
 			{
@@ -64,6 +67,7 @@ char	*expand_token_dquote(char *token, char **env)
 	int		j;
 	int		prev_is_backslash;
 	char	*final_token;
+	char	*tmp;
 	
 
 	i = 0;
@@ -82,8 +86,10 @@ char	*expand_token_dquote(char *token, char **env)
 			}
 			else if (token[i] == '$' && token[i + 1] && ft_isalnum(token[i + 1]))
 			{
+				tmp = final_token;
 				if (!(final_token = expand_env(token, &i, &j, env)))
 					return (NULL);
+				free(tmp);
 			}
 			else
 			{
@@ -102,6 +108,7 @@ char	*expand_token_dquote(char *token, char **env)
 			i++;
 		}
 	}
+	free(token);
 	final_token[j] = '\0';
 	return (final_token);
 }
@@ -132,11 +139,13 @@ void	*get_final_token(void *content, void *env)
 		return (str);
 }
 
-t_list	*expand_tokens(t_list **token_list, char **env)
+t_list	*expand_tokens(t_list *token_list, char **env)
 {
 	t_list	*expanded_list;
-
-	if (!(expanded_list = ft_lstfilter_data(token_list, get_final_token, free, (void*)env)))
+	t_list	*tmp_list;
+	
+	tmp_list = token_list;
+	if (!(expanded_list = ft_lstfilter_data(&tmp_list, get_final_token, free, (void*)env)))
 		return (NULL);
 	return (expanded_list);
 }

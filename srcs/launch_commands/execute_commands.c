@@ -3,62 +3,119 @@
 /*                                                        :::      ::::::::   */
 /*   execute_commands.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 16:17:09 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/03 13:02:32 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/04 16:34:39 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+t_list	*copy_command(t_list *command_start)
+{
+	t_list	*command_copy;
+	char	*token_copy;
+	t_list	*nav;
+	t_list	*node_copy;
+
+	nav = command_start;
+	token_copy = NULL;
+	command_copy = NULL;
+	while (nav && nav->content && ((char*)nav->content)[0] != ';')
+	{
+		if (!(token_copy = ft_strdup((char*)nav->content)))
+			return (NULL);
+		if (!(node_copy = ft_lstnew(token_copy)))
+			return (NULL);
+		if (!command_copy)
+			command_copy = node_copy;
+		else
+			ft_lstadd_back(&command_copy, node_copy);
+		nav = nav->next;
+	}
+	return (command_copy);
+}
+
 t_list	*get_command_list(t_list *token_list)
 {
 	t_list	*command_list;
 	t_list	*nav;
-	t_list	*tmp;
-
+	t_list	*new_node;
+	t_list	*new_node_content;
+	
 	nav = token_list;
-	tmp = NULL;
-	if (!(command_list = ft_lstnew(token_list)))
-		return (NULL);
+	command_list = NULL;
 	while (nav)
 	{
-		if (tmp && (nav->content && ((char*)nav->content)[0] == ';'))
+		if (nav->content && ((char*)nav->content)[0] != ';')
 		{
-			tmp->next = NULL;
-			tmp = nav;
-			nav = nav->next;
-			ft_lstdelone(tmp, free);
-			if (!(tmp = ft_lstnew(nav)))
+			if (!(new_node_content = copy_command(nav)))
 				return (NULL);
-			ft_lstadd_back(&command_list, tmp);
+			if (!(new_node = ft_lstnew(new_node_content)))
+				return (NULL);
+			if (!command_list)
+				command_list = new_node;
+			else
+				ft_lstadd_back(&command_list, new_node);
+			while (nav && nav->content && ((char*)nav->content)[0] != ';')
+				nav = nav->next;
 		}
-		else
-		{
-			tmp = nav;
+		if (nav)
 			nav = nav->next;
-		}
 	}
 	return (command_list);
 }
 
+// t_list	*get_command_list(t_list *token_list)
+// {
+// 	t_list	*command_list;
+// 	t_list	*nav;
+// 	t_list	*tmp;
+
+// 	nav = token_list;
+// 	tmp = NULL;
+// 	if (!(command_list = ft_lstnew(token_list)))
+// 		return (NULL);
+// 	while (nav)
+// 	{
+// 		if (tmp && (nav->content && ((char*)nav->content)[0] == ';'))
+// 		{
+// 			tmp->next = NULL;
+// 			tmp = nav;
+// 			nav = nav->next;
+// 			ft_lstdelone(tmp, free);
+// 			if (!(tmp = ft_lstnew(nav)))
+// 				return (NULL);
+// 			ft_lstadd_back(&command_list, tmp);
+// 		}
+// 		else
+// 		{
+// 			tmp = nav;
+// 			nav = nav->next;
+// 		}
+// 	}
+// 	return (command_list);
+// }
+
 int		execute_commands(t_list **commandlist, char **env)
 {
 	t_list	*nav;
-	t_list	*token_list;
 	char	**args;
+	t_list	*tmp_list;
 	int		exit_status;
 
 	nav = *commandlist;
 	while (nav)
 	{
-		token_list = (t_list*)nav->content;
-		token_list = expand_tokens(&token_list, env);
-		if (!(args = list_to_argv(token_list)))
+		tmp_list = (t_list*)nav->content;
+		if (!(nav->content = expand_tokens((t_list*)nav->content, env)))
 			return (0);
-		exit_minishell(0, SAVE_POINTERS_TO_EXIT, commandlist, &args);
-		exit_status = minishell_launch(args, env);
+		ft_lstclear(&tmp_list, free);
+		if (!(args = list_to_argv((t_list*)nav->content)))
+			return (0);
+		// exit_minishell(0, SAVE_POINTERS_TO_EXIT, commandlist, &args);
+		// exit_status = minishell_launch(args, env);
 		free_argv(args, INT_MAX);
 		nav = nav->next;
 	}

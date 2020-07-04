@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 16:49:23 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/02 17:11:56 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/04 17:02:32 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,8 @@ char	*get_env(char *key, char **env)
 int		ft_strlen_key(char *key_start)
 {
 	int	i;
-	int	is_nb;
 
 	i = 1;
-	is_nb = 0;
 	while (key_start[i])
 	{
 		if (!ft_isalnum(key_start[i]))
@@ -68,6 +66,10 @@ char	*expand_env(char *token, int *i, int *j, char **env)
 		body = ft_strdup("");
 	*i += ft_strlen_key(&token[*i]);
 	*j += ft_strlen(body);
+	printf("head: %s\n", head);
+	printf("body: %s\n", body);
+	printf("tail: %s\n", tail);
+	printf("key: %s\n", key);
 	free(key);
 	if (!(head = ft_strjoin_2free(head, body)))
 		return (NULL);

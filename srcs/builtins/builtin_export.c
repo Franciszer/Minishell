@@ -6,7 +6,7 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:25:27 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/04 10:36:01 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/04 14:25:40 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ int		modify_env_var(int index, char **argv, char **env)
 	ft_lstadd_back(&filtered_env_list, new);
 	// free_argv(env, INT_MAX);
 	if (!(env = list_to_argv(filtered_env_list)))
-		return (NULL);
-	return (env);
+		return (1);
+	return (0);
 }
 
 static int	export_envvar(int i, char **argv, char **env)
@@ -98,6 +98,7 @@ static int	export_envvar(int i, char **argv, char **env)
 		free(var);
 		modify_env_var(i, argv, env);
 	}
+	return (1);
 }
 
 int			builtin_export(char **argv, char **env)
