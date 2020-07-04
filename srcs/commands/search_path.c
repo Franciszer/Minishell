@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   search_path.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 14:02:44 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/02 18:48:09 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/04 19:48:36 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*search_relativepath(char *command, char **env)
 
 	if (!(path = get_env("PWD", env)))
 		return (NULL);
-	if (path[ft_strlen(path - 1)] != '/')
+	if (path[ft_strlen(path) - 1] != '/')
 	{
 		if (!(path = ft_strjoin_free(path, "/")))
 			return (NULL);
@@ -40,7 +40,10 @@ static char	*search_relativepath(char *command, char **env)
 	if (!(path = ft_strjoin_free(path, command)))
 		return (NULL);
 	if (open(path, O_CLOEXEC) == -1)
+	{
+		free(path);
 		return (NULL);
+	}
 	else
 		return (path);
 }

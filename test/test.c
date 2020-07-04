@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 16:41:59 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/02 14:56:32 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/04 19:47:39 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,9 @@
 
 int	main(int argc, char **argv, char **env)
 {
-	printf("%s\n", ERR_PID);
+	char	*path;
+
+	path = search_path("ls", env);
+	printf("%s\n", path);
+	free(path);
 }

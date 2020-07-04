@@ -6,7 +6,7 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 16:49:23 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/04 17:02:32 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/04 19:12:45 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,17 @@ int		ft_strlen_key(char *key_start)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
 	while (key_start[i])
 	{
-		if (!ft_isalnum(key_start[i]))
+		if (i == 0 && key_start[i] == '$')
+			i++;
+		else if (!ft_isalnum(key_start[i]))
 			return (i);
-		if (ft_isdigit(key_start[i]))
+		else if (ft_isdigit(key_start[i]))
 			return (++i);
-		i++;
+		else
+			i++;
 	}
 	return (i);
 }
@@ -64,12 +67,9 @@ char	*expand_env(char *token, int *i, int *j, char **env)
 		return (NULL);
 	if (!(body = get_env(key, env)))
 		body = ft_strdup("");
-	*i += ft_strlen_key(&token[*i]);
+	if (!(!head[0] && !body[0] && !tail[0]))
+		*i += ft_strlen_key(&token[*i]);
 	*j += ft_strlen(body);
-	printf("head: %s\n", head);
-	printf("body: %s\n", body);
-	printf("tail: %s\n", tail);
-	printf("key: %s\n", key);
 	free(key);
 	if (!(head = ft_strjoin_2free(head, body)))
 		return (NULL);

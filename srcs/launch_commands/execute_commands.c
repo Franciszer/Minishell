@@ -6,7 +6,7 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 16:17:09 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/04 16:34:39 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/04 19:58:02 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,14 @@ int		execute_commands(t_list **commandlist, char **env)
 	{
 		tmp_list = (t_list*)nav->content;
 		if (!(nav->content = expand_tokens((t_list*)nav->content, env)))
+		{
 			return (0);
+		}
 		ft_lstclear(&tmp_list, free);
 		if (!(args = list_to_argv((t_list*)nav->content)))
 			return (0);
-		// exit_minishell(0, SAVE_POINTERS_TO_EXIT, commandlist, &args);
-		// exit_status = minishell_launch(args, env);
+		exit_minishell(0, SAVE_POINTERS_TO_EXIT, commandlist, &args);
+		exit_status = minishell_launch(args, env);
 		free_argv(args, INT_MAX);
 		nav = nav->next;
 	}

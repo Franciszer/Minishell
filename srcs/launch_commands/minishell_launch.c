@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_launch.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 14:37:03 by franciszer        #+#    #+#             */
-/*   Updated: 2020/07/03 11:37:45 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/04 19:34:45 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int		minishell_launch(char **argv, char **env)
 		return (launch_builtin(builtin_id, argv, env));
 	else if (builtin_id == -2)
 		return (-1);
-	tmp = search_path(argv[0], env);
+	if (!(tmp = search_path(argv[0], env)))
+		return (0);
 	free(argv[0]);
 	argv[0] = tmp;
 	if (!(pid = fork()))

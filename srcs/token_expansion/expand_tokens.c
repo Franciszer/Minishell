@@ -6,7 +6,7 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 11:57:50 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/04 16:53:55 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/04 19:27:05 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*expand_token_noquote(char *token, char **env)
 	i = 0;
 	j = 0;
 	prev_is_backslash = 0;
-	if (!(final_token = (char*)malloc(sizeof(char) * 100)))
+	if (!(final_token = (char*)malloc(sizeof(char) * ft_strlen_etokens(token, env))))
 		return (NULL);
 	while (token[i])
 	{
@@ -41,6 +41,12 @@ char	*expand_token_noquote(char *token, char **env)
 				if (!(final_token = expand_env(token, &i, &j, env)))
 					return (NULL);
 				free(tmp);
+				if (!final_token)
+					return(ft_strdup(""));
+				if (!final_token[0])
+				{
+					return (final_token);
+				}
 			}
 			else
 			{
@@ -90,6 +96,13 @@ char	*expand_token_dquote(char *token, char **env)
 				if (!(final_token = expand_env(token, &i, &j, env)))
 					return (NULL);
 				free(tmp);
+				if (!final_token)
+					return(ft_strdup(""));
+				if (!final_token[0])
+				{
+					free(token);
+					return (final_token);
+				}
 			}
 			else
 			{
@@ -130,9 +143,9 @@ void	*get_final_token(void *content, void *env)
 	}
 	else
 		str = expand_token_noquote((char*)content, (char**)env);
+	return str;
 	if (str[0] == '\0')
 	{
-		//free(content);
 		return (NULL);
 	}
 	else
@@ -145,7 +158,6 @@ t_list	*expand_tokens(t_list *token_list, char **env)
 	t_list	*tmp_list;
 	
 	tmp_list = token_list;
-	if (!(expanded_list = ft_lstfilter_data(&tmp_list, get_final_token, free, (void*)env)))
-		return (NULL);
+	expanded_list = ft_lstfilter_data(&tmp_list, get_final_token, free, (void*)env);
 	return (expanded_list);
 }

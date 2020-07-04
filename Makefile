@@ -1,4 +1,4 @@
-FLAGS=-Wall -Wextra
+FLAGS=-Wall -Wextra -fsanitize=address
 # -Werror -static-libasan -fPIE -pie
 # VARIABLES
 
@@ -48,7 +48,7 @@ $(NAME):	${OBJECTS}
 			@mkdir logs
 			@echo "${LIGHT_BLUE}Compiling minishell...${NC}"
 			@make -C ${LIB_DIR} > /dev/null 2>&1
-			@cc -g ${FLAGS} -fsanitize=address ${MAIN} ${OBJECTS} ${INCLUDE_DIRS} ${LIB} -o ${NAME}
+			@cc -g ${FLAGS} ${MAIN} ${OBJECTS} ${INCLUDE_DIRS} ${LIB} -o ${NAME}
 			@echo "${GREEN}✓  minishell successfully compiled${NC}"
 start: all
 	@@echo "${GREEN}✓  minishell launched${NC}"
