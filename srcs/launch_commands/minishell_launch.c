@@ -6,7 +6,7 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 14:37:03 by franciszer        #+#    #+#             */
-/*   Updated: 2020/07/05 15:05:56 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/05 17:56:30 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,12 @@ int		minishell_launch(char **argv)
 		ft_perror(ERR_PID);
 	else
 	{
-		pid = wait(&g_exit_status);
+		waitpid(pid, &g_exit_status, 0);
+		if (WIFEXITED(g_exit_status))
+			g_exit_status = WEXITSTATUS(g_exit_status);
+		else
+			g_exit_status = 1;
+		
 	}
 	return (1);
 }

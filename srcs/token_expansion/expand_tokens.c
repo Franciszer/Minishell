@@ -6,7 +6,7 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 11:57:50 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/05 11:59:38 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/05 17:42:50 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*expand_token_noquote(char *token)
 				prev_is_backslash = 1;
 				i++;
 			}
-			else if (token[i] == '$' && token[i + 1] && ft_isalnum(token[i + 1]))
+			else if (token[i] == '$' && token[i + 1] && (ft_isalnum(token[i + 1]) || token[i + 1] == '?'))
 			{
 				tmp = final_token;
 				if (!(final_token = expand_env(token, &i, &j)))
@@ -90,7 +90,7 @@ char	*expand_token_dquote(char *token)
 				prev_is_backslash = 1;
 				i++;
 			}
-			else if (token[i] == '$' && token[i + 1] && ft_isalnum(token[i + 1]))
+			else if (token[i] == '$' && token[i + 1] && (ft_isalnum(token[i + 1]) || token[i + 1] == '?'))
 			{
 				tmp = final_token;
 				if (!(final_token = expand_env(token, &i, &j)))

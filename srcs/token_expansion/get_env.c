@@ -6,7 +6,7 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 16:49:23 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/05 10:59:27 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/05 17:42:01 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ char	*get_env(char *key)
 		return (NULL);
 	if (*key == '$')
 		key++;
+	if (*key == '?')
+		return (ft_itoa(g_exit_status));
 	while (g_env[i])
 	{
 		if (!ft_strncmp(key, g_env[i], ft_strlen(key)) && g_env[i][ft_strlen(key)] == '=')
@@ -44,6 +46,8 @@ int		ft_strlen_key(char *key_start)
 	{
 		if (i == 0 && key_start[i] == '$')
 			i++;
+		if (key_start[0] == '$' && key_start[1] == '?')
+			return (2);
 		else if (!ft_isalnum(key_start[i]))
 			return (i);
 		else if (ft_isdigit(key_start[i]))
