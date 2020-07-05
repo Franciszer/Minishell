@@ -6,7 +6,7 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 11:40:02 by franciszer        #+#    #+#             */
-/*   Updated: 2020/07/05 12:04:44 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/05 15:27:55 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ static int	remove_var(char *var_name)
 		}
 		free(tmp);
 	}
+	if (g_env_modified)
+		free_argv(g_env, INT_MAX);
+	else
+		g_env_modified = 1;	
 	if (!(g_env = list_to_argv(env_list)))
 		return (1);
 	ft_lstclear(&env_list, free);

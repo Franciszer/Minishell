@@ -6,7 +6,7 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 14:37:03 by franciszer        #+#    #+#             */
-/*   Updated: 2020/07/05 10:42:30 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/05 15:05:56 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		minishell_launch(char **argv)
 	int		builtin_id;
 
 	if ((builtin_id = is_builtin(argv[0])) >= 0)
-		return (launch_builtin(builtin_id, argv));
+		return ((g_exit_status = launch_builtin(builtin_id, argv)));
 	else if (builtin_id == -2)
 		return (-1);
 	if (!(tmp = search_path(argv[0])))
@@ -38,7 +38,7 @@ int		minishell_launch(char **argv)
 		ft_perror(ERR_PID);
 	else
 	{
-		wait(&pid);
+		pid = wait(&g_exit_status);
 	}
 	return (1);
 }

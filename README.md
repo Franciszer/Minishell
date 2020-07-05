@@ -3,9 +3,10 @@ A small shell
 
 TODOLIST:
 	BUILTINS:
-		-export
-		-unset
+		-export (no args)
+		-$?
+		-signals: ctrl-C, ctrl-D and ctrl-\
+QUENTIN'S JOB:
 	-pipes |
 	-redirections: <, >, >>
-	-$?
-	-signals: ctrl-C, ctrl-D and ctrl-\
+	

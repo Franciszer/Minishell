@@ -6,7 +6,7 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:40:30 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/05 11:57:12 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/05 14:09:01 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 */
 
 char			**g_env;
+int				g_env_modified;
 int				g_exit_status;
 
 /*

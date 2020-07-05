@@ -6,7 +6,7 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:25:27 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/05 11:37:19 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/05 15:26:57 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,21 @@ static int	new_env_var(char *var)
 {
 	t_list	*env_list;
 	t_list	*new;
+	char	*var_copy;
 
 	if (!(env_list = ft_argv_to_list(g_env)))
 		return (1);
-	if (!(new = ft_lstnew((void*)var)))
+	if (!(var_copy = ft_strdup(var)))
+		return (1);
+	if (!(new = ft_lstnew((void*)var_copy)))
 		return (1);
 	ft_lstadd_back(&env_list, new);
-	//free_argv(env, INT_MAX);
+	if (g_env_modified)
+		free_argv(g_env, INT_MAX);
 	if (!(g_env = list_to_argv(env_list)))
 		return (1);
+	g_env_modified = 1;
+	ft_lstclear(&env_list, free);
 	return (1);
 }
 
@@ -55,11 +61,8 @@ static int	modify_env_var(int index, char **argv, char *var)
 	t_list	*env_list;
 	t_list	*nav;
 	char	*to_cmp;
-	char	*new_var;
 
 	if (!(env_list = ft_argv_to_list(g_env)))
-		return (1);
-	if (!(new_var = ft_strdup(argv[index])))
 		return (1);
 	nav = env_list;
 	while (nav)
@@ -73,8 +76,13 @@ static int	modify_env_var(int index, char **argv, char *var)
 		}
 		nav = nav->next;
 	}
+	if (g_env_modified)
+		free_argv(g_env, INT_MAX);
+	else
+		g_env_modified = 1;	
 	if (!(g_env = list_to_argv(env_list)))
 		return (1);
+	ft_lstclear(&env_list, free);
 	return (0);
 }
 
@@ -82,6 +90,8 @@ static int	export_envvar(int i, char **argv)
 {
 	char	*var;
 	int		syntax_check;
+	int		return_value;
+	char	*to_free;
 
 	if ((syntax_check = export_check_syntax(argv[i])) == 1)
 		return (1);
@@ -89,14 +99,15 @@ static int	export_envvar(int i, char **argv)
 		return (0);
 	if (!(var = ft_strndup(argv[i], ft_strlen_char(argv[i], '='))))
 		return (1);
-	if (!(get_env(var)))
-		return (new_env_var(argv[i]));
+	if (!(to_free = get_env(var)))
+		return_value = new_env_var(argv[i]);
 	else
 	{
-		modify_env_var(i, argv, var);
-		free(var);
+		free(to_free);
+		return_value = modify_env_var(i, argv, var);
 	}
-	return (1);
+	free(var);
+	return (return_value);
 }
 
 
