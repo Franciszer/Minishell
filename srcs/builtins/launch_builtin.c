@@ -6,7 +6,7 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 11:20:05 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/05 10:43:18 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/05 12:02:32 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int		is_builtin(char *command)
 		return (BUILTIN_ECHO);
 	else if (!ft_strncmp(command, "export", ft_strlen("export") + 1))
 		return (BUILTIN_EXPORT);
+	else if (!ft_strncmp(command, "unset", ft_strlen("unset") + 1))
+		return (BUILTIN_UNSET);
 	else
 		return (-1);
 }
@@ -44,6 +46,8 @@ int		launch_builtin(int builtin_id, char **argv)
 		return (builtin_echo(argv));
 	else if (builtin_id == BUILTIN_EXPORT)
 		return (builtin_export(argv));
+	else if (builtin_id == BUILTIN_UNSET)
+		return (builtin_unset(argv));
 	else
 		return (-1);
 }

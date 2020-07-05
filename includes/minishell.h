@@ -6,7 +6,7 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:40:30 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/05 10:44:10 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/05 11:57:12 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define BUILTIN_ENV 3
 # define BUILTIN_ECHO 4	
 # define BUILTIN_EXPORT 5
+# define BUILTIN_UNSET 6
 
 # define SAVE_POINTERS_TO_EXIT 0
 # define EXIT_NOW 1
@@ -105,6 +106,7 @@ int				builtin_pwd();
 int				builtin_env();
 int				builtin_echo(char **argv);
 int				builtin_export(char **argv);
+int				builtin_unset(char **argv);
 
 /*
 **		______UTILS______

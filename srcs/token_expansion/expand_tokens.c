@@ -6,7 +6,7 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 11:57:50 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/05 10:39:32 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/05 11:59:38 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,6 @@ t_list	*expand_tokens(t_list *token_list)
 	t_list	*tmp_list;
 	
 	tmp_list = token_list;
-	expanded_list = ft_lstfilter_data(&tmp_list, get_final_token, free, (void*)g_env);
+	expanded_list = ft_lstfilter(&tmp_list, get_final_token, free);
 	return (expanded_list);
 }

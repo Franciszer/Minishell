@@ -1,4 +1,4 @@
-FLAGS=-Wall -Wextra
+FLAGS=-Wall -Wextra -fsanitize=address
 # -Werror -static-libasan -fPIE -pie
 # VARIABLES
 
@@ -25,6 +25,7 @@ SRCS=	srcs/parsing/prompt_loop.c\
 		srcs/builtins/builtin_env.c\
 		srcs/builtins/builtin_echo.c\
 		srcs/builtins/builtin_export.c\
+		srcs/builtins/builtin_unset.c\
 		srcs/builtins/launch_builtin.c\
 		srcs/utils/print_tokens.c
 INCLUDE_DIRS = -I srcs/libft\
