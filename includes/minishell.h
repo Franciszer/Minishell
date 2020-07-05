@@ -6,7 +6,7 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:40:30 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/04 16:35:53 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/05 10:44:10 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,13 @@
 # define EXIT_NOW 1
 
 /*
+**	 ________GLOBAL_VARIABLES________
+*/
+
+char			**g_env;
+int				g_exit_status;
+
+/*
 ** ________FUNCTIONS________
 */
 
@@ -65,13 +72,14 @@ int				tokens_syntax_check(t_list *token_list);
 **       ______TOKEN_EXPANSION_____
 */
 
-char			*get_env(char *key, char **env);
+char			*get_env(char *key);
 int				ft_strlen_key(char *key_start);
-char			*expand_env(char *token, int *i, int *j, char **env);
-void			*get_final_token(void *content, void *env);
-t_list			*expand_tokens(t_list *token_list, char **env);
-char			*expand_token_noquote(char *token, char **env);
-size_t			ft_strlen_etokens(char *s, char **env);
+char			*expand_env(char *token, int *i, int *j);
+void			*get_final_token(void *content);
+t_list			*expand_tokens(t_list *token_list);
+char			*expand_token_dquote(char *token);
+char			*expand_token_noquote(char *token);
+size_t			ft_strlen_etokens(char *s);
 int				is_specialchar_dquote(char c);
 
 /*
@@ -79,24 +87,24 @@ int				is_specialchar_dquote(char c);
 */
 
 t_list			*get_command_list(t_list *token_list);
-int				execute_commands(t_list **commandlist, char **env);
+int				execute_commands(t_list **commandlist);
 void			free_commandlist(t_list **commandlist);
 void			exit_minishell(int exit_code, int action, t_list **commandlist, char ***args);
-int				minishell_launch(char **argv, char **env);
-char			*search_path(char *command, char **env);
+int				minishell_launch(char **argv);
+char			*search_path(char *command);
 
 /*
 **		_____BUILTINS_____
 */
 
 int				is_builtin(char *command);
-int				launch_builtin(int builtin_id, char **argv, char **env);
+int				launch_builtin(int builtin_id, char **argv);
 int				builtin_cd(char **args);
 int				builtin_exit(char **args);
-int				builtin_pwd(char **env);
-int				builtin_env(char **env);
+int				builtin_pwd();
+int				builtin_env();
 int				builtin_echo(char **argv);
-int				builtin_export(char **argv, char **env);
+int				builtin_export(char **argv);
 
 /*
 **		______UTILS______

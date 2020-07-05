@@ -6,114 +6,124 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:25:27 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/04 14:25:40 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/05 11:37:19 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	new_env_var(char *var, char **env)
+static int	new_env_var(char *var)
 {
 	t_list	*env_list;
 	t_list	*new;
 
-	if (!(env_list = ft_argv_to_list(env)))
+	if (!(env_list = ft_argv_to_list(g_env)))
 		return (1);
 	if (!(new = ft_lstnew((void*)var)))
 		return (1);
 	ft_lstadd_back(&env_list, new);
 	//free_argv(env, INT_MAX);
-	if (!(env = list_to_argv(env_list)))
+	if (!(g_env = list_to_argv(env_list)))
 		return (1);
 	return (1);
 }
 
-static int	export_check_syntax(char **argv)
+static int	export_check_syntax(char *arg)
 {
 	int		i;
 
 	i = 0;
-	if (!argv[1][0] || (!ft_isalpha(argv[1][0] && argv[1][0] != '_')))
-		return (1);
-	i++;
-	while (argv[1][i] && argv[1][i] != '=')
+	if (!arg[0] || (!ft_isalpha(arg[0]) && arg[0] != '_'))
 	{
-		if (!ft_isalnum(argv[1][i]) && argv[1][0] != '_')
+		return (1);
+	}
+	i++;
+	while (arg[i] && arg[i] != '=')
+	{
+		if (!ft_isalnum(arg[i]) && arg[0] != '_')
 			return (1);
 		i++;
 	}
-	if (!argv[1][i])
+	if (!arg[i])
 		return (2);
 	else
 		return (0);
 }
 
-static void	*is_env_var(void *content, void *str)
-{
-	char	*key;
-
-	if (!(key = ft_strndup((char*)str, ft_strlen_char((char*)str, '=') + 1)))
-		return (NULL);
-	if (!ft_strncmp((const char*)content, key, ft_strlen(key) + 1))
-		return (NULL);
-	else
-		return ((void*)ft_strdup((const char*)content));
-}
-
-int		modify_env_var(int index, char **argv, char **env)
+static int	modify_env_var(int index, char **argv, char *var)
 {
 	t_list	*env_list;
-	t_list	*filtered_env_list;
-	t_list	*new;
+	t_list	*nav;
+	char	*to_cmp;
 	char	*new_var;
 
-	if (!(env_list = ft_argv_to_list(env)))
-		return (1);
-	if (!(filtered_env_list = ft_lstfilter_data(&env_list, is_env_var, free, (void*)argv[index])))
+	if (!(env_list = ft_argv_to_list(g_env)))
 		return (1);
 	if (!(new_var = ft_strdup(argv[index])))
 		return (1);
-	if (!(new = ft_lstnew(new_var)))
-		return (1);
-	ft_lstadd_back(&filtered_env_list, new);
-	// free_argv(env, INT_MAX);
-	if (!(env = list_to_argv(filtered_env_list)))
+	nav = env_list;
+	while (nav)
+	{
+		to_cmp = (char*)nav->content;
+		if (!ft_strncmp(to_cmp , (const char*)var, ft_strlen(var)) && to_cmp[ft_strlen(var)] == '=')
+		{
+			free(nav->content);
+			if (!(nav->content = ft_strdup(argv[index])))
+				return (1);
+		}
+		nav = nav->next;
+	}
+	if (!(g_env = list_to_argv(env_list)))
 		return (1);
 	return (0);
 }
 
-static int	export_envvar(int i, char **argv, char **env)
+static int	export_envvar(int i, char **argv)
 {
 	char	*var;
 	int		syntax_check;
 
-	if ((syntax_check = export_check_syntax(argv)) == 1)
+	if ((syntax_check = export_check_syntax(argv[i])) == 1)
 		return (1);
 	else if (syntax_check == 2)
 		return (0);
-	else if (!(var = get_env(argv[i], env)))
-		return (new_env_var(argv[i], env));
+	if (!(var = ft_strndup(argv[i], ft_strlen_char(argv[i], '='))))
+		return (1);
+	if (!(get_env(var)))
+		return (new_env_var(argv[i]));
 	else
 	{
+		modify_env_var(i, argv, var);
 		free(var);
-		modify_env_var(i, argv, env);
 	}
 	return (1);
 }
 
-int			builtin_export(char **argv, char **env)
+
+// PRINT_EXPORT:
+// 	-sort sort
+// 	-put value in ""
+// 	-join "declar -x " with each line
+
+// static int	print_export()
+// {
+	
+// }
+
+int			builtin_export(char **argv)
 {
 	int	i;
 	int	status;
 
-	i = 0;
+	i = 1;
 	status = 0;
 	if (!argv[1])
-		return (builtin_env(env));
+		return (builtin_env(g_env));
 	while (argv[i])
 	{
-		if (export_envvar(i, argv, env))
+		if (export_envvar(i, argv))
 			status = 1;
+		i++;
 	}
 	return (status);
 }

@@ -6,7 +6,7 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 14:02:44 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/04 19:48:36 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/05 10:45:18 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ static char	*get_pathcommand(char *path, char *command)
 		return (ft_strjoin(path, command));	
 }
 
-static char	*search_relativepath(char *command, char **env)
+static char	*search_relativepath(char *command)
 {
 	char	*path;
 
-	if (!(path = get_env("PWD", env)))
+	if (!(path = get_env("PWD")))
 		return (NULL);
 	if (path[ft_strlen(path) - 1] != '/')
 	{
@@ -48,7 +48,7 @@ static char	*search_relativepath(char *command, char **env)
 		return (path);
 }
 
-char			*search_path(char *command, char **env)
+char			*search_path(char *command)
 {
 	char	*path;
 	char	**path_array;
@@ -57,9 +57,9 @@ char			*search_path(char *command, char **env)
 
 	if (open(command, O_CLOEXEC) != -1)
 		return (ft_strdup(command));
-	if ((command_path = search_relativepath(command, env)))
+	if ((command_path = search_relativepath(command)))
 		return (command_path);
-	if (!(path = get_env("PATH", env)))
+	if (!(path = get_env("PATH")))
 		return (NULL);
 	if (!(path_array = ft_split(path, ':')))
 		return (NULL);

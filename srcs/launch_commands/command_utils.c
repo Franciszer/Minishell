@@ -6,27 +6,11 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 16:21:03 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/04 20:15:00 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/05 10:41:20 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// void	ft_lstclear(t_list **lst, void (*del)(void *))
-// {
-// 	t_list	*nav;
-// 	t_list	*list;
-
-// 	if (!(lst && del))
-// 		return ;
-// 	nav = *lst;
-// 	while (nav)
-// 	{
-// 		list = nav->next;
-// 		ft_lstdelone(nav, del);
-// 		nav = list;
-// 	}
-// }
 
 static void	free_command(t_list	*command)
 {

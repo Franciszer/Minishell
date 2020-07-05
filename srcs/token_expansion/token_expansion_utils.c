@@ -6,7 +6,7 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 15:04:43 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/04 16:42:41 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/05 10:38:17 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		is_specialchar_dquote(char c)
 		return (0);
 }
 
-size_t	ft_strlen_etokens(char *s, char **env)
+size_t	ft_strlen_etokens(char *s)
 {
 	int		i;
 	size_t	maxlen;
@@ -48,10 +48,10 @@ size_t	ft_strlen_etokens(char *s, char **env)
 	i = 0;
 	maxlen = 0;
 	evar_count = 0;
-	while (env[i])
+	while (g_env[i])
 	{
-		if (ft_strlen(env[i]) > maxlen)
-			maxlen = ft_strlen(env[i]);
+		if (ft_strlen(g_env[i]) > maxlen)
+			maxlen = ft_strlen(g_env[i]);
 		i++;
 	}
 	i = 0;

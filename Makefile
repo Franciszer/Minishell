@@ -1,4 +1,4 @@
-FLAGS=-Wall -Wextra -fsanitize=address
+FLAGS=-Wall -Wextra
 # -Werror -static-libasan -fPIE -pie
 # VARIABLES
 
@@ -59,9 +59,9 @@ valgrind_start: all
 	@valgrind --leak-check=full --show-leak-kinds=all ./${NAME}
 
 test: all
-	@cc -fsanitize=address ${MAIN_TEST} ${OBJECTS} ${INCLUDE_DIRS} ${LIB} -o test_exec
-	@./test_exec
-	@rm -rf test_exec
+	@cc ${MAIN_TEST} ${OBJECTS} ${INCLUDE_DIRS} ${LIB} -o test_exec
+	# @./test_exec
+	# @rm -rf test_exec
 
 clean:
 		@rm -rf logs

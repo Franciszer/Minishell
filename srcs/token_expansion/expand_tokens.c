@@ -6,13 +6,13 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 11:57:50 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/04 19:27:05 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/05 10:39:32 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*expand_token_noquote(char *token, char **env)
+char	*expand_token_noquote(char *token)
 {
 	int		i;
 	int		j;
@@ -24,7 +24,7 @@ char	*expand_token_noquote(char *token, char **env)
 	i = 0;
 	j = 0;
 	prev_is_backslash = 0;
-	if (!(final_token = (char*)malloc(sizeof(char) * ft_strlen_etokens(token, env))))
+	if (!(final_token = (char*)malloc(sizeof(char) * ft_strlen_etokens(token))))
 		return (NULL);
 	while (token[i])
 	{
@@ -38,7 +38,7 @@ char	*expand_token_noquote(char *token, char **env)
 			else if (token[i] == '$' && token[i + 1] && ft_isalnum(token[i + 1]))
 			{
 				tmp = final_token;
-				if (!(final_token = expand_env(token, &i, &j, env)))
+				if (!(final_token = expand_env(token, &i, &j)))
 					return (NULL);
 				free(tmp);
 				if (!final_token)
@@ -67,7 +67,7 @@ char	*expand_token_noquote(char *token, char **env)
 	return (final_token);
 }
 
-char	*expand_token_dquote(char *token, char **env)
+char	*expand_token_dquote(char *token)
 {
 	int		i;
 	int		j;
@@ -79,7 +79,7 @@ char	*expand_token_dquote(char *token, char **env)
 	i = 0;
 	j = 0;
 	prev_is_backslash = 0;
-	if (!(final_token = (char*)malloc(sizeof(char) * ft_strlen_etokens(token, env))))
+	if (!(final_token = (char*)malloc(sizeof(char) * ft_strlen_etokens(token))))
 		return (NULL);
 	while (token[i])
 	{
@@ -93,7 +93,7 @@ char	*expand_token_dquote(char *token, char **env)
 			else if (token[i] == '$' && token[i + 1] && ft_isalnum(token[i + 1]))
 			{
 				tmp = final_token;
-				if (!(final_token = expand_env(token, &i, &j, env)))
+				if (!(final_token = expand_env(token, &i, &j)))
 					return (NULL);
 				free(tmp);
 				if (!final_token)
@@ -126,7 +126,7 @@ char	*expand_token_dquote(char *token, char **env)
 	return (final_token);
 }
 
-void	*get_final_token(void *content, void *env)
+void	*get_final_token(void *content)
 {
 	char	*str;
 
@@ -134,7 +134,7 @@ void	*get_final_token(void *content, void *env)
 	{
 		str = ((char*)content);
 		str = remove_quotes_free(str, '\"');
-		str = expand_token_dquote(str, (char**)env);
+		str = expand_token_dquote(str);
 	}
 	else if (((char*)content)[0] == '\'')
 	{
@@ -142,7 +142,7 @@ void	*get_final_token(void *content, void *env)
 		str = remove_quotes_free(str, '\'');
 	}
 	else
-		str = expand_token_noquote((char*)content, (char**)env);
+		str = expand_token_noquote((char*)content);
 	return str;
 	if (str[0] == '\0')
 	{
@@ -152,12 +152,12 @@ void	*get_final_token(void *content, void *env)
 		return (str);
 }
 
-t_list	*expand_tokens(t_list *token_list, char **env)
+t_list	*expand_tokens(t_list *token_list)
 {
 	t_list	*expanded_list;
 	t_list	*tmp_list;
 	
 	tmp_list = token_list;
-	expanded_list = ft_lstfilter_data(&tmp_list, get_final_token, free, (void*)env);
+	expanded_list = ft_lstfilter_data(&tmp_list, get_final_token, free, (void*)g_env);
 	return (expanded_list);
 }

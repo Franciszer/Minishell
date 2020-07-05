@@ -6,7 +6,7 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 11:20:05 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/04 14:26:08 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/05 10:43:18 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,20 @@ int		is_builtin(char *command)
 		return (-1);
 }
 
-int		launch_builtin(int builtin_id, char **argv, char **env)
+int		launch_builtin(int builtin_id, char **argv)
 {
 	if (builtin_id == BUILTIN_CD)
 		return (builtin_cd(argv));
 	else if (builtin_id == BUILTIN_EXIT)
 		return (builtin_exit(argv));
 	else if (builtin_id == BUILTIN_PWD)
-		return (builtin_pwd(env));
+		return (builtin_pwd());
 	else if (builtin_id == BUILTIN_ENV)
-		return (builtin_env(env));
+		return (builtin_env());
 	else if (builtin_id == BUILTIN_ECHO)
 		return (builtin_echo(argv));
 	else if (builtin_id == BUILTIN_EXPORT)
-		return (builtin_export(argv, env));
+		return (builtin_export(argv));
 	else
 		return (-1);
 }
