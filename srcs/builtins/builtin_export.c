@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:25:27 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/05 15:26:57 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/06 11:59:43 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,50 @@ static int	export_envvar(int i, char **argv)
 // 	-put value in ""
 // 	-join "declar -x " with each line
 
-// static int	print_export()
-// {
-	
-// }
+static int	all_env_written(char *env_written, size_t len)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < len)
+	{
+		if (!env_written[i++])
+			return (0);
+	}
+	return (1);
+}
+
+static int	print_export()
+{
+	size_t	len;
+	size_t	i;
+	size_t	lowest_index;
+	char	*env_written;
+
+	len = 0;
+	while (g_env[len])
+		len++;
+	if (!(env_written = (char*)malloc(sizeof(char) * (len))))
+		return (1);
+	ft_bzero(env_written, len);
+	while (!all_env_written(env_written, len))
+	{
+		lowest_index = 0;
+		while (env_written[lowest_index])
+			lowest_index++;
+		i = 1;
+		while (g_env[i])
+		{
+			if (!env_written[i] && ft_strncmp(g_env[lowest_index], g_env[i], ft_strlen(g_env[lowest_index]) + 1) > 0)
+				lowest_index = i;
+			i++;
+		}
+		env_written[lowest_index] = 1;
+		ft_printf("declare -x %s\n", g_env[lowest_index]);
+	}
+	free(env_written);
+	return (1);
+}
 
 int			builtin_export(char **argv)
 {
@@ -129,7 +169,7 @@ int			builtin_export(char **argv)
 	i = 1;
 	status = 0;
 	if (!argv[1])
-		return (builtin_env(g_env));
+		return (print_export());
 	while (argv[i])
 	{
 		if (export_envvar(i, argv))

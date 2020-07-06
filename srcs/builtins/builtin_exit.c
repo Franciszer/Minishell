@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 11:30:42 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/03 13:40:28 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/06 10:22:19 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,3 @@ int		builtin_exit(char **args)
 	exit_minishell(exit_code, EXIT_NOW, NULL, NULL);
 	return (0);
 }
-

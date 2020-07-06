@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 16:21:03 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/05 10:41:20 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/06 12:17:00 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ void		exit_minishell(int exit_code, int action, t_list **commandlist, char ***ar
 		if (args_to_free)
 			free_argv(*args_to_free, INT_MAX);
 	}
+	system("leaks minishell");
 	exit (exit_code);
 }

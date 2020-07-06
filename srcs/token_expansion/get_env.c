@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 16:49:23 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/05 17:42:01 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/06 10:13:05 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,17 @@ int		ft_strlen_key(char *key_start)
 	return (i);
 }
 
-char	*expand_env(char *token, int *i, int *j)
+char	*expand_env(char *token, char *final_token, int *i, int *j)
 {
 	char	*key;
 	char	*head;
 	char	*body;
 	char	*tail;
 
+	final_token[*j] = 0;
 	if (!(key = ft_strndup(&token[*i], ft_strlen_key(&token[*i]))))
 		return (NULL);
-	if (!(head = ft_strndup(token, *i)))
+	if (!(head = ft_strdup(final_token)))
 		return (NULL);
 	if (!(tail = ft_strdup(&token[*i + ft_strlen_key(&token[*i])])))
 		return (NULL);

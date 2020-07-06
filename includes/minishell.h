@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:40:30 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/05 14:09:01 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/06 09:39:32 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int				tokens_syntax_check(t_list *token_list);
 
 char			*get_env(char *key);
 int				ft_strlen_key(char *key_start);
-char			*expand_env(char *token, int *i, int *j);
+char			*expand_env(char *token, char *final_token, int *i, int *j);
 void			*get_final_token(void *content);
 t_list			*expand_tokens(t_list *token_list);
 char			*expand_token_dquote(char *token);

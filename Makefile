@@ -1,4 +1,4 @@
-FLAGS=-Wall -Wextra -fsanitize=address
+FLAGS=-Wall -Wextra#-fsanitize=address
 # -Werror -static-libasan -fPIE -pie
 # VARIABLES
 
@@ -61,8 +61,8 @@ valgrind_start: all
 
 test: all
 	@cc ${MAIN_TEST} ${OBJECTS} ${INCLUDE_DIRS} ${LIB} -o test_exec
-	# @./test_exec
-	# @rm -rf test_exec
+	@./test_exec
+	@rm -rf test_exec
 
 clean:
 		@rm -rf logs

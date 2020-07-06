@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:39:32 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/05 10:44:21 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/06 11:12:43 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,6 @@ int	main(int argc, char **argv, char **env)
 			if ((command_list = get_command_list(token_list)))
 			{
 				execute_commands(&command_list);
-			}
-			if (token_list && !ft_strncmp((char*)token_list->content, "exit", 5))
-			{
-				ft_lstclear(&token_list, free);
-				free_commandlist(&command_list);
-				return (0);
 			}
 			ft_lstclear(&token_list, free);
 			free_commandlist(&command_list);

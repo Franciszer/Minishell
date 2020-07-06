@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 11:57:50 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/05 17:42:50 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/06 10:13:36 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*expand_token_noquote(char *token)
 			else if (token[i] == '$' && token[i + 1] && (ft_isalnum(token[i + 1]) || token[i + 1] == '?'))
 			{
 				tmp = final_token;
-				if (!(final_token = expand_env(token, &i, &j)))
+				if (!(final_token = expand_env(token, final_token, &i, &j)))
 					return (NULL);
 				free(tmp);
 				if (!final_token)
@@ -93,7 +93,7 @@ char	*expand_token_dquote(char *token)
 			else if (token[i] == '$' && token[i + 1] && (ft_isalnum(token[i + 1]) || token[i + 1] == '?'))
 			{
 				tmp = final_token;
-				if (!(final_token = expand_env(token, &i, &j)))
+				if (!(final_token = expand_env(token, final_token, &i, &j)))
 					return (NULL);
 				free(tmp);
 				if (!final_token)
