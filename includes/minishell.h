@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:40:30 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/06 09:39:32 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/06 18:11:40 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <errno.h>
+# include <signal.h>
 
 /*
 **	DEFINES
@@ -47,15 +48,19 @@
 char			**g_env;
 int				g_env_modified;
 int				g_exit_status;
+int				g_p_stop_sig;
 
 /*
 ** ________FUNCTIONS________
 */
 
+void			minishell_start();
+
 /*
 **       ______PARSING_AND_TOKENIZATION_____
 */
 
+void			print_prompt();
 t_list			*prompt_loop();
 void			manage_quotes(char *quotes, char c);
 int				isQuote(char c);
@@ -91,7 +96,7 @@ int				is_specialchar_dquote(char c);
 t_list			*get_command_list(t_list *token_list);
 int				execute_commands(t_list **commandlist);
 void			free_commandlist(t_list **commandlist);
-void			exit_minishell(int exit_code, int action, t_list **commandlist, char ***args);
+void			exit_minishell(int action, t_list *token_list, t_list **commandlist, char ***args);
 int				minishell_launch(char **argv);
 char			*search_path(char *command);
 
@@ -108,6 +113,16 @@ int				builtin_env();
 int				builtin_echo(char **argv);
 int				builtin_export(char **argv);
 int				builtin_unset(char **argv);
+
+/*
+**		_____SIGNAL_HANDLING_____
+*/
+
+void			sigint_handler(int signo);
+void			signal_handler();
+void			signal_default();
+
+
 
 /*
 **		______UTILS______

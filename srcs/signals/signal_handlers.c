@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_strdigit.c                                   :+:      :+:    :+:   */
+/*   signal_handlers.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/03 12:04:24 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/06 14:48:32 by frthierr         ###   ########.fr       */
+/*   Created: 2020/07/06 15:10:26 by frthierr          #+#    #+#             */
+/*   Updated: 2020/07/06 17:03:49 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_is_strdigit(char *str)
+// void sigint_handler(int signo)
+// {
+// 	ft_printf("hello\n");
+// 	//minishell_start();
+// }
+
+void signal_handler(int sig)
 {
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
+	if (sig == SIGINT)
 	{
-		if (!ft_isdigit(str[i]))
-			return (0);
-		i++;
+		ft_printf("\b\b\b\b\n");
+		print_prompt();
 	}
-	return (1);
+}
+
+void signal_default()
+{
+	signal(SIGINT, SIG_DFL);
 }

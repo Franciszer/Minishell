@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 16:17:09 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/06 11:18:38 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/06 15:47:15 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int		execute_commands(t_list **commandlist)
 		ft_lstclear(&tmp_list, free);
 		if (!(args = list_to_argv((t_list*)nav->content)))
 			return (0);
-		exit_minishell(0, SAVE_POINTERS_TO_EXIT, commandlist, &args);
+		exit_minishell(SAVE_POINTERS_TO_EXIT, NULL, commandlist, &args);
 		if (!(minishell_launch(args)))
 		{
 			free_argv(args, INT_MAX);

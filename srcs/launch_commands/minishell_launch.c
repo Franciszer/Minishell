@@ -6,12 +6,16 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 14:37:03 by franciszer        #+#    #+#             */
-/*   Updated: 2020/07/06 11:18:10 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/06 18:13:37 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+void	sigtest(int sig)
+{
+	if (sig == SIGINT)
+		g_exit_status = 130;
+}
 int		minishell_launch(char **argv)
 {
 	pid_t	pid;
@@ -33,6 +37,7 @@ int		minishell_launch(char **argv)
 	argv[0] = tmp;
 	if (!(pid = fork()))
 	{
+		signal(SIGINT, sigtest);
 		if (execve(argv[0], argv, g_env) == -1)
 			ft_perror(ERR_EXECVE);
 	}
@@ -43,9 +48,15 @@ int		minishell_launch(char **argv)
 		waitpid(pid, &g_exit_status, 0);
 		if (WIFEXITED(g_exit_status))
 			g_exit_status = WEXITSTATUS(g_exit_status);
+		else if (WIFSIGNALED(g_exit_status))
+		{
+			g_p_stop_sig = 1;
+			g_exit_status = 130;
+		}
 		else
-			g_exit_status = 1;
+			g_exit_status = 0;
 		
 	}
+	signal(SIGINT, signal_handler);
 	return (1);
 }
