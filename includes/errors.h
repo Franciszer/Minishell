@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 14:12:42 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/03 12:00:37 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/06 21:42:53 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 # define ERRORS_H
 
-# define ERR_READLINE "an error has occured while reading standard input"
+# define ERR_READLINE "an error has occured while reading input"
 
 # define ERR_UNFINISHED_QUOTE "quote was not proprely closed"
 

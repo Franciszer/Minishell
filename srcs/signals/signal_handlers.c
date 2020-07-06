@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handlers.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 15:10:26 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/06 17:03:49 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/06 21:53:31 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,17 @@
 // 	//minishell_start();
 // }
 
-void signal_handler(int sig)
+void	sigquit_handler(int sig)
+{
+	if (sig == SIGQUIT)
+	{
+		ft_printf("\nQuit (core dumped)\n");
+		g_exit_status = 131;
+		print_prompt();
+	}
+}
+
+void	sigint_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
@@ -27,7 +37,7 @@ void signal_handler(int sig)
 	}
 }
 
-void signal_default()
+void	signal_default()
 {
 	signal(SIGINT, SIG_DFL);
 }

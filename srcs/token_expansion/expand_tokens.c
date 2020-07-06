@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 11:57:50 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/06 10:13:36 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/06 20:36:44 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,14 +142,15 @@ void	*get_final_token(void *content)
 		str = remove_quotes_free(str, '\'');
 	}
 	else
-		str = expand_token_noquote((char*)content);
-	return str;
-	if (str[0] == '\0')
 	{
-		return (NULL);
+		str = expand_token_noquote((char*)content);
+		if (str[0] == '\0')
+		{
+			free(str);
+			return (NULL);
+		}	
 	}
-	else
-		return (str);
+	return (str);
 }
 
 t_list	*expand_tokens(t_list *token_list)

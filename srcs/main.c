@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:39:32 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/06 18:13:12 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/06 21:46:55 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	minishell_start()
 	t_list	*token_list;
 	t_list	*command_list;
 	
-	signal(SIGINT, signal_handler);
 	if ((token_list = prompt_loop()))
 	{
 		if (!tokens_syntax_check(token_list))
@@ -35,7 +34,8 @@ void	minishell_start()
 			free_commandlist(&command_list);
 		}
 	}
-	signal(SIGINT, SIG_DFL);
+	else
+		return ;
 }
 
 int	main(int argc, char **argv, char **env)
@@ -48,9 +48,13 @@ int	main(int argc, char **argv, char **env)
 	g_env = env;
 	while (1)
 	{
+		signal(SIGINT, sigint_handler);
+		signal(SIGQUIT, sigquit_handler);
 		if (!g_p_stop_sig)
 			print_prompt();
 		minishell_start();
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, sigquit_handler);
 	}
 	return (0);	
 }

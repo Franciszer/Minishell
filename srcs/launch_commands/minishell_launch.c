@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_launch.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 14:37:03 by franciszer        #+#    #+#             */
-/*   Updated: 2020/07/06 18:13:37 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/06 21:51:59 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 void	sigtest(int sig)
 {
 	if (sig == SIGINT)
@@ -37,7 +38,8 @@ int		minishell_launch(char **argv)
 	argv[0] = tmp;
 	if (!(pid = fork()))
 	{
-		signal(SIGINT, sigtest);
+		signal(SIGINT, sigint_handler);
+		signal(SIGQUIT, SIG_DFL);
 		if (execve(argv[0], argv, g_env) == -1)
 			ft_perror(ERR_EXECVE);
 	}
@@ -51,12 +53,14 @@ int		minishell_launch(char **argv)
 		else if (WIFSIGNALED(g_exit_status))
 		{
 			g_p_stop_sig = 1;
-			g_exit_status = 130;
+			if (WTERMSIG(g_exit_status) == SIGINT)
+				g_exit_status = 130;
+			if (WTERMSIG(g_exit_status) == SIGQUIT)
+				g_exit_status = 131;
 		}
 		else
 			g_exit_status = 0;
 		
 	}
-	signal(SIGINT, signal_handler);
 	return (1);
 }
