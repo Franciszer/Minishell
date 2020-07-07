@@ -3,8 +3,8 @@ A small shell
 
 TODOLIST:
 	BUILTINS:
-		-export +=
-		-signals: ctrl-D and ctrl-\
+		-export += (1 leak left)
+		-signals: ctrl-D
 QUENTIN'S JOB:
 	-pipes |
 	-redirections: <, >, >>
