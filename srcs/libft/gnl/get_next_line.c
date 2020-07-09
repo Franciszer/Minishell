@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 12:37:34 by frthierr          #+#    #+#             */
-/*   Updated: 2019/11/26 09:52:53 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/09 14:19:36 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,6 @@ int		get_next_line(int fd, char **line)
 	if (!ft_clear_line(&s))
 		return (0);
 	if (!red && !ft_isline(s))
-		return (0);
+		return (-2);
 	return (1);
 }

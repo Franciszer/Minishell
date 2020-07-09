@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_loop.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 14:48:38 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/06 21:42:30 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/09 14:19:41 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,16 @@ void	print_prompt()
 
 t_list *prompt_loop()
 {
-	char *line;
-	t_list *tokenList;
+	char 	*line;
+	t_list 	*tokenList;
+	int		ret_value;
 
 	g_p_stop_sig = 0;
-	if (get_next_line(STDIN_FILENO, &line) < 0)
+	if ((ret_value = get_next_line(STDIN_FILENO, &line)) < 0)
 	{
-		ft_perror(ERR_READLINE);
-		exit(2);
+		if (ret_value != -2)
+			ft_perror(ERR_READLINE);
+		exit(0);
 		return (NULL);
 	}
 	tokenList = tokenize(line);
