@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 16:17:09 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/06 15:47:15 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/15 13:55:41 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,11 @@ t_list	*copy_command(t_list *command_start)
 	{
 		if (!(token_copy = ft_strdup((char*)nav->content)))
 			return (NULL);
-		if (!(node_copy = ft_lstnew(token_copy)))
+  		if (!(node_copy = ft_lstnew(token_copy)))
+		{
+			free(token_copy);
 			return (NULL);
+		}
 		if (!command_copy)
 			command_copy = node_copy;
 		else
@@ -79,6 +82,7 @@ int		execute_commands(t_list **commandlist)
 		tmp_list = (t_list*)nav->content;
 		if (!(nav->content = expand_tokens((t_list*)nav->content)))
 		{
+			ft_lstclear(&tmp_list, free);
 			return (0);
 		}
 		ft_lstclear(&tmp_list, free);

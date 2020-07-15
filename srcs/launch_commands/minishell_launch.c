@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_launch.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 14:37:03 by franciszer        #+#    #+#             */
-/*   Updated: 2020/07/06 21:51:59 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/15 13:32:53 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

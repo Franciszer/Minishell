@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:25:27 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/07 10:55:10 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/15 11:17:38 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ char		*added_var(char *arg)
 	}
 	else
 	{
-		if (!(current_value = ft_strjoin_free(current_value, ft_strdup(&arg[i]))))
+		if (!(current_value = ft_strjoin_2free(current_value, ft_strdup(&arg[i]))))
 			return (NULL);
 	}
 	if (!(key = ft_strjoin_free(key, "=")))
@@ -195,16 +195,20 @@ int			builtin_export(char **argv)
 {
 	int	i;
 	int	status;
+	char	**new_args;
 
 	i = 1;
 	status = 0;
-	if (!argv[1])
+	if (!(new_args = join_export_args(argv)))
+		return (1);
+	if (!new_args[1])
 		return (print_export());
-	while (argv[i])
+	while (new_args[i])
 	{
-		if (export_envvar(i, argv))
+		if (export_envvar(i, new_args))
 			status = 1;
 		i++;
 	}
+	free_argv(new_args, INT_MAX);
 	return (status);
 }

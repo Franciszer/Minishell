@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:39:32 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/06 21:46:55 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/15 13:31:24 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,8 @@ void	minishell_start()
 		}
 		else
 		{
-			if ((command_list = get_command_list(token_list)))
-			{
-				execute_commands(&command_list);
-			}
+			command_list = get_command_list(token_list);
+			execute_commands(&command_list);
 			ft_lstclear(&token_list, free);
 			free_commandlist(&command_list);
 		}

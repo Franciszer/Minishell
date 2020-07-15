@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:40:30 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/06 21:46:24 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/15 10:38:55 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int				builtin_env();
 int				builtin_echo(char **argv);
 int				builtin_export(char **argv);
 int				builtin_unset(char **argv);
+char			**join_export_args(char **args);
 
 /*
 **		_____SIGNAL_HANDLING_____
@@ -121,7 +122,6 @@ int				builtin_unset(char **argv);
 void			sigint_handler(int signo);
 void			sigquit_handler(int sig);
 void			signal_default();
-
 
 
 /*

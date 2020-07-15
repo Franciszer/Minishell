@@ -27,6 +27,7 @@ SRCS=	srcs/parsing/prompt_loop.c\
 		srcs/builtins/builtin_export.c\
 		srcs/builtins/builtin_unset.c\
 		srcs/builtins/launch_builtin.c\
+		srcs/builtins/builtin_utils.c\
 		srcs/signals/signal_handlers.c\
 		srcs/utils/print_tokens.c
 INCLUDE_DIRS = -I srcs/libft\
@@ -55,10 +56,9 @@ $(NAME):	${OBJECTS}
 start: all
 	@@echo "${GREEN}✓  minishell launched${NC}"
 	@./${NAME}
-	@rm -rf ${NAME}
 
 valgrind_start: all
-	@valgrind --leak-check=full --show-leak-kinds=all ./${NAME}
+	@valgrind --leak-check=full --show-leak-kinds=definite --track-origins=yes ./${NAME}
 
 test: all
 	@cc ${MAIN_TEST} ${OBJECTS} ${INCLUDE_DIRS} ${LIB} -o test_exec
