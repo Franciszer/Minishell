@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 14:44:06 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/04 20:00:28 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/08/05 15:52:52 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,21 @@ int		builtin_echo(char **argv)
 {
 	int		i;
 	char	option_n;
-	char	*str;
-	
+
 	i = 1;
 	option_n = 0;
-	if (!ft_strncmp(argv[1], "-n", 3))
+	while (!ft_strncmp(argv[i], "-n", 3))
 	{
 		option_n = 1;
 		i++;
 	}
-	if (!(str = ft_strdup(argv[i++])))
-		return (1);
+	if (argv[i])
+		ft_putstr_fd(argv[i++], STDOUT_FILENO);
 	while (argv[i])
 	{
-		if (!(str = ft_strjoin_free(str, " ")))
-				return (1);
-		if (!(str = ft_strjoin_free(str, argv[i++])))
-			return (1);
+		ft_putstr_fd(" ", STDOUT_FILENO);
+		ft_putstr_fd(argv[i++], STDOUT_FILENO);
 	}
-	ft_putstr_fd(str, STDOUT_FILENO);
-	free(str);
 	if (!option_n)
 		ft_putchar_fd('\n', STDOUT_FILENO);
 	return (0);

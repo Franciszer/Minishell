@@ -3,23 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handlers.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
+/*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 15:10:26 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/06 21:53:31 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/08/09 13:01:01 by qfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-// void sigint_handler(int signo)
-// {
-// 	ft_printf("hello\n");
-// 	//minishell_start();
-// }
+#include "../../includes/minishell.h"
 
 void	sigquit_handler(int sig)
 {
+	g_open_pipe = 0;
 	if (sig == SIGQUIT)
 	{
 		ft_printf("\nQuit (core dumped)\n");
@@ -30,14 +25,19 @@ void	sigquit_handler(int sig)
 
 void	sigint_handler(int sig)
 {
+	g_open_pipe = 0;
 	if (sig == SIGINT)
 	{
-		ft_printf("\b\b\b\b\n");
-		print_prompt();
+		if (!g_man)
+		{
+			ft_printf("\n");
+			print_prompt();
+		}
 	}
 }
 
-void	signal_default()
+void	signal_default(void)
 {
+	g_open_pipe = 0;
 	signal(SIGINT, SIG_DFL);
 }

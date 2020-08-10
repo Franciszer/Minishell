@@ -6,28 +6,31 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:39:32 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/15 13:31:24 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/10 14:25:29 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	minishell_start()
+void	clear_and_throw(char *err, t_list **to_clear)
+{
+	ft_lstclear(to_clear, free);
+	ft_perror(err);
+}
+
+void	minishell_start(void)
 {
 	t_list	*token_list;
 	t_list	*command_list;
-	
-	if ((token_list = prompt_loop()))
+
+	if ((token_list = prompt_loop(0)))
 	{
 		if (!tokens_syntax_check(token_list))
-		{
-			ft_lstclear(&token_list, free);
-			ft_perror(ERR_UNFINISHED_QUOTE);
-		}
+			clear_and_throw(ERR_UNFINISHED_QUOTE, &token_list);
 		else
 		{
 			command_list = get_command_list(token_list);
-			execute_commands(&command_list);
+			execute_pipes(&command_list);
 			ft_lstclear(&token_list, free);
 			free_commandlist(&command_list);
 		}
@@ -36,8 +39,13 @@ void	minishell_start()
 		return ;
 }
 
-int	main(int argc, char **argv, char **env)
+int		main(int argc, char **argv, char **env)
 {
+	g_open_pipe = 0;
+	g_pipe_error = 0;
+	g_exit_status = 0;
+	g_semicol_error = 0;
+	g_man = 0;
 	if (argc > 1 || argv[1])
 	{
 		ft_perror(ERR_TOO_MANY_ARGS);
@@ -54,5 +62,5 @@ int	main(int argc, char **argv, char **env)
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, sigquit_handler);
 	}
-	return (0);	
+	return (0);
 }

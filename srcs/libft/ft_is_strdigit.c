@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 12:04:24 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/06 14:48:32 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/05 14:28:17 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	ft_is_strdigit(char *str)
 	i = 0;
 	if (!str)
 		return (0);
+	if (str[i] == '-')
+		i++;
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))

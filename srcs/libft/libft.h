@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 14:42:29 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/03 14:40:07 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/21 19:49:18 by qfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ char			**list_to_argv(t_list *token_list);
 int				free_argv(char **argv, int max_index);
 t_list			*ft_lstnew(void *content);
 void			ft_lstadd_front(t_list **alst, t_list *new);
-t_list			*ft_lstfilter(t_list **list, void *(*f)(void *), void (*del)(void *));
+t_list			*ft_lstfilter(t_list **list, void *(*f)(void *),
+								void (*del)(void *));
 t_list			*ft_lstfilter_data(t_list **list, void *(*f)(void *, void*)\
 					, void (*del)(void *), void *data);
 int				ft_lstsize(t_list *lst);

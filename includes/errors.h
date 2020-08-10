@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 14:12:42 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/06 21:42:53 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/08/10 12:29:00 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,20 @@
 # define ERR_EXECVE "error executing command"
 
 # define ERR_TOO_MANY_ARGS "too many arguments"
+
+# define ERR_PIPE "Syntax error: `|\' unexpected"
+
+# define ERR_SEMICOL "Syntax error: `;\' unexpected"
+
+# define ERR_REDIR "syntax error near unexpected token `newline\'"
+# define ERR_REDIR_2 "syntax error near unexpected token `>\'"
+# define ERR_REDIR_1 "syntax error near unexpected token `>>\'"
+# define ERR_REDIR_3 "syntax error near unexpected token `<\'"
+
+# define ERR_REDIR_IS_DIR_P1 "cannot create "
+# define ERR_REDIR_IS_DIR_P2 ": Is a directory"
+
+# define ERR_REDIR_DONT_FIND_P1 "cannot open "
+# define ERR_REDIR_DONT_FIND_P2 ": No such file or directory"
 
 #endif

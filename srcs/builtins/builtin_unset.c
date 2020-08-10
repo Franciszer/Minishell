@@ -3,30 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
+/*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 11:40:02 by franciszer        #+#    #+#             */
-/*   Updated: 2020/07/05 15:27:55 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/07/21 19:10:29 by qfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	remove_var(char *var_name)
+char		*strndup_len_char(const char *s, char c)
 {
-	t_list	*env_list;
-	t_list	*nav;
-	t_list	*prev;
+	return (ft_strndup(s, ft_strlen_char(s, c)));
+}
+
+int			remove_var_loop(char *var_name, t_list *nav, t_list *prev,
+						t_list **env_list)
+{
 	t_list	*to_free;
 	char	*tmp;
 
-	if (!(env_list = ft_argv_to_list(g_env)))
-		return (1);
-	nav = env_list;
-	prev = NULL;
 	while (nav)
 	{
-		if (!(tmp = ft_strndup((char*)nav->content, ft_strlen_char((char*)nav->content, '='))))
+		if (!(tmp = strndup_len_char((char*)nav->content, '=')))
 			return (1);
 		if (!ft_strncmp(var_name, tmp, ft_strlen(tmp)))
 		{
@@ -34,7 +33,7 @@ static int	remove_var(char *var_name)
 			nav = nav->next;
 			ft_lstdelone(to_free, free);
 			if (!prev)
-				env_list = nav;
+				*env_list = nav;
 			else
 				prev->next = nav;
 		}
@@ -45,10 +44,25 @@ static int	remove_var(char *var_name)
 		}
 		free(tmp);
 	}
+	return (0);
+}
+
+int			remove_var(char *var_name)
+{
+	t_list	*env_list;
+	t_list	*nav;
+	t_list	*prev;
+
+	if (!(env_list = ft_argv_to_list(g_env)))
+		return (1);
+	nav = env_list;
+	prev = NULL;
+	if (remove_var_loop(var_name, nav, prev, &env_list))
+		return (1);
 	if (g_env_modified)
 		free_argv(g_env, INT_MAX);
 	else
-		g_env_modified = 1;	
+		g_env_modified = 1;
 	if (!(g_env = list_to_argv(env_list)))
 		return (1);
 	ft_lstclear(&env_list, free);

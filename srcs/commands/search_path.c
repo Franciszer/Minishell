@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   search_path.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 14:02:44 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/15 11:43:56 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/08 13:48:29 by qfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
-static char	*get_pathcommand(char *path, char *command)
+static char		*get_pathcommand(char *path, char *command)
 {
 	char	*pathcommand;
 
@@ -22,11 +22,11 @@ static char	*get_pathcommand(char *path, char *command)
 			return (NULL);
 		return (ft_strjoin_free(pathcommand, command));
 	}
-	else	
-		return (ft_strjoin(path, command));	
+	else
+		return (ft_strjoin(path, command));
 }
 
-static char	*search_relativepath(char *command)
+static char		*search_relativepath(char *command)
 {
 	char	*path;
 
@@ -48,6 +48,23 @@ static char	*search_relativepath(char *command)
 		return (path);
 }
 
+static char		*return_free_av(char *ret, char ***path_array, char **path)
+{
+	free_argv(*path_array, INT_MAX);
+	free(*path);
+	return (ret);
+}
+
+int				is_custom(char *command)
+{
+	if (!ft_strncmp(command, "pwd", ft_strlen("pwd") + 1)
+		|| !ft_strncmp(command, "env", ft_strlen("env") + 1)
+		|| !ft_strncmp(command, "echo", ft_strlen("echo") + 1)
+		|| !ft_strncmp(command, "export", ft_strlen("export") + 1))
+		return (1);
+	return (0);
+}
+
 char			*search_path(char *command)
 {
 	char	*path;
@@ -55,15 +72,10 @@ char			*search_path(char *command)
 	char	*command_path;
 	int		i;
 
-	if (!command || !command[0])
-		return (NULL);
-	if (open(command, O_CLOEXEC) != -1)
+	if (is_custom(command))
 		return (ft_strdup(command));
-	if ((command_path = search_relativepath(command)))
-		return (command_path);
-	if (!(path = get_env("PATH")))
-		return (NULL);
-	if (!(path_array = ft_split(path, ':')))
+	if (!(path = get_env("PATH"))
+		|| !(path_array = ft_split(path, ':')))
 		return (NULL);
 	i = 0;
 	while (path_array[i])
@@ -71,15 +83,13 @@ char			*search_path(char *command)
 		if (!(command_path = get_pathcommand(path_array[i], command)))
 			return (NULL);
 		if (open(command_path, O_CLOEXEC) != -1)
-		{
-			free_argv(path_array, INT_MAX);
-			free(path);
-			return (command_path);
-		}
+			return (return_free_av(command_path, &path_array, &path));
 		free(command_path);
 		i++;
 	}
-	free_argv(path_array, INT_MAX);
-	free(path);
-	return (NULL);
+	if (open(command, O_CLOEXEC) != -1)
+		return (ft_strdup(command));
+	if ((command_path = search_relativepath(command)))
+		return (command_path);
+	return (return_free_av(NULL, &path_array, &path));
 }

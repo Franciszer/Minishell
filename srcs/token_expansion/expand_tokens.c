@@ -6,159 +6,97 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 11:57:50 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/15 13:52:27 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/10 15:22:02 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*expand_token_noquote(char *token)
+char	*return_token(char **tk, int check_quote)
 {
-	int		i;
-	int		j;
-	int		prev_is_backslash;
-	char	*final_token;
-	char	*tmp;
-	
-
-	i = 0;
-	j = 0;
-	prev_is_backslash = 0;
-	if (!(final_token = (char*)malloc(sizeof(char) * ft_strlen_etokens(token))))
-		return (NULL);
-	while (token[i])
+	if ((!(*tk) || !(*tk)[0]) && check_quote)
 	{
-		if (!prev_is_backslash)
-		{
-			if (token[i] == '\\')
-			{
-				prev_is_backslash = 1;
-				i++;
-			}
-			else if (token[i] == '$' && token[i + 1] && (ft_isalnum(token[i + 1]) || token[i + 1] == '?'))
-			{
-				tmp = final_token;
-				if (!(final_token = expand_env(token, final_token, &i, &j)))
-					return (NULL);
-				free(tmp);
-				if (!final_token)
-					return(ft_strdup(""));
-				if (!final_token[0])
-				{
-					return (final_token);
-				}
-			}
-			else
-			{
-				final_token[j] = token[i];
-				j++;
-				i++;
-			}
-		}
-		else
-		{
-			prev_is_backslash = 0;
-			final_token[j] = token[i];
-			j++;
-			i++;
-		}
+		if (*tk)
+			free(*tk);
+		return (ft_strdup("\33\127"));
 	}
-	final_token[j] = '\0';
-	return (final_token);
+	return (*tk);
 }
 
-char	*expand_token_dquote(char *token)
+char	*expand_token_quote(char *tk, t_expand_tk_dt d)
 {
-	int		i;
-	int		j;
-	int		prev_is_backslash;
-	char	*final_token;
-	char	*tmp;
-	
+	int		check_quote;
 
-	i = 0;
-	j = 0;
-	prev_is_backslash = 0;
-	if (!(final_token = (char*)malloc(sizeof(char) * ft_strlen_etokens(token))))
-		return (NULL);
-	while (token[i])
+	check_quote = 0;
+	if (is_quote_only(tk))
+		check_quote = 1;
+	if (!(d.final_token = init_expand(&d.qt, &d.ij, &d.pb, tk)))
+		return (return_token(NULL, check_quote));
+	while (tk[d.ij.a])
 	{
-		if (!prev_is_backslash)
-		{
-			if (token[i] == '\\' && token[i + 1])
+		tk[d.ij.a] == '\'' && d.qt.dq == -1 && (!d.pb || d.qt.q == 1)
+				? d.qt.q *= -1 : 0;
+		if (!d.pb || d.qt.q == 1)
+			if (if_loop(tk, &d.ij, &d.qt, &d.pb))
+				d.final_token = d.final_token;
+			else if (elif_test(tk, d.qt, d.ij))
 			{
-				prev_is_backslash = 1;
-				i++;
-			}
-			else if (token[i] == '$' && token[i + 1] && (ft_isalnum(token[i + 1]) || token[i + 1] == '?'))
-			{
-				tmp = final_token;
-				if (!(final_token = expand_env(token, final_token, &i, &j)))
-					return (NULL);
-				free(tmp);
-				if (!final_token)
-					return(ft_strdup(""));
-				if (!final_token[0])
-				{
-					free(token);
-					return (final_token);
-				}
+				d.tmp = d.final_token;
+				if (!(d.final_token = eev(tk, d.final_token, &d.ij.a, &d.ij.b)))
+					return (return_token(NULL, check_quote));
+				if (elif_loop(&d.final_token, &d.tmp))
+					return (return_token(&d.final_token, check_quote));
 			}
 			else
-			{
-				final_token[j] = token[i];
-				j++;
-				i++;
-			}
-		}
-		else
-		{
-			prev_is_backslash = 0;
-			if (!is_specialchar_dquote(token[i]))
-				final_token[j++] = '\\';
-			final_token[j] = token[i];
-			j++;
-			i++;
-		}
+				d.final_token[d.ij.b++] = tk[d.ij.a++];
+		else if (!(d.pb = 0))
+			else_loop(tk, &d.final_token, &d.ij, &d.qt);
 	}
-	free(token);
-	final_token[j] = '\0';
-	return (final_token);
+	d.final_token[d.ij.b] = '\0';
+	return (return_token(&d.final_token, check_quote));
 }
 
 void	*get_final_token(void *content)
 {
-	char	*str;
+	char			*str;
+	t_expand_tk_dt	d;
 
-	if (((char*)content)[0] == '\"')
+	d.qt.q = -1;
+	str = ((char*)content);
+	str = expand_token_quote(str, d);
+	if (!str || !str[0])
 	{
-		str = ((char*)content);
-		str = remove_quotes_free(str, '\"');
-		str = expand_token_dquote(str);
-	}
-	else if (((char*)content)[0] == '\'')
-	{
-		str = ((char*)content);
-		str = remove_quotes_free(str, '\'');
-	}
-	else
-	{
-		str = expand_token_noquote((char*)content);
-		if (str[0] == '\0')
-		{
+		if (str)
 			free(str);
-			return (NULL);
-		}	
+		return (NULL);
 	}
 	return (str);
+}
+
+void	clear_token(t_list **token_list)
+{
+	t_list *nav;
+	t_list **tmp;
+
+	nav = *token_list;
+	while (nav)
+	{
+		if (!nav->content)
+		{
+			tmp = &nav;
+			(*tmp) = nav->next;
+		}
+		nav = nav->next;
+	}
 }
 
 t_list	*expand_tokens(t_list *token_list)
 {
 	t_list	*expanded_list;
 	t_list	*tmp_list;
-	
+
 	tmp_list = token_list;
 	expanded_list = ft_lstfilter(&tmp_list, get_final_token, free);
+	clear_token(&expanded_list);
 	return (expanded_list);
 }

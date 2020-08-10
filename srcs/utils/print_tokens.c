@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 10:36:09 by franciszer        #+#    #+#             */
-/*   Updated: 2020/06/29 12:20:26 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/09 18:34:19 by qfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	print_argv(char **argv)
 	i = 0;
 	while (argv[i])
 	{
-		ft_printf("%d: |%s|\n",i, argv[i]);
+		ft_printf("%d: |%s|\n", i, argv[i]);
 		i++;
 	}
 }

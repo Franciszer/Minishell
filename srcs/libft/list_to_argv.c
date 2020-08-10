@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_to_argv.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 14:36:34 by frthierr          #+#    #+#             */
-/*   Updated: 2020/07/03 14:36:48 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/07/21 19:46:10 by qfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	**list_to_argv(t_list *token_list)
 	{
 		if (!(argv[i] = ft_strdup((char*)token_list->content)))
 		{
-			free_argv(argv, i);	
+			free_argv(argv, i);
 			return (NULL);
 		}
 		token_list = token_list->next;
