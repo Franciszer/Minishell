@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
+/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 16:27:14 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/09 18:34:34 by qfeuilla         ###   ########.fr       */
+/*   Updated: 2020/08/10 19:06:18 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,7 @@ size_t	get_token(char *token_start, t_list **tokenlist)
 	size_t	token_lenv;
 	char	*token;
 
-	if (is_special_char(token_start))
-		token_lenv = token_len_special(token_start);
-	else if (*token_start == '\'')
-		token_lenv = token_len_s_quote(token_start);
-	else if (*token_start == '\"')
-		token_lenv = token_len_d_quote(token_start);
-	else
-		token_lenv = token_len(token_start);
+	token_lenv = ftoken_len(token_start);
 	if (!(token = ft_strndup((const char*)token_start, token_lenv)))
 		return (0);
 	if (!add_to_token_list(token, tokenlist))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:40:30 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/10 14:22:59 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/10 19:56:37 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,9 +116,7 @@ char				*copy_token(char *str, size_t maxsize);
 t_list				*tokenize(char *line);
 size_t				get_token(char *token_start, t_list **tokenlist);
 int					add_to_token_list(char *token, t_list **tokenlist);
-size_t				token_len(char *token_start);
-size_t				token_len_s_quote(char *token_start);
-size_t				token_len_d_quote(char *token_start);
+size_t				ftoken_len(char *tok_s);
 size_t				token_len_special(char *token_start);
 int					tokens_syntax_check(t_list *token_list);
 int					pipes_syntax_check(t_list *token_list);
@@ -173,6 +171,7 @@ int					execute_pipes(t_list **commandlist);
 
 int					is_builtin_child(char *command);
 int					is_builtin_parent(char **command);
+int					is_builtin_parent_2(char *command);
 int					launch_builtin_child(int builtin_id, char **argv);
 int					launch_builtin_parent(int builtin_id, char **argv);
 int					builtin_cd(char **args);

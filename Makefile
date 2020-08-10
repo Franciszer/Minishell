@@ -1,4 +1,4 @@
-FLAGS=-Wall -Wextra  -Werror#-fsanitize=address
+FLAGS=-Wall -Wextra  -Werror -fsanitize=address
 # -static-libasan -fPIE -pie
 # VARIABLES
 

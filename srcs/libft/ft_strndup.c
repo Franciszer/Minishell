@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 14:36:26 by frthierr          #+#    #+#             */
-/*   Updated: 2020/06/25 12:21:31 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/10 20:36:53 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strndup(const char *s, size_t maxsize)
 	if (!(str = (char *)malloc(sizeof(char) * (size + 1))))
 		return (NULL);
 	i = 0;
-	while (i < size)
+	while (i < size && s[i])
 	{
 		str[i] = s[i];
 		maxsize--;
