@@ -6,7 +6,7 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 16:17:09 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/10 20:48:45 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/08/10 22:03:53 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,20 @@ int		identify_token(char *token_start, t_list **tokenlist)
 	return (1);
 }
 
+t_list	*get_identify_token(t_list *tokenlist)
+{
+	t_list	*arg;
+	t_list	*last;
+
+	if (!(arg = tokenize((char*)tokenlist->content)))
+		return (NULL);
+	last = ft_lstlast(arg);
+	if (tokenlist && tokenlist->next)
+		last->next = tokenlist->next;
+	ft_lstdelone(tokenlist, free);
+	return (arg);
+}
+
 int		execute_commands(t_list **commandlist)
 {
 	t_list	*nav;
@@ -147,14 +161,18 @@ int		execute_commands(t_list **commandlist)
 	save = 0;
 	while (nav)
 	{
+		g_first_is_envvar = 0;
 		tmp_list = (t_list*)nav->content;
 		if (!(nav->content = expand_tokens((t_list*)nav->content)))
 			return (return_free_cmd(1, NULL, &tmp_list));
-		if (!(identify_token(((t_list*)nav->content)->content, (t_list**)&(nav->content))))
-		{
-			printf("okbro\n");
-			return return_free_cmd(1, NULL, &tmp_list);
-		}
+		// if (!(identify_token(((t_list*)nav->content)->content, (t_list**)&(nav->content))))
+		// {
+		// 	printf("okbro\n");
+		// 	return return_free_cmd(1, NULL, &tmp_list);
+		// }
+		if (g_first_is_envvar &&\
+		(!(nav->content = get_identify_token((t_list*)nav->content))))
+			return (0);
 		ft_lstclear(&tmp_list, free);
 		if (!(args = list_to_argv((t_list*)nav->content)))
 			return (0);

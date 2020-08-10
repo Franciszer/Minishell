@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 11:57:50 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/10 15:22:02 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/10 22:08:20 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,9 @@ t_list	*expand_tokens(t_list *token_list)
 	t_list	*tmp_list;
 
 	tmp_list = token_list;
+	if (token_list && token_list->content &&\
+	((char*)(token_list->content))[0] == '$')
+		g_first_is_envvar = 1;
 	expanded_list = ft_lstfilter(&tmp_list, get_final_token, free);
 	clear_token(&expanded_list);
 	return (expanded_list);

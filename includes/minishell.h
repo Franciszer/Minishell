@@ -6,7 +6,7 @@
 /*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:40:30 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/10 19:56:37 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/08/10 22:01:23 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int					g_open_pipe;
 int					g_pipe_error;
 int					g_man;
 int					g_semicol_error;
+int					g_first_is_envvar;
 
 /*
 **		______STRUCTS______
