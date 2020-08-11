@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 11:20:05 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/10 19:57:21 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/08/11 14:25:06 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int		is_builtin_parent_2(char *command)
 	else
 		return (-1);
 }
-
 
 int		launch_builtin_child(int builtin_id, char **argv)
 {

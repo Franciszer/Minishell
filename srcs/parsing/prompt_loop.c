@@ -6,25 +6,11 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 14:48:38 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/11 11:05:33 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/11 14:30:31 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-t_list	*pipe_handle(int depth, t_list **token_list)
-{
-	t_list	*tmp;
-
-	if (depth == 0)
-		g_open_pipe = 1;
-	print_prompt();
-	tmp = prompt_loop(depth + 1);
-	ft_lstadd_back(token_list, tmp);
-	if (depth == 0)
-		g_open_pipe = 0;
-	return ((*token_list));
-}
 
 char	*last_token(t_list *token_list)
 {

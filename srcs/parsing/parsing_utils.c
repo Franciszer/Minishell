@@ -6,11 +6,25 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 14:28:17 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/10 14:24:42 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/11 14:30:48 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_list	*pipe_handle(int depth, t_list **token_list)
+{
+	t_list	*tmp;
+
+	if (depth == 0)
+		g_open_pipe = 1;
+	print_prompt();
+	tmp = prompt_loop(depth + 1);
+	ft_lstadd_back(token_list, tmp);
+	if (depth == 0)
+		g_open_pipe = 0;
+	return ((*token_list));
+}
 
 int		is_quote(char c)
 {

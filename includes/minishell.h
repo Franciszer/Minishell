@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:40:30 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/11 13:26:12 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/11 14:31:22 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ void				exit_minishell(int action, t_list *token_list,
 int					minishell_launch(char **argv, int *start, int islast);
 char				*search_path(char *command);
 int					execute_pipes(t_list **commandlist);
+t_list				*pipe_handle(int depth, t_list **token_list);
 
 /*
 **		_____BUILTINS_____

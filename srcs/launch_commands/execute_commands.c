@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 16:17:09 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/11 10:50:57 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/11 14:29:23 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,18 @@ t_list	*get_identify_token(t_list *tokenlist)
 	t_list	*arg;
 	t_list	*last;
 
-	if (!(arg = tokenize((char*)tokenlist->content)))
-		return (NULL);
-	last = ft_lstlast(arg);
-	if (tokenlist && tokenlist->next)
-		last->next = tokenlist->next;
-	ft_lstdelone(tokenlist, free);
-	return (arg);
+	if (g_first_is_envvar)
+	{
+		if (!(arg = tokenize((char*)tokenlist->content)))
+			return (NULL);
+		last = ft_lstlast(arg);
+		if (tokenlist && tokenlist->next)
+			last->next = tokenlist->next;
+		ft_lstdelone(tokenlist, free);
+		return (arg);
+	}
+	else
+		return (tokenlist);
 }
 
 int		execute_commands(t_list **commandlist)
@@ -107,8 +112,7 @@ int		execute_commands(t_list **commandlist)
 		tmp_list = (t_list*)nav->content;
 		if (!(nav->content = expand_tokens((t_list*)nav->content)))
 			return (return_free_cmd(1, NULL, &tmp_list));
-		if (g_first_is_envvar &&\
-		(!(nav->content = get_identify_token((t_list*)nav->content))))
+		if ((!(nav->content = get_identify_token((t_list*)nav->content))))
 			return (0);
 		ft_lstclear(&tmp_list, free);
 		if (!(args = list_to_argv((t_list*)nav->content)))
