@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 11:30:42 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/11 14:39:47 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/11 14:58:51 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		builtin_exit(char **args)
 	int		i;
 
 	i = 0;
-	ft_putendl_fd("exit", 1);
+	ft_putendl_fd("exit", 2);
 	while (args[i])
 		i++;
 	if (i > 2)
