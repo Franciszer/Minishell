@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 11:30:42 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/11 16:33:11 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/11 18:57:54 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,5 @@ int		builtin_exit(char **args)
 	else if (args[1])
 		g_exit_status = ft_atoi(args[1]);
 	exit_minishell(EXIT_NOW, NULL, NULL, NULL);
-	system("leaks minishell");
 	return (0);
 }

@@ -1,7 +1,6 @@
 # minishell
 a 42 school project
 
-check ctrl \
 env -i 
 cat < test.txt | grep echo > test.txt | wc
 "<" : error

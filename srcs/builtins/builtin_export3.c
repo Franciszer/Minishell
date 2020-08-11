@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 13:58:47 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/10 13:59:19 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/11 19:06:52 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int			export_envvar(int i, char **argv)
 		return (1);
 	if (syntax_check == 3 && !(argv[i] = added_var(argv[i])))
 		return (1);
-	else if (syntax_check == 2)
-		return (0);
+	if (syntax_check == 2)
+		return (return_value = new_env_var(argv[i]));
 	if (!(var = ft_strndup(argv[i], ft_strlen_char(argv[i], '='))))
 		return (1);
 	if (!(to_free = get_env(var)))
