@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 11:57:50 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/10 22:08:20 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/08/11 12:10:25 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,11 @@ void	clear_token(t_list **token_list)
 		{
 			tmp = &nav;
 			(*tmp) = nav->next;
+		}
+		else if (!ft_strncmp(nav->content, "\33\127", ft_strlen("\33\127") + 1))
+		{
+			free(nav->content);
+			nav->content = ft_strdup("");
 		}
 		nav = nav->next;
 	}

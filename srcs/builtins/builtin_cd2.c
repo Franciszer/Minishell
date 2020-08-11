@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 14:05:50 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/10 14:06:00 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/11 11:20:50 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int			ft_go_home(char *current_dir)
 		if (!(home = get_env("HOME")))
 			return (1);
 		new[1] = home;
+		new[2] = NULL;
 		return_value = builtin_cd(new);
 		free_argv(new, INT_MAX);
 	}

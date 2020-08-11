@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 18:43:38 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/10 14:26:52 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/11 11:18:13 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ int		pipes_syntax_check(t_list *token_list)
 	if (ft_lstlen(token_list) == 1 &&
 		!ft_strncmp(last_token(token_list), "|", 2))
 		return (0);
-	else if (!pipes_syntax_check(token_list) || g_pipe_error \
+	else if (!pipes_syntax_check(token_list) || g_pipe_error\
 	|| g_semicol_error)
 	{
-		g_exit_status = 258;
+		g_exit_status = 2;
 		if (g_pipe_error)
 		{
 			g_pipe_error = 0;

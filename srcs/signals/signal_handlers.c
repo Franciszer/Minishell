@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handlers.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 15:10:26 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/09 13:01:01 by qfeuilla         ###   ########.fr       */
+/*   Updated: 2020/08/11 13:57:57 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,14 @@ void	sigquit_handler(int sig)
 	g_open_pipe = 0;
 	if (sig == SIGQUIT)
 	{
-		ft_printf("\nQuit (core dumped)\n");
-		g_exit_status = 131;
-		print_prompt();
+		if (g_in_fork)
+		{
+			ft_printf("\n");
+			g_exit_status = 131;
+			print_prompt();			
+		}
+		else
+			ft_printf("\b\b  \b\b");
 	}
 }
 

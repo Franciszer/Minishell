@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_commands.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 16:17:09 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/10 22:03:53 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/08/11 10:50:57 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,64 +78,6 @@ int		return_free_cmd(int type, char ***args, t_list **tmp_list)
 	return (0);
 }
 
-
-int		get_next_token(char *token, char *raw_token, t_list **tokenlist)
-{
-	t_list	*new;
-	size_t	len;
-	int		is_next;
-	
-	is_next = 0;
-	len =  ftoken_len(raw_token);
-	if (raw_token[len])
-		len += ftoken_len(&raw_token[ftoken_len(raw_token)]);
-	while (raw_token[len] && ft_isspace(raw_token[len]))
-		len++;
-	if (raw_token[len])
-		is_next = 1;
-	if (!(new = ft_lstnew(token)))
-		return (0);
-	if ((len == ft_strlen(raw_token)) || !is_next)
-	{
-		if ((*tokenlist)->next)
-			new->next = (*tokenlist)->next;
-	}
-	else
-	{
-		if (!(new->next = ft_lstnew(ft_strdup(&raw_token[len]))))
-			return (0);
-		new->next->next = (*tokenlist)->next;				
-	}
-	ft_lstdelone(*tokenlist, free);
-	*tokenlist = new;
-	return (1);
-}
-
-int		identify_token(char *token_start, t_list **tokenlist)
-{
-	char	*token;
-	char	*is_command;
-	size_t	len;
-
-	if((len = ftoken_len(token_start)) == ft_strlen(token_start))
-		return (1);
-	if (!(token = ft_strndup(token_start, ftoken_len(token_start))))
-		return (0);
-	is_command = NULL;
-	if (is_builtin_child(token) != -1 || is_builtin_parent_2(token) ||\
-	(is_command = search_path(token)))
-	{
-		if (is_command)
-			free(is_command);
-		if (!(get_next_token(token, token_start, tokenlist)))
-			return (0);
-		return (1);
-	}
-	else
-		free(token);
-	return (1);
-}
-
 t_list	*get_identify_token(t_list *tokenlist)
 {
 	t_list	*arg;
@@ -165,11 +107,6 @@ int		execute_commands(t_list **commandlist)
 		tmp_list = (t_list*)nav->content;
 		if (!(nav->content = expand_tokens((t_list*)nav->content)))
 			return (return_free_cmd(1, NULL, &tmp_list));
-		// if (!(identify_token(((t_list*)nav->content)->content, (t_list**)&(nav->content))))
-		// {
-		// 	printf("okbro\n");
-		// 	return return_free_cmd(1, NULL, &tmp_list);
-		// }
 		if (g_first_is_envvar &&\
 		(!(nav->content = get_identify_token((t_list*)nav->content))))
 			return (0);

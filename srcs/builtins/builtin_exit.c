@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 11:30:42 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/08 13:47:31 by qfeuilla         ###   ########.fr       */
+/*   Updated: 2020/08/11 11:48:38 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int		builtin_exit(char **args)
 	int		i;
 
 	i = 0;
+	ft_putendl_fd("exit", 1);
 	while (args[i])
 		i++;
 	if (i > 2)
@@ -26,7 +27,10 @@ int		builtin_exit(char **args)
 		return (1);
 	}
 	else if (args[1] && (!ft_is_strdigit(args[1]) || ft_strlen(args[1]) > 10))
-		g_exit_status = 255;
+		{
+			ft_perror("numeric argument required");
+			g_exit_status = 255;
+		}
 	else if (args[1])
 		g_exit_status = ft_atoi(args[1]);
 	exit_minishell(EXIT_NOW, NULL, NULL, NULL);

@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 14:48:38 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/10 14:22:10 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/11 11:05:33 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,34 @@ char	*last_token(t_list *token_list)
 	return (NULL);
 }
 
+int		ft_is_sep(char *s)
+{
+	if (!ft_strncmp(s, "|", 2) ||\
+	!ft_strncmp(s, ";", 2))
+		return (1);
+	return (0);
+}
+
 int		check_pipe_error(t_list *token_list)
 {
 	t_list	*tmp;
-	int		prev_is_pipe;
+	int		prev_is_sep;
 
-	prev_is_pipe = 0;
-	if (!ft_strncmp(first_token(token_list), "|", 2))
+	prev_is_sep = 0;
+	if (ft_is_sep(first_token(token_list)))
 		return (1);
 	tmp = token_list;
 	while (tmp)
 	{
-		if (!ft_strncmp((char*)tmp->content, "|", 2))
+		if (ft_is_sep(tmp->content))
 		{
-			if (prev_is_pipe)
+			if (prev_is_sep)
 				return (g_pipe_error = 1);
 			else
-				prev_is_pipe = 1;
+				prev_is_sep = 1;
 		}
 		else
-			prev_is_pipe = 0;
+			prev_is_sep = 0;
 		tmp = tmp->next;
 	}
 	return (0);
@@ -79,7 +87,10 @@ int		check_semicol_error(t_list *token_list)
 		if (!ft_strncmp((char*)tmp->content, ";", 2))
 		{
 			if (prev_is_semicol)
+			{
+				printf("here\n");
 				return (g_semicol_error = 1);
+			}
 			else
 				prev_is_semicol = 1;
 		}
@@ -107,7 +118,11 @@ t_list	*prompt_loop(int depth)
 	token_list = tokenize(line);
 	free(line);
 	if (check_pipe_error(token_list) || check_semicol_error(token_list))
-		return (token_list);
+	{
+		g_exit_status = 2;
+		ft_lstclear(&token_list, free);
+		return (ft_perror(ERR_PIPE) == 0 ? NULL : NULL);
+	}
 	else if ((!ft_strncmp(last_token(token_list), "|", 2))
 		|| (depth >= 1 && !last_token(token_list)))
 		return (pipe_handle(depth, &token_list));

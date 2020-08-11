@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 16:21:03 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/09 18:01:14 by qfeuilla         ###   ########.fr       */
+/*   Updated: 2020/08/11 13:41:20 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ void			exit_minishell(int action, t_list *token_list,
 		if (args_to_free)
 			free_argv(*args_to_free, INT_MAX);
 	}
+	system("leaks minishell");
 	exit(g_exit_status);
 }

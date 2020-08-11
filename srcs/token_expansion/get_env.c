@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 16:49:23 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/10 14:21:34 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/11 11:34:49 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,16 +80,16 @@ int		ft_strlen_key(char *key_start)
 	int	i;
 
 	i = 0;
+	if (key_start[i] == '$')
+		i++;
+	if (ft_isdigit(key_start[i]))
+		return (++i);
 	while (key_start[i])
 	{
-		if (i == 0 && key_start[i] == '$')
-			i++;
 		if (key_start[0] == '$' && key_start[1] == '?')
 			return (2);
 		else if (!ft_isalnum(key_start[i]))
 			return (i);
-		else if (ft_isdigit(key_start[i]))
-			return (++i);
 		else
 			i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:39:32 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/10 14:25:29 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/11 13:26:22 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int		main(int argc, char **argv, char **env)
 	g_exit_status = 0;
 	g_semicol_error = 0;
 	g_man = 0;
+	g_in_fork = 0;
 	if (argc > 1 || argv[1])
 	{
 		ft_perror(ERR_TOO_MANY_ARGS);

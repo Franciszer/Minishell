@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 00:58:12 by qfeuilla          #+#    #+#             */
-/*   Updated: 2020/08/10 14:01:52 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/11 13:26:53 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		redir_error(t_redirection redir)
 		|| redir.putendfile || redir.putfile))
 		|| (type = is_redir(redir.file)))
 	{
-		g_exit_status = 258;
+		g_exit_status = 2;
 		if (type == 1)
 			ft_perror(ERR_REDIR_1);
 		else if (type == 2)
@@ -55,6 +55,7 @@ void	parent(pid_t *pid, int *save, int fd[2])
 	waitpid(*pid, &g_exit_status, 0);
 	*save = fd[0];
 	close(fd[1]);
+	g_in_fork = 0;
 	if (WIFEXITED(g_exit_status))
 		g_exit_status = WEXITSTATUS(g_exit_status);
 	else if (WIFSIGNALED(g_exit_status))
