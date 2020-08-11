@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 00:58:12 by qfeuilla          #+#    #+#             */
-/*   Updated: 2020/08/11 13:26:53 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/11 14:50:40 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ void	parent(pid_t *pid, int *save, int fd[2])
 		if (WTERMSIG(g_exit_status) == SIGQUIT)
 			g_exit_status = 131;
 	}
-	else
-		g_exit_status = 0;
 }
 
 void	child(t_int2 save_last, int contain_putfile,
@@ -97,7 +95,6 @@ int		preprocess_minishell(char ***argv)
 	char			*tmp;
 
 	builtin_id = -1;
-	g_exit_status = 0;
 	if (!((*argv)[1] && is_redir((*argv)[1]))\
 		&& (builtin_id = is_builtin_parent((*argv))) >= 0)
 		g_exit_status = launch_builtin_parent(builtin_id, (*argv));
