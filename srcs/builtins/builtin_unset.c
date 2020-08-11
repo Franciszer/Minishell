@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 11:40:02 by franciszer        #+#    #+#             */
-/*   Updated: 2020/07/21 19:10:29 by qfeuilla         ###   ########.fr       */
+/*   Updated: 2020/08/11 16:04:48 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int			remove_var_loop(char *var_name, t_list *nav, t_list *prev,
 	{
 		if (!(tmp = strndup_len_char((char*)nav->content, '=')))
 			return (1);
-		if (!ft_strncmp(var_name, tmp, ft_strlen(tmp)))
+		if (!ft_strncmp(var_name, tmp, ft_strlen(tmp) + 1))
 		{
 			to_free = nav;
 			nav = nav->next;
