@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:25:27 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/10 13:58:56 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/13 18:30:54 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,15 @@ char		*ft_quote_envvar(char *envvar)
 	int		i;
 
 	i = 0;
-	if (!(head = malloc(sizeof(char) * ft_strlen(envvar))))
+	if (!(head = malloc(sizeof(char) * (ft_strlen(envvar) + 2))))
 		return (NULL);
 	while (envvar[i] && envvar[i] != '=')
 	{
 		head[i] = envvar[i];
 		i++;
 	}
+	if (!envvar[i])
+		return ((head = ft_strndup_free(envvar, ft_strlen_char(envvar, '='))));
 	head[i++] = '=';
 	head[i] = 0;
 	if (!(tmp = ft_strdup(&envvar[i])))
