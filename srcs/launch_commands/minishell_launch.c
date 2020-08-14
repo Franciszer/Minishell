@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 14:37:03 by franciszer        #+#    #+#             */
-/*   Updated: 2020/08/11 13:25:51 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/14 12:44:23 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ int		minishell_launch(char **argv, int *save, int last)
 	t_int2			save_last;
 	t_list			*redirs;
 
-	g_man = ft_strncmp(argv[0], "man", 4) == 0 ? 1 : 0;
+	!ft_strncmp(argv[0], "man", 4) || !ft_strncmp(argv[0],\
+	"./minishell", 12) ? signal(SIGINT, SIG_IGN) : 0;
 	if (pipe(fd) < 0)
 		return (0);
 	if (!(redirs = do_redir(&argv)))
