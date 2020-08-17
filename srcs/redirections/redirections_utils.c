@@ -6,7 +6,7 @@
 /*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 16:28:06 by qfeuilla          #+#    #+#             */
-/*   Updated: 2020/08/08 15:40:12 by qfeuilla         ###   ########.fr       */
+/*   Updated: 2020/08/16 11:03:33 by qfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int				is_redir(char *cmd)
 	return (0);
 }
 
-int				is_dir(t_redirection redir)
+int				is_dir(t_redir redir)
 {
 	struct stat		path_stat;
 	char			*tmp;
@@ -50,7 +50,7 @@ int				is_dir(t_redirection redir)
 	return (0);
 }
 
-int				file_not_found(t_redirection redir)
+int				file_not_found(t_redir redir)
 {
 	char			*tmp;
 
@@ -62,19 +62,15 @@ int				file_not_found(t_redirection redir)
 	return (1);
 }
 
-t_redirection	stock_redir(char **argv)
+t_redir			stock_redir(char **argv)
 {
 	int				i;
-	t_redirection	redir;
+	t_redir			redir;
 	int				type;
 
 	i = -1;
-	redir.putfile = 0;
-	redir.putendfile = 0;
-	redir.in = 0;
-	redir.file = 0;
+	redir = (t_redir){0, 0, 0, 0};
 	while (argv[++i])
-	{
 		if ((type = is_redir(argv[i])))
 		{
 			if (type == 1)
@@ -84,10 +80,12 @@ t_redirection	stock_redir(char **argv)
 			else if (type == 3)
 				redir.in = 1;
 			if (argv[i + 1])
+			{
 				redir.file = ft_strdup(argv[i + 1]);
+				check_file(&(redir.file));
+			}
 			return (redir);
 		}
-	}
 	return (redir);
 }
 

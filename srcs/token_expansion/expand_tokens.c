@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 11:57:50 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/11 12:10:25 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/17 14:57:46 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,8 @@ char	*expand_token_quote(char *tk, t_expand_tk_dt d)
 {
 	int		check_quote;
 
-	check_quote = 0;
-	if (is_quote_only(tk))
-		check_quote = 1;
-	if (!(d.final_token = init_expand(&d.qt, &d.ij, &d.pb, tk)))
-		return (return_token(NULL, check_quote));
+	if (!expand_quote_set_vals(tk, &d, &check_quote))
+		return (!d.is_err ? d.final_token : return_token(NULL, check_quote));
 	while (tk[d.ij.a])
 	{
 		tk[d.ij.a] == '\'' && d.qt.dq == -1 && (!d.pb || d.qt.q == 1)
@@ -52,8 +49,7 @@ char	*expand_token_quote(char *tk, t_expand_tk_dt d)
 		else if (!(d.pb = 0))
 			else_loop(tk, &d.final_token, &d.ij, &d.qt);
 	}
-	d.final_token[d.ij.b] = '\0';
-	return (return_token(&d.final_token, check_quote));
+	return (return_expand_tk_quote(&d, check_quote));
 }
 
 void	*get_final_token(void *content)

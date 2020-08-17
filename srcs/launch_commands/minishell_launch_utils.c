@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_launch_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 00:58:12 by qfeuilla          #+#    #+#             */
-/*   Updated: 2020/08/13 18:39:33 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/16 11:04:45 by qfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		path_searching(char **argv, char **tmp)
 	return (0);
 }
 
-int		redir_error(t_redirection redir)
+int		redir_error(t_redir redir)
 {
 	int		type;
 
@@ -61,10 +61,6 @@ void	parent(pid_t *pid, int *save, int fd[2])
 	else if (WIFSIGNALED(g_exit_status))
 	{
 		g_p_stop_sig = 1;
-		// if (WTERMSIG(g_exit_status) == SIGINT)
-		// 	g_exit_status = 130;
-		// if (WTERMSIG(g_exit_status) == SIGQUIT)
-		// 	g_exit_status = 131;
 		g_exit_status += 128;
 	}
 }

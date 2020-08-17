@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   search_path.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 14:02:44 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/08 13:48:29 by qfeuilla         ###   ########.fr       */
+/*   Updated: 2020/08/17 17:00:52 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ char			*search_path(char *command)
 
 	if (is_custom(command))
 		return (ft_strdup(command));
-	if (!(path = get_env("PATH"))
-		|| !(path_array = ft_split(path, ':')))
+	if (!(path = get_env("PATH")) ||\
+	!(path_array = ft_split(path, ':')))
 		return (NULL);
 	i = 0;
 	while (path_array[i])
@@ -88,8 +88,7 @@ char			*search_path(char *command)
 		i++;
 	}
 	if (open(command, O_CLOEXEC) != -1)
-		return (ft_strdup(command));
-	if ((command_path = search_relativepath(command)))
-		return (command_path);
-	return (return_free_av(NULL, &path_array, &path));
+		return (return_free_av(ft_strdup(command), &path_array, &path));
+	command_path = search_relativepath(command);
+	return (return_free_av(command_path, &path_array, &path));
 }

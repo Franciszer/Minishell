@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_launch_utils2.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 14:13:58 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/10 14:14:30 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/16 10:17:16 by qfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ int		contain_redir(char **argv)
 
 t_list	*do_redir(char ***argv)
 {
-	t_redirection	*redir;
+	t_redir	*redir;
 
-	redir = (t_redirection*)malloc(sizeof(t_redirection));
+	redir = (t_redir*)malloc(sizeof(t_redir));
 	*redir = stock_redir(*argv);
 	if (redir_error(*redir))
 	{

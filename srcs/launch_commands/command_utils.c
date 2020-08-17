@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 16:21:03 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/11 15:41:21 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/17 12:46:06 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,5 @@ void			exit_minishell(int action, t_list *token_list,
 		if (args_to_free)
 			free_argv(*args_to_free, INT_MAX);
 	}
-	system("minishell leaks");
 	exit(g_exit_status);
 }

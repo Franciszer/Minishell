@@ -6,13 +6,13 @@
 /*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 15:11:34 by qfeuilla          #+#    #+#             */
-/*   Updated: 2020/08/08 16:40:30 by qfeuilla         ###   ########.fr       */
+/*   Updated: 2020/08/16 11:17:30 by qfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int				red_putfile(t_redirection red, int (*pipefd)[2])
+int				red_putfile(t_redir red, int (*pipefd)[2])
 {
 	int fd;
 
@@ -33,7 +33,7 @@ int				red_putfile(t_redirection red, int (*pipefd)[2])
 	return (0);
 }
 
-int				redirection(t_redirection red, int (*pipefd)[2], int *save)
+int				redirection(t_redir red, int (*pipefd)[2], int *save)
 {
 	int		fd;
 
@@ -53,4 +53,22 @@ int				redirection(t_redirection red, int (*pipefd)[2], int *save)
 	if (red.file && red.in == 0 && red.putfile == 0 && red.putendfile == 0)
 		return (1);
 	return (0);
+}
+
+void			check_file(char **file)
+{
+	char	*tmp;
+
+	tmp = NULL;
+	if (!ft_strncmp(*file, "\33\127>", 4))
+		tmp = ft_strdup("\'>\'");
+	else if (!ft_strncmp(*file, "\33\127>>", 5))
+		tmp = ft_strdup("\'>>\'");
+	else if (!ft_strncmp(*file, "\33\127<", 4))
+		tmp = ft_strdup("\'<\'");
+	if (tmp)
+	{
+		free(*file);
+		*file = tmp;
+	}
 }

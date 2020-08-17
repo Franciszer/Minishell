@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 12:37:34 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/11 15:36:47 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/16 11:05:41 by qfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		get_next_line(int fd, char **line)
 		if (!(ft_add_buffer(&s, buffer, red)))
 			return (-1);
 	}
-	if(!s[0])
+	if (!s[0])
 		ft_putendl_fd("exit", 2);
 	if (!ft_getline(s, line))
 		return (-1);

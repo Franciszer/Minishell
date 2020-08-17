@@ -74,10 +74,6 @@ start: all
 valgrind_start: all
 	@valgrind --leak-check=full --show-leak-kinds=definite ./${NAME}
 
-test: all
-	@cc ${MAIN_TEST} ${OBJECTS} ${INCLUDE_DIRS} ${LIB} -o test_exec
-	@./test_exec
-
 clean:
 	@rm -rf logs
 	@printf "${RED}X	"

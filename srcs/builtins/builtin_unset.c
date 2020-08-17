@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 11:40:02 by franciszer        #+#    #+#             */
-/*   Updated: 2020/08/11 19:15:39 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/08/17 12:45:36 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int			builtin_unset(char **argv)
 {
 	int	i;
 	int	ret_value;
-	
+
 	ret_value = 0;
 	i = 1;
 	while (argv[i])

@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:40:30 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/11 14:31:22 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/17 15:19:46 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ int					g_in_fork;
 **		______STRUCTS______
 */
 
-typedef struct		s_redirection
+typedef struct		s_redir
 {
 	int				in;
 	int				putfile;
 	int				putendfile;
 	char			*file;
-}					t_redirection;
+}					t_redir;
 
 typedef struct		s_quotes
 {
@@ -92,11 +92,12 @@ typedef struct		s_size_t2
 
 typedef struct		s_expand_tk_dt
 {
-	t_int2		ij;
-	int			pb;
-	char		*tmp;
-	char		*final_token;
-	t_quotes	qt;
+	t_int2			ij;
+	int				pb;
+	char			*tmp;
+	char			*final_token;
+	int				is_err;
+	t_quotes		qt;
 }					t_expand_tk_dt;
 
 /*
@@ -130,7 +131,7 @@ char				*first_token(t_list *token_list);
 */
 
 int					path_searching(char **argv, char **tmp);
-int					redir_error(t_redirection redir);
+int					redir_error(t_redir redir);
 void				parent(pid_t *pid, int *save, int fd[2]);
 void				child(t_int2 save_last, int contain_putfile,
 							char ***argv, int fd[2]);
@@ -153,6 +154,10 @@ char				*expand_token_quote(char *tk, t_expand_tk_dt d);
 size_t				ft_strlen_etokens(char *s);
 int					is_specialchar_dquote(char c);
 int					is_quote_only(char *tk);
+char				*return_token(char **tk, int check_quote);
+int					expand_quote_set_vals(char *tk,\
+					t_expand_tk_dt *d, int *check_quote);
+char				*return_expand_tk_quote(t_expand_tk_dt *d, int check_quote);
 
 /*
 **		_____COMMANDS_____
@@ -220,13 +225,15 @@ void				print_argv(char **argv);
 **		_____REDIRECTION_____
 */
 
-t_redirection		stock_redir(char **cmd);
-int					redirection(t_redirection redir, int (*pipefd)[2],
+t_redir				stock_redir(char **cmd);
+int					redirection(t_redir redir, int (*pipefd)[2],
 								int *save);
 void				cmd_to_rafter(char ***cmd);
 int					is_redir(char *cmd);
-int					is_dir(t_redirection redir);
-int					file_not_found(t_redirection redir);
+int					is_dir(t_redir redir);
+int					file_not_found(t_redir redir);
+void				check_file(char **file);
+char				*quoted_redir(char *tk);
 
 /*
 **		_____EXPAND_TOKEN_____
