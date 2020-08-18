@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/21 19:36:48 by qfeuilla          #+#    #+#             */
-/*   Updated: 2020/08/18 12:41:59 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/18 18:49:56 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int			new_env_var(char *var)
 		return (1);
 	g_env_modified = 1;
 	ft_lstclear(&env_list, free);
-	return (1);
+	return (0);
 }
 
 int			export_check_syntax(char *arg)
@@ -47,10 +47,15 @@ int			export_check_syntax(char *arg)
 		return (3);
 	if (!arg[i])
 	{
+		printf("heyre\n");
 		if ((is_envvar = get_env(arg)))
 		{
+			if (is_envvar[0])
+			{
+				free(is_envvar);
+				return (1);
+			}
 			free(is_envvar);
-			return (1);
 		}
 		return (2);
 	}

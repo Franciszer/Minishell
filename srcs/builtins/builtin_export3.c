@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 13:58:47 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/18 12:07:53 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/18 18:50:43 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int			export_envvar(int i, char **argv)
 
 	if ((syntax_check = export_check_syntax(argv[i])) == 1)
 		return (1);
+	printf("syntax: %d\n", syntax_check);
 	if (syntax_check == 3 && !(argv[i] = added_var(argv[i])))
 		return (1);
 	if (syntax_check == 2)
