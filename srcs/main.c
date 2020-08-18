@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:39:32 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/18 10:45:56 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/17 12:40:19 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		main(int argc, char **argv, char **env)
 	g_in_fork = 0;
 	if (argc > 1 || argv[1])
 	{
-		ft_perror(ERR_TOO_MANY_ARGS);
+		ft_perror("ERR_TOO_MANY_ARGS");
 		return (1);
 	}
 	g_env = env;

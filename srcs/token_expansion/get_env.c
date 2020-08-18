@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 16:49:23 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/18 18:52:16 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/11 11:34:49 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ char	*get_env(char *key)
 	char	*value;
 	int		i;
 
-	if ((i = 0) || !key)
+	i = 0;
+	if (!key)
 		return (NULL);
 	if (*key == '$')
 		key++;
@@ -62,16 +63,12 @@ char	*get_env(char *key)
 		return (ft_itoa(g_exit_status));
 	while (g_env[i])
 	{
-		if (!ft_strncmp(key, g_env[i], ft_strlen(key)))
+		if (!ft_strncmp(key, g_env[i], ft_strlen(key))
+			&& g_env[i][ft_strlen(key)] == '=')
 		{
-			if (g_env[i][ft_strlen(key)] == '=')
-			{
-				if (!(value = ft_strdup(&g_env[i][ft_strlen(key) + 1])))
-					return (NULL);
-				return (preprocess_env(value));
-			}
-			else
+			if (!(value = ft_strdup(&g_env[i][ft_strlen(key) + 1])))
 				return (NULL);
+			return (preprocess_env(value));
 		}
 		i++;
 	}

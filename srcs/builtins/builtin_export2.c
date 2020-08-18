@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/21 19:36:48 by qfeuilla          #+#    #+#             */
-/*   Updated: 2020/08/18 18:49:56 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/11 19:04:23 by franciszer       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,12 @@ int			new_env_var(char *var)
 		return (1);
 	g_env_modified = 1;
 	ft_lstclear(&env_list, free);
-	return (0);
+	return (1);
 }
 
 int			export_check_syntax(char *arg)
 {
 	int		i;
-	char	*is_envvar;
 
 	i = 1;
 	if (!arg[0] || (!ft_isalpha(arg[0]) && arg[0] != '_'))
@@ -46,20 +45,9 @@ int			export_check_syntax(char *arg)
 	if (arg[i] == '+' && arg[i + 1] == '=')
 		return (3);
 	if (!arg[i])
-	{
-		printf("heyre\n");
-		if ((is_envvar = get_env(arg)))
-		{
-			if (is_envvar[0])
-			{
-				free(is_envvar);
-				return (1);
-			}
-			free(is_envvar);
-		}
 		return (2);
-	}
-	return (0);
+	else
+		return (0);
 }
 
 int			modify_env_var_loop(t_list **env_list, char *var, char **argv,
@@ -73,7 +61,7 @@ int			modify_env_var_loop(t_list **env_list, char *var, char **argv,
 	{
 		to_cmp = (char*)nav->content;
 		if (!ft_strncmp(to_cmp, (const char*)var, ft_strlen(var))
-		&& ft_strlen_char(to_cmp, '=') == ft_strlen(var))
+			&& to_cmp[ft_strlen(var)] == '=')
 		{
 			free(nav->content);
 			if (!(nav->content = ft_strdup(argv[index])))

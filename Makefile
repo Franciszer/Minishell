@@ -7,8 +7,7 @@ LIB_DIR= srcs/libft
 LIB= ${LIB_DIR}/libft.a
 MAIN= srcs/main.c
 MAIN_TEST=test/test.c
-SRCS=	srcs/main.c\
-		srcs/parsing/prompt_loop.c\
+SRCS=	srcs/parsing/prompt_loop.c\
 		srcs/parsing/parsing_utils.c\
 		srcs/parsing/token_len.c\
 		srcs/parsing/tokenize.c\
@@ -52,6 +51,7 @@ RED=\033[0;31m
 YELLOW=\033[0;33m
 NC=\033[0m
 
+all: $(NAME)
 
 .c.o:
 	@printf "${LIGHT_BLUE}=>	"
@@ -59,22 +59,23 @@ NC=\033[0m
 	@printf "${NC}"
 
 $(NAME):	${OBJECTS}
+	@rm -rf logs
+	@mkdir logs
 	@make -C ${LIB_DIR}
 	@printf "${YELLOW}=>	"
-	cc ${FLAGS} ${INCLUDE_DIRS} -o ${NAME} ${OBJECTS} ${LIB}
+	cc ${FLAGS} ${MAIN} ${OBJECTS} ${INCLUDE_DIRS} ${LIB} -o ${NAME}
 	@echo "${GREEN}✓	${NAME} compiled${NC}"
-
-all: $(NAME)
 
 start: all
 	@@echo "${GREEN}✓  minishell launched${NC}"
 	@./${NAME}
 	@rm -rf ${NAME}
 
-valgrind_start: all
+valgrind_start: re
 	@valgrind --leak-check=full --show-leak-kinds=definite ./${NAME}
 
 clean:
+	@rm -rf logs
 	@printf "${RED}X	"
 	rm -rf ${OBJECTS}
 	@printf "${NC}"
@@ -90,4 +91,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all start clean fclean re
+.PHONY: all start clean fclean re ${NAME}
