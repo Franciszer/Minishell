@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/21 19:36:48 by qfeuilla          #+#    #+#             */
-/*   Updated: 2020/08/18 12:41:59 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/18 12:16:39 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int			export_check_syntax(char *arg)
 			free(is_envvar);
 			return (1);
 		}
-		return (2);
 	}
 	return (0);
 }
