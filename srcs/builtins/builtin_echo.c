@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 14:44:06 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/05 15:52:52 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/18 11:18:14 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ int		builtin_echo(char **argv)
 	}
 	if (!option_n)
 		ft_putchar_fd('\n', STDOUT_FILENO);
+	
 	return (0);
 }

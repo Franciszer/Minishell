@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handlers.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 15:10:26 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/17 16:43:08 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/18 10:49:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	sigint_handler(int sig)
 	{
 		if (!g_man)
 		{
-			g_exit_status = 1;
+			g_exit_status = 130;
 			ft_printf("\n");
 			print_prompt();
 		}

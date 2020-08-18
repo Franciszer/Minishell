@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_loop.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 14:48:38 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/11 14:30:31 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/18 10:52:06 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ t_list	*prompt_loop(int depth)
 	{
 		if (ret_value != -2)
 			ft_perror(ERR_READLINE);
-		exit(0);
+		exit(g_exit_status);
 		return (NULL);
 	}
 	token_list = tokenize(line);

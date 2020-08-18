@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/21 19:36:48 by qfeuilla          #+#    #+#             */
-/*   Updated: 2020/08/11 19:04:23 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/08/18 11:03:37 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,12 @@ int			modify_env_var_loop(t_list **env_list, char *var, char **argv,
 	t_list	*nav;
 
 	nav = *env_list;
+	printf("var: %s\n", var);
 	while (nav)
 	{
 		to_cmp = (char*)nav->content;
 		if (!ft_strncmp(to_cmp, (const char*)var, ft_strlen(var))
-			&& to_cmp[ft_strlen(var)] == '=')
+		&& ft_strlen_char(to_cmp, '=') == ft_strlen(var))
 		{
 			free(nav->content);
 			if (!(nav->content = ft_strdup(argv[index])))
