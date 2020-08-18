@@ -73,10 +73,7 @@ int		check_semicol_error(t_list *token_list)
 		if (!ft_strncmp((char*)tmp->content, ";", 2))
 		{
 			if (prev_is_semicol)
-			{
-				printf("here\n");
 				return (g_semicol_error = 1);
-			}
 			else
 				prev_is_semicol = 1;
 		}

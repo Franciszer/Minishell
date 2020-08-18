@@ -45,10 +45,7 @@ static char		*search_relativepath(char *command)
 		return (NULL);
 	}
 	else
-	{
-		printf("ITSHERE\n");
 		return (path);
-	}
 }
 
 static char		*return_free_av(char *ret, char ***path_array, char **path)
