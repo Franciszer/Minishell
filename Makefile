@@ -71,7 +71,7 @@ start: all
 	@./${NAME}
 	@rm -rf ${NAME}
 
-valgrind_start: all
+valgrind_start: re
 	@valgrind --leak-check=full --show-leak-kinds=definite ./${NAME}
 
 clean:

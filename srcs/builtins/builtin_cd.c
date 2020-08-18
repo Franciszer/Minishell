@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 11:18:29 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/10 14:18:32 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/18 10:12:01 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ static int			handle_deleted_dir(char *arg)
 		return (1);
 	if (modify_path(new_dir, "PWD="))
 		return (1);
+	free(new_dir);
 	return (0);
 }
 
