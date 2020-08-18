@@ -59,8 +59,6 @@ all: $(NAME)
 	@printf "${NC}"
 
 $(NAME):	${OBJECTS}
-	@rm -rf logs
-	@mkdir logs
 	@make -C ${LIB_DIR}
 	@printf "${YELLOW}=>	"
 	cc ${FLAGS} ${MAIN} ${OBJECTS} ${INCLUDE_DIRS} ${LIB} -o ${NAME}
@@ -71,11 +69,10 @@ start: all
 	@./${NAME}
 	@rm -rf ${NAME}
 
-valgrind_start: re
+valgrind_start: all
 	@valgrind --leak-check=full --show-leak-kinds=definite ./${NAME}
 
 clean:
-	@rm -rf logs
 	@printf "${RED}X	"
 	rm -rf ${OBJECTS}
 	@printf "${NC}"
@@ -91,4 +88,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all start clean fclean re ${NAME}
+.PHONY: all start clean fclean re
