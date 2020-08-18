@@ -82,6 +82,7 @@ all: $(NAME)
 $(NAME) : ${OBJECTS}
 			@make -C ft_printf/
 			@ar rcs ${NAME} ${OBJECTS}
+			@ranlib ${NAME}
 			@echo "LIB DONE"
 
 clean:

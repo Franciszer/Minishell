@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   search_path.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 14:02:44 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/18 09:25:05 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/18 16:07:02 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,7 @@ static char		*search_relativepath(char *command)
 		return (NULL);
 	}
 	else
-	{
-		printf("ITSHERE\n");
 		return (path);
-	}
 }
 
 static char		*return_free_av(char *ret, char ***path_array, char **path)
