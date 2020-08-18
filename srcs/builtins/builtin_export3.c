@@ -19,9 +19,11 @@ int			export_envvar(int i, char **argv)
 	int		return_value;
 	char	*to_free;
 
+	if (replace_envvar(argv[i]))
+		return (0);
 	if ((syntax_check = export_check_syntax(argv[i])) == 1)
 		return (1);
-	if (syntax_check == 3 && !(argv[i] = added_var(argv[i])))
+	if (syntax_check == 3 && !(argv[i] = added_v 	ar(argv[i])))
 		return (1);
 	if (syntax_check == 2)
 		return (return_value = new_env_var(argv[i]));
