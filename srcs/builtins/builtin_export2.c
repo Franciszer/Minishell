@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/21 19:36:48 by qfeuilla          #+#    #+#             */
-/*   Updated: 2020/08/18 11:03:37 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/18 11:40:02 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int			modify_env_var_loop(t_list **env_list, char *var, char **argv,
 	t_list	*nav;
 
 	nav = *env_list;
-	printf("var: %s\n", var);
 	while (nav)
 	{
 		to_cmp = (char*)nav->content;
