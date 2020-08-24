@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:25:27 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/21 15:51:36 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/24 12:27:44 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int			print_export(void)
 	ft_bzero(env_written, len);
 	print_export_loop(&env_written, len);
 	free(env_written);
-	return (1);
+	return (0);
 }
 
 int			builtin_export(char **argv)

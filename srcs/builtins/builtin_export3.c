@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 13:58:47 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/22 12:55:02 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/24 12:26:40 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,13 @@ int			export_envvar(int i, char **argv)
 	int		return_value;
 	char	*to_free;
 
+	return_value = 0;
 	if (replace_envvar(argv[i]))
 		return (0);
 	if ((syntax_check = export_check_syntax(argv[i])) == 1)
-		return (1);
-	if (syntax_check == 3 && !(argv[i] = added_var(argv[i])))
-		return (1);
+		return (!ft_perror("invalid argument") ? 1 : 1);
+	if (syntax_check == 3 && (argv[i] = added_var(argv[i])))
+		return (0);
 	if (syntax_check == 2)
 		return (return_value = new_env_var(argv[i]));
 	if (!(var = ft_strndup(argv[i], ft_strlen_char(argv[i], '='))))
@@ -119,10 +120,12 @@ int			export_envvar(int i, char **argv)
 		return_value = new_env_var(argv[i]);
 	else
 	{
+		printf("%d\n", return_value);
 		free(to_free);
 		return_value = modify_env_var(i, argv, var);
 	}
 	free(var);
+	printf("%d\n", return_value);
 	return (return_value);
 }
 

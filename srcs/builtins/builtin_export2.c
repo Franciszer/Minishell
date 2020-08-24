@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: franciszer <franciszer@student.42.fr>      +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/21 19:36:48 by qfeuilla          #+#    #+#             */
-/*   Updated: 2020/08/11 19:04:23 by franciszer       ###   ########.fr       */
+/*   Updated: 2020/08/24 12:24:27 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int			new_env_var(char *var)
 		return (1);
 	g_env_modified = 1;
 	ft_lstclear(&env_list, free);
-	return (1);
+	return (0);
 }
 
 int			export_check_syntax(char *arg)

@@ -37,7 +37,8 @@ char	*preprocess_env(char *env_val)
 	preproc_env = (char *)malloc((ft_strlen(env_val) + 1) * sizeof(char));
 	while (env_val[++i])
 	{
-		if (!(env_val[i] == ' ' && prev_is_space == 1))
+		if (!(env_val[i] == ' ' && prev_is_space == 1) 
+			&& !(env_val[i] == ' ' && i == 0))
 			preproc_env[j++] = env_val[i];
 		if (env_val[i] == ' ')
 			prev_is_space = 1;
