@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 11:18:29 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/18 10:12:01 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/24 15:21:49 by qfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int			backtrack_dirs(void)
 	char	*current_dir;
 	char	*new_dir;
 
-	if (!(current_dir = get_env("PWD")))
+	if (!(current_dir = get_env("PWD", 1)))
 		return (1);
 	if (modify_path(current_dir, "OLDPWD="))
 		return (1);
@@ -72,7 +72,7 @@ static int			handle_deleted_dir(char *arg)
 
 	if (!ft_strncmp(arg, "..", 3))
 		return (backtrack_dirs());
-	if (!(current_dir = get_env("PWD")))
+	if (!(current_dir = get_env("PWD", 1)))
 		return (1);
 	if (modify_path(current_dir, "OLDPWD="))
 		return (1);
@@ -89,7 +89,7 @@ char				*is_working_dir(void)
 	DIR		*dir;
 	char	*current_dir;
 
-	if (!(current_dir = get_env("PWD")))
+	if (!(current_dir = get_env("PWD", 1)))
 		return (NULL);
 	if (!(dir = opendir((const char*)current_dir)))
 		return (NULL);

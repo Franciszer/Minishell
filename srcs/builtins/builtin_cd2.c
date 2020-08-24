@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 14:05:50 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/11 11:20:50 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/24 15:22:05 by qfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int			ft_go_home(char *current_dir)
 	int		return_value;
 	char	*check_home;
 
-	if (!(check_home = get_env("HOME")))
+	if (!(check_home = get_env("HOME", 1)))
 		return (1);
 	if (!ft_strncmp(check_home, current_dir, ft_strlen(current_dir) + 1))
 		return_value = 0;
@@ -29,7 +29,7 @@ int			ft_go_home(char *current_dir)
 			return (1);
 		if (!(new[0] = ft_strdup("cd")))
 			return (1);
-		if (!(home = get_env("HOME")))
+		if (!(home = get_env("HOME", 1)))
 			return (1);
 		new[1] = home;
 		new[2] = NULL;

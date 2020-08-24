@@ -14,8 +14,10 @@ SRCS=	srcs/parsing/prompt_loop.c\
 		srcs/parsing/syntax_check.c\
 		srcs/commands/search_path.c\
 		srcs/token_expansion/get_env.c\
+		srcs/token_expansion/get_env_utils.c\
 		srcs/token_expansion/expand_tokens.c\
 		srcs/token_expansion/expand_tokens_utils.c\
+		srcs/token_expansion/expand_tokens_utils2.c\
 		srcs/token_expansion/token_expansion_utils.c\
 		srcs/launch_commands/minishell_launch.c\
 		srcs/launch_commands/minishell_launch_utils.c\

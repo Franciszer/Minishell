@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:40:30 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/24 12:48:24 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/24 16:54:40 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,9 +145,10 @@ t_list				*do_redir(char ***argv);
 **       ______TOKEN_EXPANSION_____
 */
 
-char				*get_env(char *key);
+char				*get_env(char *key, int preprocess);
 int					ft_strlen_key(char *key_start);
 char				*eev(char *token, char *final_token, int *i, int *j);
+char				*eev2(char *token, char *final_token, int *i, int *j);
 void				*get_final_token(void *content);
 t_list				*expand_tokens(t_list *token_list);
 char				*expand_token_quote(char *tk, t_expand_tk_dt d);
@@ -249,5 +250,6 @@ char				*elif_loop(char **final_token, char **tmp);
 void				else_loop(char *tk, char **final_token,\
 					t_int2 *ij, t_quotes *qt);
 int					elif_test(char *tk, t_quotes qt, t_int2 ij);
+char				*return_token(char **tk, int check_quote);
 
 #endif

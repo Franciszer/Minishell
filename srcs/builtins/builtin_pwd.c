@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 13:56:49 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/17 12:54:43 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/24 15:22:16 by qfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int				builtin_pwd(void)
 {
 	char	*pwd;
 
-	if (!(pwd = get_env("PWD")))
+	if (!(pwd = get_env("PWD", 1)))
 	{
 		if (!(pwd = set_new_pwd()))
 			return (1);
