@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 13:58:47 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/24 15:22:48 by qfeuilla         ###   ########.fr       */
+/*   Updated: 2020/08/24 18:29:58 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ int			export_envvar(int i, char **argv)
 		return (0);
 	if ((syntax_check = export_check_syntax(argv[i])) == 1)
 		return (!ft_perror("invalid argument") ? 1 : 1);
-	if (syntax_check == 3 && (argv[i] = added_var(argv[i])))
-		return (0);
+	if (syntax_check == 3 && !(argv[i] = added_var(argv[i])))
+		return (1);
 	if (syntax_check == 2)
 		return (return_value = new_env_var(argv[i]));
 	if (!(var = ft_strndup(argv[i], ft_strlen_char(argv[i], '='))))
