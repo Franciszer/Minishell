@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 16:49:23 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/11 11:34:49 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/24 12:39:49 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*preprocess_env(char *env_val)
 	preproc_env = (char *)malloc((ft_strlen(env_val) + 1) * sizeof(char));
 	while (env_val[++i])
 	{
-		if (!(env_val[i] == ' ' && prev_is_space == 1) 
+		if (!(env_val[i] == ' ' && prev_is_space == 1)
 			&& !(env_val[i] == ' ' && i == 0))
 			preproc_env[j++] = env_val[i];
 		if (env_val[i] == ' ')

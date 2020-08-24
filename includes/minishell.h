@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:40:30 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/17 15:19:46 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/24 12:48:24 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,10 @@ int					all_env_written(char *env_written, size_t len);
 void				print_export_loop(char **env_written, size_t len);
 int					print_export(void);
 int					builtin_export(char **argv);
+char				*remove_plus_sign(char *arg);
+t_list				*replance_envvar_init_vals(int *replaced);
+int					replace_envvar_util(t_list *nav, char *arg);
+int					replace_envvar(char *arg);
 
 /*
 **		_____SIGNAL_HANDLING_____
