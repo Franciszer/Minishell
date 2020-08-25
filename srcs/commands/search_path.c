@@ -6,7 +6,7 @@
 /*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 14:02:44 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/24 16:06:38 by qfeuilla         ###   ########.fr       */
+/*   Updated: 2020/08/25 12:47:09 by qfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char		*search_relativepath(char *command)
 {
 	char	*path;
 
-	if (!(path = get_env("PWD", 0)))
+	if (!(path = get_env("PWD")))
 		return (NULL);
 	if (path[ft_strlen(path) - 1] != '/')
 	{
@@ -74,7 +74,7 @@ char			*search_path(char *command)
 
 	if (is_custom(command))
 		return (ft_strdup(command));
-	if (!(path = get_env("PATH", 0)) ||\
+	if (!(path = get_env("PATH")) ||\
 	!(path_array = ft_split(path, ':')))
 		return (NULL);
 	i = 0;

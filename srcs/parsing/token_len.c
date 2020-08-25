@@ -6,7 +6,7 @@
 /*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 14:27:21 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/24 18:04:20 by qfeuilla         ###   ########.fr       */
+/*   Updated: 2020/08/25 12:41:40 by qfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ size_t		ftoken_len(char *tk)
 		set_values_2(&tk[i], &qt.q, &qt.dq, pb);
 		if (qt.q == -1 && qt.dq == -1 && !pb)
 		{
-			if (tk[i] == '$' && (len = token_len_env(&tk[i])))
-				return (return_i_or_len(i, len));
 			if (tk[i] == ' ')
 				return (i);
 			if ((len = token_len_special(&tk[i])))

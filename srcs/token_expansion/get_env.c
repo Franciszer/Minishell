@@ -6,7 +6,7 @@
 /*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 16:49:23 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/24 17:34:18 by qfeuilla         ###   ########.fr       */
+/*   Updated: 2020/08/25 12:47:20 by qfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,37 +22,7 @@ int		is_quote_only(char *tk)
 	return (0);
 }
 
-char	*preprocess_env(char *env_val)
-{
-	char	*preproc_env;
-	int		i;
-	int		j;
-	int		prev_is_space;
-
-	if (!env_val)
-		return (NULL);
-	i = -1;
-	j = 0;
-	prev_is_space = 0;
-	preproc_env = (char *)malloc((ft_strlen(env_val) + 1) * sizeof(char));
-	while (env_val[++i])
-	{
-		if (!(env_val[i] == ' ' && prev_is_space == 1)
-			&& !(env_val[i] == ' ' && i == 0))
-			preproc_env[j++] = env_val[i];
-		if (env_val[i] == ' ')
-			prev_is_space = 1;
-		else
-			prev_is_space = 0;
-	}
-	if (j - 1 >= 0 && preproc_env[j - 1] == ' ')
-		preproc_env[j - 1] = '\0';
-	preproc_env[j] = '\0';
-	free(env_val);
-	return (preproc_env);
-}
-
-char	*get_env(char *key, int preprocess)
+char	*get_env(char *key)
 {
 	char	*value;
 	int		i;
@@ -71,8 +41,6 @@ char	*get_env(char *key, int preprocess)
 		{
 			if (!(value = ft_strdup(&g_env[i][ft_strlen(key) + 1])))
 				return (NULL);
-			if (preprocess)
-				return (preprocess_env(value));
 			return (value);
 		}
 		i++;

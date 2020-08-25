@@ -6,7 +6,7 @@
 /*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 13:58:47 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/24 18:40:10 by qfeuilla         ###   ########.fr       */
+/*   Updated: 2020/08/25 15:11:25 by qfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int			envvar_exists(char *arg)
 		return (0);
 	if (!(key = ft_strndup(arg, ft_strlen_char(arg, c))))
 		return (0);
-	if (!(value = get_env(key, 0)))
+	if (!(value = get_env(key)))
 	{
 		free(key);
 		return (0);
@@ -71,7 +71,7 @@ int			replace_envvar(char *arg)
 	int		replaced;
 	char	*new_arg;
 
-	if (!ft_strchr(arg, '=') && (current_env = get_env(arg, 0)))
+	if (!ft_strchr(arg, '=') && (current_env = get_env(arg)))
 	{
 		free(current_env);
 		return (1);
@@ -110,7 +110,7 @@ int			export_envvar(int i, char **argv)
 		return (return_value = new_env_var(argv[i]));
 	if (!(var = ft_strndup(argv[i], ft_strlen_char(argv[i], '='))))
 		return (1);
-	if (!(to_free = get_env(var, 0)))
+	if (!(to_free = get_env(var)))
 		return_value = new_env_var(argv[i]);
 	else
 	{

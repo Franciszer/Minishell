@@ -6,7 +6,7 @@
 /*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 11:57:50 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/25 11:50:13 by qfeuilla         ###   ########.fr       */
+/*   Updated: 2020/08/25 15:13:33 by qfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,7 @@
 
 int		expand_token_dquote_return(t_expand_tk_dt *d, char *tk)
 {
-	if (d->qt.dq == -1)
-	{
-		if(!(d->final_token = eev2(tk, d->final_token, &d->ij.a, &d->ij.b)))
-			return (1);
-	}
-	else if (!(d->final_token = eev(tk, d->final_token, &d->ij.a, &d->ij.b)))
+	if (!(d->final_token = eev(tk, d->final_token, &d->ij.a, &d->ij.b)))
 		return (1);
 	if (elif_loop(&d->final_token, &d->tmp))
 		return (2);
