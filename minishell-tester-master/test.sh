@@ -79,11 +79,22 @@ printf "| |  | |_| |_| |\  |_| |_ ____) | |  | | |____| |____| |____ \n"
 printf "|_|  |_|_____|_| \_|_____|_____/|_|  |_|______|______|______|\n$RESET"
 echo
 
+#PATH
+
+exec_test '/bin/ls'
+exec_test '/bin/ls -l            -a'
+exec_test 'cd / ; bin/ls -la'
+exec_test 'unset 1test'
+exec_test 'cd / ; unset HOME; cd ; pwd'
+exec_test 'unset PWD ; pwd'
+
 # ECHO TESTS
 exec_test 'echo test tout'
 exec_test 'echo test      tout'
 exec_test 'echo -n test tout'
 exec_test 'echo -n -n -n test tout'
+exec_test 'echo $PATH$PATH$PATH$PATH$PATH$PATH$PATH$PATH$PATH$PATH$PATH$PATH$PATH'
+exec_test 'echo "$PATH$PATH$PATH$PATH$PATH$PATH$PATH$PATH$PATH$PATH$PATH$PATH$PATH"'
 
 
 # CD TESTS
@@ -135,6 +146,8 @@ exec_test 'export TEST=LOL; export TEST+=LOL ; echo $TEST ;' $ENV_SHOW
 exec_test $ENV_SHOW
 exec_test $EXPORT_SHOW
 exec_test 'export TEST="ls       -l     - a" ; echo $TEST ; $LS ; ' $ENV_SHOW
+exec_test 'export TEST="ls|ls|ls|ls|ls|ls|ls ; export TEST+=$TEST$TEST$TEST$TEST$TEST$TEST$TEST$TEST$TEST$TEST$TEST$TEST$TEST$TEST ; echo $TEST'
+exec_test 'export TEST="ls|ls|ls|ls|ls|ls|ls ; export TEST=$TEST$TEST$TEST$TEST$TEST$TEST$TEST$TEST$TEST$TEST$TEST$TEST$TEST$TEST ; echo $TEST'
 
 # REDIRECTIONS
 exec_test 'echo test > ls ; cat ls'
@@ -169,5 +182,6 @@ exec_test "exit 42 53 68"
 # exec_test "ls -Z"
 # exec_test "cd gdhahahad"
 exec_test "ls -la | wtf"
+
 
 rm lol ls test

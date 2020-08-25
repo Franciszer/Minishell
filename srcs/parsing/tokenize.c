@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 16:27:14 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/25 17:11:28 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/25 17:38:50 by qfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,22 @@ int		add_to_token_list(char *token, t_list **tokenlist)
 	return (1);
 }
 
+int		expand_quote_set_vals_env(char *tk, t_expand_tk_dt *d)
+{
+	if (!(d->final_token = init_expand(&d->qt, &d->ij, &d->pb, tk)))
+	{
+		d->is_err = 1;
+		return (0);
+	}
+	return (1);
+}
 
 char	*expand_env_var(char *tk, t_expand_tk_dt d)
 {
-	int		check_quote;
+	char	*tmp;
 
-	if (!expand_quote_set_vals(tk, &d, &check_quote))
-		return (!d.is_err ? d.final_token : return_token(NULL, check_quote));
+	if (!expand_quote_set_vals_env(tk, &d))
+		return (!d.is_err ? d.final_token : NULL);
 	while (tk[d.ij.a])
 	{
 		tk[d.ij.a] == '\'' && d.qt.dq == -1 && (!d.pb || d.qt.q == 1)
@@ -51,14 +60,19 @@ char	*expand_env_var(char *tk, t_expand_tk_dt d)
 		if (d.qt.q == -1 && tk[d.ij.a] == '$' && tk[d.ij.a + 1] &&
 			!d.pb && ft_isalnum(tk[d.ij.a + 1]))
 		{
-			if (!(d.final_token = eev(tk, d.final_token, &d.ij.a, &d.ij.b)))
+			if (!(tmp = eev(tk, d.final_token, &d.ij.a, &d.ij.b)))
 				return (NULL);
+			else
+			{
+				free(d.final_token);
+				d.final_token = tmp;
+			}
 		}
 		if (tk[d.ij.a] == '\\' && !d.pb && d.qt.q == -1)
 			d.pb = 1;
 		else
 			d.pb = 0;
-		if (tk[d.ij.a] && !(!d.pb && tk[d.ij.a] == '$' && d.qt.q == -1))
+		if (tk[d.ij.a] && !(!d.pb && tk[d.ij.a] == '$' && d.qt.q == -1 && tk[d.ij.a + 1]))
 			d.final_token[d.ij.b++] = tk[d.ij.a++];
 	}
 	d.final_token[d.ij.b] = '\0';
@@ -89,5 +103,6 @@ t_list	*tokenize(char *line)
 		else
 			i++;
 	}
+	free(tmp);
 	return (tokenlist);
 }
