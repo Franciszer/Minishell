@@ -29,6 +29,7 @@ char		*remove_plus_sign(char *arg)
 		else
 			i++;
 	}
+	new_arg[j] = '\0';
 	return (new_arg);
 }
 

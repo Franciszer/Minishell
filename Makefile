@@ -10,6 +10,7 @@ MAIN_TEST=test/test.c
 SRCS=	srcs/parsing/prompt_loop.c\
 		srcs/parsing/parsing_utils.c\
 		srcs/parsing/token_len.c\
+		srcs/parsing/token_len_utils.c\
 		srcs/parsing/tokenize.c\
 		srcs/parsing/syntax_check.c\
 		srcs/commands/search_path.c\

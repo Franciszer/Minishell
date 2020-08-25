@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 13:58:47 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/24 18:29:58 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/24 18:40:10 by qfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,28 @@ int			replace_envar_free(t_list **env_list, char *new_arg, int replaced)
 	return (0);
 }
 
+int			envvar_exists(char *arg)
+{
+	char	*key;
+	char	*value;
+	char	c;
+
+	if (ft_strchr(arg, '+'))
+		c = '+';
+	else
+		return (0);
+	if (!(key = ft_strndup(arg, ft_strlen_char(arg, c))))
+		return (0);
+	if (!(value = get_env(key, 0)))
+	{
+		free(key);
+		return (0);
+	}
+	free(key);
+	free(value);
+	return (1);
+}
+
 int			replace_envvar(char *arg)
 {
 	t_list	*env_list;
@@ -54,6 +76,8 @@ int			replace_envvar(char *arg)
 		free(current_env);
 		return (1);
 	}
+	if (envvar_exists(arg))
+		return (0);
 	if (!(new_arg = remove_plus_sign(arg)))
 		return (0);
 	if (!(env_list = replance_envvar_init_vals(&replaced)))

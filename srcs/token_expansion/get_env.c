@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 16:49:23 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/24 16:41:31 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/24 17:34:18 by qfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ char	*preprocess_env(char *env_val)
 		else
 			prev_is_space = 0;
 	}
+	if (j - 1 >= 0 && preproc_env[j - 1] == ' ')
+		preproc_env[j - 1] = '\0';
 	preproc_env[j] = '\0';
 	free(env_val);
 	return (preproc_env);

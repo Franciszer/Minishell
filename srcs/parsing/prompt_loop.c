@@ -95,7 +95,7 @@ t_list	*prompt_loop(int depth)
 	{
 		if (ret_value != -2)
 			ft_perror(ERR_READLINE);
-		exit(0);
+		exit(g_exit_status);
 		return (NULL);
 	}
 	token_list = tokenize(line);
