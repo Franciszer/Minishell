@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:40:30 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/26 12:25:30 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/26 16:41:55 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,11 @@ int					pipes_syntax_check(t_list *token_list);
 char				*last_token(t_list *tokenlist);
 char				*first_token(t_list *token_list);
 void				do_quotes(t_expand_tk_dt *d, char *tk);
-void				manage_tmp(t_expand_tk_dt *d, char *tmp, char *tk);
+int					manage_tmp(t_expand_tk_dt *d, char *tmp, char *tk);
+char				*expand_env_var(char *tk, t_expand_tk_dt d);
+int					expand_quote_set_vals_env(char *tk, t_expand_tk_dt *d);
+int					expand_token_dquote_return(t_expand_tk_dt *d, char *tk);
+char				*expand_token_quote(char *tk, t_expand_tk_dt d);
 
 /*
 **		_____MINISHELL_LAUNCH_____
