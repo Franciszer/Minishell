@@ -1,91 +1,985 @@
-==7940== Memcheck, a memory error detector
-==7940== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==7940== Using Valgrind-3.17.0.GIT and LibVEX; rerun with -h for copyright info
-==7940== Command: ./minishell
-==7940== 
-[0;34mminishell$ [0m==7940== Syscall param stat64(path) points to unaddressable byte(s)
-==7940==    at 0x1004F4EDA: stat$INODE64 (in /usr/lib/system/libsystem_kernel.dylib)
-==7940==    by 0x100007CB5: is_dir (in ./minishell)
-==7940==    by 0x1000045B9: redir_error (in ./minishell)
-==7940==    by 0x100004A8E: do_redir (in ./minishell)
-==7940==    by 0x1000042D6: minishell_launch (in ./minishell)
-==7940==    by 0x100004F44: execute_commands (in ./minishell)
-==7940==    by 0x100007B92: execute_pipes (in ./minishell)
-==7940==    by 0x100001419: minishell_start (in ./minishell)
-==7940==    by 0x100001544: main (in ./minishell)
-==7940==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==7940== 
-==7940== Conditional jump or move depends on uninitialised value(s)
-==7940==    at 0x100007CCF: is_dir (in ./minishell)
-==7940==    by 0x1000045B9: redir_error (in ./minishell)
-==7940==    by 0x100004A8E: do_redir (in ./minishell)
-==7940==    by 0x1000042D6: minishell_launch (in ./minishell)
-==7940==    by 0x100004F44: execute_commands (in ./minishell)
-==7940==    by 0x100007B92: execute_pipes (in ./minishell)
-==7940==    by 0x100001419: minishell_start (in ./minishell)
-==7940==    by 0x100001544: main (in ./minishell)
-==7940== 
-==7941== 
-==7941== HEAP SUMMARY:
-==7941==     in use at exit: 29,626 bytes in 217 blocks
-==7941==   total heap usage: 255 allocs, 38 frees, 39,009 bytes allocated
-==7941== 
-==7941== 2,064 (16 direct, 2,048 indirect) bytes in 1 blocks are definitely lost in loss record 68 of 72
-==7941==    at 0x1000E5995: malloc (in /Users/frthierr/.brew/Cellar/valgrind/HEAD-3ab1ae5/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==7941==    by 0x1004D5B17: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
-==7941==    by 0x1004D5AE8: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
-==7941==    by 0x100536AAA: _os_once_callout (in /usr/lib/system/libsystem_platform.dylib)
-==7941==    by 0x100536A6E: _os_alloc_once (in /usr/lib/system/libsystem_platform.dylib)
-==7941==    by 0x1004D6D29: _notify_fork_child (in /usr/lib/system/libsystem_notify.dylib)
-==7941==    by 0x1000F1B12: libSystem_atfork_child (in /usr/lib/libSystem.B.dylib)
-==7941==    by 0x1002F5D96: fork (in /usr/lib/system/libsystem_c.dylib)
-==7941==    by 0x100004372: minishell_launch (in ./minishell)
-==7941==    by 0x100004F44: execute_commands (in ./minishell)
-==7941==    by 0x100007B92: execute_pipes (in ./minishell)
-==7941==    by 0x100001419: minishell_start (in ./minishell)
-==7941== 
-==7941== 2,064 (16 direct, 2,048 indirect) bytes in 1 blocks are definitely lost in loss record 69 of 72
-==7941==    at 0x1000E5995: malloc (in /Users/frthierr/.brew/Cellar/valgrind/HEAD-3ab1ae5/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
-==7941==    by 0x1004D5B17: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
-==7941==    by 0x1004D5AF6: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
-==7941==    by 0x100536AAA: _os_once_callout (in /usr/lib/system/libsystem_platform.dylib)
-==7941==    by 0x100536A6E: _os_alloc_once (in /usr/lib/system/libsystem_platform.dylib)
-==7941==    by 0x1004D6D29: _notify_fork_child (in /usr/lib/system/libsystem_notify.dylib)
-==7941==    by 0x1000F1B12: libSystem_atfork_child (in /usr/lib/libSystem.B.dylib)
-==7941==    by 0x1002F5D96: fork (in /usr/lib/system/libsystem_c.dylib)
-==7941==    by 0x100004372: minishell_launch (in ./minishell)
-==7941==    by 0x100004F44: execute_commands (in ./minishell)
-==7941==    by 0x100007B92: execute_pipes (in ./minishell)
-==7941==    by 0x100001419: minishell_start (in ./minishell)
-==7941== 
-==7941== LEAK SUMMARY:
-==7941==    definitely lost: 32 bytes in 2 blocks
-==7941==    indirectly lost: 4,096 bytes in 2 blocks
-==7941==      possibly lost: 8,904 bytes in 8 blocks
-==7941==    still reachable: 16,594 bytes in 205 blocks
-==7941==         suppressed: 0 bytes in 0 blocks
-==7941== Reachable blocks (those to which a pointer was found) are not shown.
-==7941== To see them, rerun with: --leak-check=full --show-leak-kinds=all
-==7941== 
-==7941== Use --track-origins=yes to see where uninitialised values come from
-==7941== For lists of detected and suppressed errors, rerun with: -s
-==7941== ERROR SUMMARY: 11 errors from 11 contexts (suppressed: 398 from 10)
+==58808== Memcheck, a memory error detector
+==58808== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==58808== Using Valgrind-3.17.0.GIT and LibVEX; rerun with -h for copyright info
+==58808== Command: ./minishell
+==58808== 
+--58808-- run: /usr/bin/dsymutil "./minishell"
+warning: no debug symbols in executable (-arch x86_64)
+[0;34mminishell$ [0m==58808== Syscall param stat64(path) points to unaddressable byte(s)
+==58808==    at 0x1004F4EDA: stat$INODE64 (in /usr/lib/system/libsystem_kernel.dylib)
+==58808==    by 0x100007CB5: is_dir (in ./minishell)
+==58808==    by 0x1000045B9: redir_error (in ./minishell)
+==58808==    by 0x100004A8E: do_redir (in ./minishell)
+==58808==    by 0x1000042D6: minishell_launch (in ./minishell)
+==58808==    by 0x100004F44: execute_commands (in ./minishell)
+==58808==    by 0x100007B92: execute_pipes (in ./minishell)
+==58808==    by 0x1000012D9: minishell_start (in ./minishell)
+==58808==    by 0x100001544: main (in ./minishell)
+==58808==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==58808== 
+==58808== Conditional jump or move depends on uninitialised value(s)
+==58808==    at 0x100007CCF: is_dir (in ./minishell)
+==58808==    by 0x1000045B9: redir_error (in ./minishell)
+==58808==    by 0x100004A8E: do_redir (in ./minishell)
+==58808==    by 0x1000042D6: minishell_launch (in ./minishell)
+==58808==    by 0x100004F44: execute_commands (in ./minishell)
+==58808==    by 0x100007B92: execute_pipes (in ./minishell)
+==58808==    by 0x1000012D9: minishell_start (in ./minishell)
+==58808==    by 0x100001544: main (in ./minishell)
+==58808== 
+==58830== 
+==58830== HEAP SUMMARY:
+==58830==     in use at exit: 31,432 bytes in 249 blocks
+==58830==   total heap usage: 287 allocs, 38 frees, 40,815 bytes allocated
+==58830== 
+==58830== 2,064 (16 direct, 2,048 indirect) bytes in 1 blocks are definitely lost in loss record 70 of 74
+==58830==    at 0x1000E5995: malloc (in /Users/frthierr/.brew/Cellar/valgrind/HEAD-3ab1ae5/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==58830==    by 0x1004D5B17: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58830==    by 0x1004D5AE8: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58830==    by 0x100536AAA: _os_once_callout (in /usr/lib/system/libsystem_platform.dylib)
+==58830==    by 0x100536A6E: _os_alloc_once (in /usr/lib/system/libsystem_platform.dylib)
+==58830==    by 0x1004D6D29: _notify_fork_child (in /usr/lib/system/libsystem_notify.dylib)
+==58830==    by 0x1000F1B12: libSystem_atfork_child (in /usr/lib/libSystem.B.dylib)
+==58830==    by 0x1002F5D96: fork (in /usr/lib/system/libsystem_c.dylib)
+==58830==    by 0x100004372: minishell_launch (in ./minishell)
+==58830==    by 0x100004F44: execute_commands (in ./minishell)
+==58830==    by 0x100007B92: execute_pipes (in ./minishell)
+==58830==    by 0x1000012D9: minishell_start (in ./minishell)
+==58830== 
+==58830== 2,064 (16 direct, 2,048 indirect) bytes in 1 blocks are definitely lost in loss record 71 of 74
+==58830==    at 0x1000E5995: malloc (in /Users/frthierr/.brew/Cellar/valgrind/HEAD-3ab1ae5/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==58830==    by 0x1004D5B17: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58830==    by 0x1004D5AF6: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58830==    by 0x100536AAA: _os_once_callout (in /usr/lib/system/libsystem_platform.dylib)
+==58830==    by 0x100536A6E: _os_alloc_once (in /usr/lib/system/libsystem_platform.dylib)
+==58830==    by 0x1004D6D29: _notify_fork_child (in /usr/lib/system/libsystem_notify.dylib)
+==58830==    by 0x1000F1B12: libSystem_atfork_child (in /usr/lib/libSystem.B.dylib)
+==58830==    by 0x1002F5D96: fork (in /usr/lib/system/libsystem_c.dylib)
+==58830==    by 0x100004372: minishell_launch (in ./minishell)
+==58830==    by 0x100004F44: execute_commands (in ./minishell)
+==58830==    by 0x100007B92: execute_pipes (in ./minishell)
+==58830==    by 0x1000012D9: minishell_start (in ./minishell)
+==58830== 
+==58830== LEAK SUMMARY:
+==58830==    definitely lost: 32 bytes in 2 blocks
+==58830==    indirectly lost: 4,096 bytes in 2 blocks
+==58830==      possibly lost: 8,904 bytes in 8 blocks
+==58830==    still reachable: 18,400 bytes in 237 blocks
+==58830==         suppressed: 0 bytes in 0 blocks
+==58830== Reachable blocks (those to which a pointer was found) are not shown.
+==58830== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==58830== 
+==58830== Use --track-origins=yes to see where uninitialised values come from
+==58830== For lists of detected and suppressed errors, rerun with: -s
+==58830== ERROR SUMMARY: 11 errors from 11 contexts (suppressed: 398 from 10)
 exit
-==7940== 
-==7940== HEAP SUMMARY:
-==7940==     in use at exit: 19,622 bytes in 190 blocks
-==7940==   total heap usage: 248 allocs, 58 frees, 28,468 bytes allocated
-==7940== 
-==7940== LEAK SUMMARY:
-==7940==    definitely lost: 0 bytes in 0 blocks
-==7940==    indirectly lost: 0 bytes in 0 blocks
-==7940==      possibly lost: 8,840 bytes in 7 blocks
-==7940==    still reachable: 10,782 bytes in 183 blocks
-==7940==         suppressed: 0 bytes in 0 blocks
-==7940== Reachable blocks (those to which a pointer was found) are not shown.
-==7940== To see them, rerun with: --leak-check=full --show-leak-kinds=all
-==7940== 
-==7940== Use --track-origins=yes to see where uninitialised values come from
-==7940== For lists of detected and suppressed errors, rerun with: -s
-==7940== ERROR SUMMARY: 10 errors from 8 contexts (suppressed: 398 from 10)
+==58808== 
+==58808== HEAP SUMMARY:
+==58808==     in use at exit: 19,622 bytes in 190 blocks
+==58808==   total heap usage: 280 allocs, 90 frees, 30,274 bytes allocated
+==58808== 
+==58808== LEAK SUMMARY:
+==58808==    definitely lost: 0 bytes in 0 blocks
+==58808==    indirectly lost: 0 bytes in 0 blocks
+==58808==      possibly lost: 8,840 bytes in 7 blocks
+==58808==    still reachable: 10,782 bytes in 183 blocks
+==58808==         suppressed: 0 bytes in 0 blocks
+==58808== Reachable blocks (those to which a pointer was found) are not shown.
+==58808== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==58808== 
+==58808== Use --track-origins=yes to see where uninitialised values come from
+==58808== For lists of detected and suppressed errors, rerun with: -s
+==58808== ERROR SUMMARY: 10 errors from 8 contexts (suppressed: 398 from 10)
 "echo test tout"
+==58845== Memcheck, a memory error detector
+==58845== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==58845== Using Valgrind-3.17.0.GIT and LibVEX; rerun with -h for copyright info
+==58845== Command: ./minishell
+==58845== 
+[0;34mminishell$ [0m==58845== Syscall param stat64(path) points to unaddressable byte(s)
+==58845==    at 0x1004F4EDA: stat$INODE64 (in /usr/lib/system/libsystem_kernel.dylib)
+==58845==    by 0x100007CB5: is_dir (in ./minishell)
+==58845==    by 0x1000045B9: redir_error (in ./minishell)
+==58845==    by 0x100004A8E: do_redir (in ./minishell)
+==58845==    by 0x1000042D6: minishell_launch (in ./minishell)
+==58845==    by 0x100004F44: execute_commands (in ./minishell)
+==58845==    by 0x100007B92: execute_pipes (in ./minishell)
+==58845==    by 0x1000012D9: minishell_start (in ./minishell)
+==58845==    by 0x100001544: main (in ./minishell)
+==58845==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==58845== 
+==58845== Conditional jump or move depends on uninitialised value(s)
+==58845==    at 0x100007CCF: is_dir (in ./minishell)
+==58845==    by 0x1000045B9: redir_error (in ./minishell)
+==58845==    by 0x100004A8E: do_redir (in ./minishell)
+==58845==    by 0x1000042D6: minishell_launch (in ./minishell)
+==58845==    by 0x100004F44: execute_commands (in ./minishell)
+==58845==    by 0x100007B92: execute_pipes (in ./minishell)
+==58845==    by 0x1000012D9: minishell_start (in ./minishell)
+==58845==    by 0x100001544: main (in ./minishell)
+==58845== 
+==58857== 
+==58857== HEAP SUMMARY:
+==58857==     in use at exit: 31,432 bytes in 249 blocks
+==58857==   total heap usage: 287 allocs, 38 frees, 40,815 bytes allocated
+==58857== 
+==58857== 2,064 (16 direct, 2,048 indirect) bytes in 1 blocks are definitely lost in loss record 70 of 74
+==58857==    at 0x1000E5995: malloc (in /Users/frthierr/.brew/Cellar/valgrind/HEAD-3ab1ae5/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==58857==    by 0x1004D5B17: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58857==    by 0x1004D5AE8: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58857==    by 0x100536AAA: _os_once_callout (in /usr/lib/system/libsystem_platform.dylib)
+==58857==    by 0x100536A6E: _os_alloc_once (in /usr/lib/system/libsystem_platform.dylib)
+==58857==    by 0x1004D6D29: _notify_fork_child (in /usr/lib/system/libsystem_notify.dylib)
+==58857==    by 0x1000F1B12: libSystem_atfork_child (in /usr/lib/libSystem.B.dylib)
+==58857==    by 0x1002F5D96: fork (in /usr/lib/system/libsystem_c.dylib)
+==58857==    by 0x100004372: minishell_launch (in ./minishell)
+==58857==    by 0x100004F44: execute_commands (in ./minishell)
+==58857==    by 0x100007B92: execute_pipes (in ./minishell)
+==58857==    by 0x1000012D9: minishell_start (in ./minishell)
+==58857== 
+==58857== 2,064 (16 direct, 2,048 indirect) bytes in 1 blocks are definitely lost in loss record 71 of 74
+==58857==    at 0x1000E5995: malloc (in /Users/frthierr/.brew/Cellar/valgrind/HEAD-3ab1ae5/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==58857==    by 0x1004D5B17: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58857==    by 0x1004D5AF6: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58857==    by 0x100536AAA: _os_once_callout (in /usr/lib/system/libsystem_platform.dylib)
+==58857==    by 0x100536A6E: _os_alloc_once (in /usr/lib/system/libsystem_platform.dylib)
+==58857==    by 0x1004D6D29: _notify_fork_child (in /usr/lib/system/libsystem_notify.dylib)
+==58857==    by 0x1000F1B12: libSystem_atfork_child (in /usr/lib/libSystem.B.dylib)
+==58857==    by 0x1002F5D96: fork (in /usr/lib/system/libsystem_c.dylib)
+==58857==    by 0x100004372: minishell_launch (in ./minishell)
+==58857==    by 0x100004F44: execute_commands (in ./minishell)
+==58857==    by 0x100007B92: execute_pipes (in ./minishell)
+==58857==    by 0x1000012D9: minishell_start (in ./minishell)
+==58857== 
+==58857== LEAK SUMMARY:
+==58857==    definitely lost: 32 bytes in 2 blocks
+==58857==    indirectly lost: 4,096 bytes in 2 blocks
+==58857==      possibly lost: 8,904 bytes in 8 blocks
+==58857==    still reachable: 18,400 bytes in 237 blocks
+==58857==         suppressed: 0 bytes in 0 blocks
+==58857== Reachable blocks (those to which a pointer was found) are not shown.
+==58857== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==58857== 
+==58857== Use --track-origins=yes to see where uninitialised values come from
+==58857== For lists of detected and suppressed errors, rerun with: -s
+==58857== ERROR SUMMARY: 11 errors from 11 contexts (suppressed: 398 from 10)
+exit
+==58845== 
+==58845== HEAP SUMMARY:
+==58845==     in use at exit: 19,622 bytes in 190 blocks
+==58845==   total heap usage: 280 allocs, 90 frees, 30,274 bytes allocated
+==58845== 
+==58845== LEAK SUMMARY:
+==58845==    definitely lost: 0 bytes in 0 blocks
+==58845==    indirectly lost: 0 bytes in 0 blocks
+==58845==      possibly lost: 8,840 bytes in 7 blocks
+==58845==    still reachable: 10,782 bytes in 183 blocks
+==58845==         suppressed: 0 bytes in 0 blocks
+==58845== Reachable blocks (those to which a pointer was found) are not shown.
+==58845== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==58845== 
+==58845== Use --track-origins=yes to see where uninitialised values come from
+==58845== For lists of detected and suppressed errors, rerun with: -s
+==58845== ERROR SUMMARY: 10 errors from 8 contexts (suppressed: 398 from 10)
+"echo test tout"
+==58864== Memcheck, a memory error detector
+==58864== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==58864== Using Valgrind-3.17.0.GIT and LibVEX; rerun with -h for copyright info
+==58864== Command: ./minishell
+==58864== 
+[0;34mminishell$ [0m==58864== Syscall param stat64(path) points to unaddressable byte(s)
+==58864==    at 0x1004F4EDA: stat$INODE64 (in /usr/lib/system/libsystem_kernel.dylib)
+==58864==    by 0x100007CB5: is_dir (in ./minishell)
+==58864==    by 0x1000045B9: redir_error (in ./minishell)
+==58864==    by 0x100004A8E: do_redir (in ./minishell)
+==58864==    by 0x1000042D6: minishell_launch (in ./minishell)
+==58864==    by 0x100004F44: execute_commands (in ./minishell)
+==58864==    by 0x100007B92: execute_pipes (in ./minishell)
+==58864==    by 0x1000012D9: minishell_start (in ./minishell)
+==58864==    by 0x100001544: main (in ./minishell)
+==58864==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==58864== 
+==58864== Conditional jump or move depends on uninitialised value(s)
+==58864==    at 0x100007CCF: is_dir (in ./minishell)
+==58864==    by 0x1000045B9: redir_error (in ./minishell)
+==58864==    by 0x100004A8E: do_redir (in ./minishell)
+==58864==    by 0x1000042D6: minishell_launch (in ./minishell)
+==58864==    by 0x100004F44: execute_commands (in ./minishell)
+==58864==    by 0x100007B92: execute_pipes (in ./minishell)
+==58864==    by 0x1000012D9: minishell_start (in ./minishell)
+==58864==    by 0x100001544: main (in ./minishell)
+==58864== 
+==58865== 
+==58865== HEAP SUMMARY:
+==58865==     in use at exit: 31,500 bytes in 256 blocks
+==58865==   total heap usage: 298 allocs, 42 frees, 40,914 bytes allocated
+==58865== 
+==58865== 2,064 (16 direct, 2,048 indirect) bytes in 1 blocks are definitely lost in loss record 70 of 74
+==58865==    at 0x1000E5995: malloc (in /Users/frthierr/.brew/Cellar/valgrind/HEAD-3ab1ae5/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==58865==    by 0x1004D5B17: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58865==    by 0x1004D5AE8: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58865==    by 0x100536AAA: _os_once_callout (in /usr/lib/system/libsystem_platform.dylib)
+==58865==    by 0x100536A6E: _os_alloc_once (in /usr/lib/system/libsystem_platform.dylib)
+==58865==    by 0x1004D6D29: _notify_fork_child (in /usr/lib/system/libsystem_notify.dylib)
+==58865==    by 0x1000F1B12: libSystem_atfork_child (in /usr/lib/libSystem.B.dylib)
+==58865==    by 0x1002F5D96: fork (in /usr/lib/system/libsystem_c.dylib)
+==58865==    by 0x100004372: minishell_launch (in ./minishell)
+==58865==    by 0x100004F44: execute_commands (in ./minishell)
+==58865==    by 0x100007B92: execute_pipes (in ./minishell)
+==58865==    by 0x1000012D9: minishell_start (in ./minishell)
+==58865== 
+==58865== 2,064 (16 direct, 2,048 indirect) bytes in 1 blocks are definitely lost in loss record 71 of 74
+==58865==    at 0x1000E5995: malloc (in /Users/frthierr/.brew/Cellar/valgrind/HEAD-3ab1ae5/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==58865==    by 0x1004D5B17: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58865==    by 0x1004D5AF6: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58865==    by 0x100536AAA: _os_once_callout (in /usr/lib/system/libsystem_platform.dylib)
+==58865==    by 0x100536A6E: _os_alloc_once (in /usr/lib/system/libsystem_platform.dylib)
+==58865==    by 0x1004D6D29: _notify_fork_child (in /usr/lib/system/libsystem_notify.dylib)
+==58865==    by 0x1000F1B12: libSystem_atfork_child (in /usr/lib/libSystem.B.dylib)
+==58865==    by 0x1002F5D96: fork (in /usr/lib/system/libsystem_c.dylib)
+==58865==    by 0x100004372: minishell_launch (in ./minishell)
+==58865==    by 0x100004F44: execute_commands (in ./minishell)
+==58865==    by 0x100007B92: execute_pipes (in ./minishell)
+==58865==    by 0x1000012D9: minishell_start (in ./minishell)
+==58865== 
+==58865== LEAK SUMMARY:
+==58865==    definitely lost: 32 bytes in 2 blocks
+==58865==    indirectly lost: 4,096 bytes in 2 blocks
+==58865==      possibly lost: 8,904 bytes in 8 blocks
+==58865==    still reachable: 18,468 bytes in 244 blocks
+==58865==         suppressed: 0 bytes in 0 blocks
+==58865== Reachable blocks (those to which a pointer was found) are not shown.
+==58865== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==58865== 
+==58865== Use --track-origins=yes to see where uninitialised values come from
+==58865== For lists of detected and suppressed errors, rerun with: -s
+==58865== ERROR SUMMARY: 11 errors from 11 contexts (suppressed: 398 from 10)
+exit
+==58864== 
+==58864== HEAP SUMMARY:
+==58864==     in use at exit: 19,660 bytes in 194 blocks
+==58864==   total heap usage: 291 allocs, 97 frees, 30,373 bytes allocated
+==58864== 
+==58864== LEAK SUMMARY:
+==58864==    definitely lost: 0 bytes in 0 blocks
+==58864==    indirectly lost: 0 bytes in 0 blocks
+==58864==      possibly lost: 8,840 bytes in 7 blocks
+==58864==    still reachable: 10,820 bytes in 187 blocks
+==58864==         suppressed: 0 bytes in 0 blocks
+==58864== Reachable blocks (those to which a pointer was found) are not shown.
+==58864== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==58864== 
+==58864== Use --track-origins=yes to see where uninitialised values come from
+==58864== For lists of detected and suppressed errors, rerun with: -s
+==58864== ERROR SUMMARY: 10 errors from 8 contexts (suppressed: 398 from 10)
+"echo -n test tout"
+==58872== Memcheck, a memory error detector
+==58872== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==58872== Using Valgrind-3.17.0.GIT and LibVEX; rerun with -h for copyright info
+==58872== Command: ./minishell
+==58872== 
+[0;34mminishell$ [0m==58872== Syscall param stat64(path) points to unaddressable byte(s)
+==58872==    at 0x1004F4EDA: stat$INODE64 (in /usr/lib/system/libsystem_kernel.dylib)
+==58872==    by 0x100007CB5: is_dir (in ./minishell)
+==58872==    by 0x1000045B9: redir_error (in ./minishell)
+==58872==    by 0x100004A8E: do_redir (in ./minishell)
+==58872==    by 0x1000042D6: minishell_launch (in ./minishell)
+==58872==    by 0x100004F44: execute_commands (in ./minishell)
+==58872==    by 0x100007B92: execute_pipes (in ./minishell)
+==58872==    by 0x1000012D9: minishell_start (in ./minishell)
+==58872==    by 0x100001544: main (in ./minishell)
+==58872==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==58872== 
+==58872== Conditional jump or move depends on uninitialised value(s)
+==58872==    at 0x100007CCF: is_dir (in ./minishell)
+==58872==    by 0x1000045B9: redir_error (in ./minishell)
+==58872==    by 0x100004A8E: do_redir (in ./minishell)
+==58872==    by 0x1000042D6: minishell_launch (in ./minishell)
+==58872==    by 0x100004F44: execute_commands (in ./minishell)
+==58872==    by 0x100007B92: execute_pipes (in ./minishell)
+==58872==    by 0x1000012D9: minishell_start (in ./minishell)
+==58872==    by 0x100001544: main (in ./minishell)
+==58872== 
+==58873== 
+==58873== HEAP SUMMARY:
+==58873==     in use at exit: 31,636 bytes in 270 blocks
+==58873==   total heap usage: 320 allocs, 50 frees, 41,112 bytes allocated
+==58873== 
+==58873== 2,064 (16 direct, 2,048 indirect) bytes in 1 blocks are definitely lost in loss record 70 of 74
+==58873==    at 0x1000E5995: malloc (in /Users/frthierr/.brew/Cellar/valgrind/HEAD-3ab1ae5/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==58873==    by 0x1004D5B17: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58873==    by 0x1004D5AE8: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58873==    by 0x100536AAA: _os_once_callout (in /usr/lib/system/libsystem_platform.dylib)
+==58873==    by 0x100536A6E: _os_alloc_once (in /usr/lib/system/libsystem_platform.dylib)
+==58873==    by 0x1004D6D29: _notify_fork_child (in /usr/lib/system/libsystem_notify.dylib)
+==58873==    by 0x1000F1B12: libSystem_atfork_child (in /usr/lib/libSystem.B.dylib)
+==58873==    by 0x1002F5D96: fork (in /usr/lib/system/libsystem_c.dylib)
+==58873==    by 0x100004372: minishell_launch (in ./minishell)
+==58873==    by 0x100004F44: execute_commands (in ./minishell)
+==58873==    by 0x100007B92: execute_pipes (in ./minishell)
+==58873==    by 0x1000012D9: minishell_start (in ./minishell)
+==58873== 
+==58873== 2,064 (16 direct, 2,048 indirect) bytes in 1 blocks are definitely lost in loss record 71 of 74
+==58873==    at 0x1000E5995: malloc (in /Users/frthierr/.brew/Cellar/valgrind/HEAD-3ab1ae5/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==58873==    by 0x1004D5B17: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58873==    by 0x1004D5AF6: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58873==    by 0x100536AAA: _os_once_callout (in /usr/lib/system/libsystem_platform.dylib)
+==58873==    by 0x100536A6E: _os_alloc_once (in /usr/lib/system/libsystem_platform.dylib)
+==58873==    by 0x1004D6D29: _notify_fork_child (in /usr/lib/system/libsystem_notify.dylib)
+==58873==    by 0x1000F1B12: libSystem_atfork_child (in /usr/lib/libSystem.B.dylib)
+==58873==    by 0x1002F5D96: fork (in /usr/lib/system/libsystem_c.dylib)
+==58873==    by 0x100004372: minishell_launch (in ./minishell)
+==58873==    by 0x100004F44: execute_commands (in ./minishell)
+==58873==    by 0x100007B92: execute_pipes (in ./minishell)
+==58873==    by 0x1000012D9: minishell_start (in ./minishell)
+==58873== 
+==58873== LEAK SUMMARY:
+==58873==    definitely lost: 32 bytes in 2 blocks
+==58873==    indirectly lost: 4,096 bytes in 2 blocks
+==58873==      possibly lost: 8,904 bytes in 8 blocks
+==58873==    still reachable: 18,604 bytes in 258 blocks
+==58873==         suppressed: 0 bytes in 0 blocks
+==58873== Reachable blocks (those to which a pointer was found) are not shown.
+==58873== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==58873== 
+==58873== Use --track-origins=yes to see where uninitialised values come from
+==58873== For lists of detected and suppressed errors, rerun with: -s
+==58873== ERROR SUMMARY: 11 errors from 11 contexts (suppressed: 398 from 10)
+exit
+==58872== 
+==58872== HEAP SUMMARY:
+==58872==     in use at exit: 19,736 bytes in 202 blocks
+==58872==   total heap usage: 313 allocs, 111 frees, 30,571 bytes allocated
+==58872== 
+==58872== LEAK SUMMARY:
+==58872==    definitely lost: 0 bytes in 0 blocks
+==58872==    indirectly lost: 0 bytes in 0 blocks
+==58872==      possibly lost: 8,840 bytes in 7 blocks
+==58872==    still reachable: 10,896 bytes in 195 blocks
+==58872==         suppressed: 0 bytes in 0 blocks
+==58872== Reachable blocks (those to which a pointer was found) are not shown.
+==58872== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==58872== 
+==58872== Use --track-origins=yes to see where uninitialised values come from
+==58872== For lists of detected and suppressed errors, rerun with: -s
+==58872== ERROR SUMMARY: 10 errors from 8 contexts (suppressed: 398 from 10)
+"echo -n -n -n test tout"
+==58880== Memcheck, a memory error detector
+==58880== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==58880== Using Valgrind-3.17.0.GIT and LibVEX; rerun with -h for copyright info
+==58880== Command: ./minishell
+==58880== 
+[0;34mminishell$ [0m==58880== Syscall param stat64(path) points to unaddressable byte(s)
+==58880==    at 0x1004F4EDA: stat$INODE64 (in /usr/lib/system/libsystem_kernel.dylib)
+==58880==    by 0x100007CB5: is_dir (in ./minishell)
+==58880==    by 0x1000045B9: redir_error (in ./minishell)
+==58880==    by 0x100004A8E: do_redir (in ./minishell)
+==58880==    by 0x1000042D6: minishell_launch (in ./minishell)
+==58880==    by 0x100004F44: execute_commands (in ./minishell)
+==58880==    by 0x100007B92: execute_pipes (in ./minishell)
+==58880==    by 0x1000012D9: minishell_start (in ./minishell)
+==58880==    by 0x100001544: main (in ./minishell)
+==58880==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==58880== 
+==58880== Conditional jump or move depends on uninitialised value(s)
+==58880==    at 0x100007CCF: is_dir (in ./minishell)
+==58880==    by 0x1000045B9: redir_error (in ./minishell)
+==58880==    by 0x100004A8E: do_redir (in ./minishell)
+==58880==    by 0x1000042D6: minishell_launch (in ./minishell)
+==58880==    by 0x100004F44: execute_commands (in ./minishell)
+==58880==    by 0x100007B92: execute_pipes (in ./minishell)
+==58880==    by 0x1000012D9: minishell_start (in ./minishell)
+==58880==    by 0x100001544: main (in ./minishell)
+==58880== 
+==58881== 
+==58881== HEAP SUMMARY:
+==58881==     in use at exit: 31,362 bytes in 246 blocks
+==58881==   total heap usage: 486 allocs, 240 frees, 50,675 bytes allocated
+==58881== 
+==58881== 2,064 (16 direct, 2,048 indirect) bytes in 1 blocks are definitely lost in loss record 69 of 73
+==58881==    at 0x1000E5995: malloc (in /Users/frthierr/.brew/Cellar/valgrind/HEAD-3ab1ae5/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==58881==    by 0x1004D5B17: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58881==    by 0x1004D5AE8: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58881==    by 0x100536AAA: _os_once_callout (in /usr/lib/system/libsystem_platform.dylib)
+==58881==    by 0x100536A6E: _os_alloc_once (in /usr/lib/system/libsystem_platform.dylib)
+==58881==    by 0x1004D6D29: _notify_fork_child (in /usr/lib/system/libsystem_notify.dylib)
+==58881==    by 0x1000F1B12: libSystem_atfork_child (in /usr/lib/libSystem.B.dylib)
+==58881==    by 0x1002F5D96: fork (in /usr/lib/system/libsystem_c.dylib)
+==58881==    by 0x100004372: minishell_launch (in ./minishell)
+==58881==    by 0x100004F44: execute_commands (in ./minishell)
+==58881==    by 0x100007B92: execute_pipes (in ./minishell)
+==58881==    by 0x1000012D9: minishell_start (in ./minishell)
+==58881== 
+==58881== 2,064 (16 direct, 2,048 indirect) bytes in 1 blocks are definitely lost in loss record 70 of 73
+==58881==    at 0x1000E5995: malloc (in /Users/frthierr/.brew/Cellar/valgrind/HEAD-3ab1ae5/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==58881==    by 0x1004D5B17: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58881==    by 0x1004D5AF6: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58881==    by 0x100536AAA: _os_once_callout (in /usr/lib/system/libsystem_platform.dylib)
+==58881==    by 0x100536A6E: _os_alloc_once (in /usr/lib/system/libsystem_platform.dylib)
+==58881==    by 0x1004D6D29: _notify_fork_child (in /usr/lib/system/libsystem_notify.dylib)
+==58881==    by 0x1000F1B12: libSystem_atfork_child (in /usr/lib/libSystem.B.dylib)
+==58881==    by 0x1002F5D96: fork (in /usr/lib/system/libsystem_c.dylib)
+==58881==    by 0x100004372: minishell_launch (in ./minishell)
+==58881==    by 0x100004F44: execute_commands (in ./minishell)
+==58881==    by 0x100007B92: execute_pipes (in ./minishell)
+==58881==    by 0x1000012D9: minishell_start (in ./minishell)
+==58881== 
+==58881== LEAK SUMMARY:
+==58881==    definitely lost: 32 bytes in 2 blocks
+==58881==    indirectly lost: 4,096 bytes in 2 blocks
+==58881==      possibly lost: 8,904 bytes in 8 blocks
+==58881==    still reachable: 18,330 bytes in 234 blocks
+==58881==         suppressed: 0 bytes in 0 blocks
+==58881== Reachable blocks (those to which a pointer was found) are not shown.
+==58881== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==58881== 
+==58881== Use --track-origins=yes to see where uninitialised values come from
+==58881== For lists of detected and suppressed errors, rerun with: -s
+==58881== ERROR SUMMARY: 13 errors from 11 contexts (suppressed: 398 from 10)
+exit
+==58880== 
+==58880== HEAP SUMMARY:
+==58880==     in use at exit: 19,646 bytes in 193 blocks
+==58880==   total heap usage: 478 allocs, 285 frees, 40,098 bytes allocated
+==58880== 
+==58880== LEAK SUMMARY:
+==58880==    definitely lost: 0 bytes in 0 blocks
+==58880==    indirectly lost: 0 bytes in 0 blocks
+==58880==      possibly lost: 8,840 bytes in 7 blocks
+==58880==    still reachable: 10,806 bytes in 186 blocks
+==58880==         suppressed: 0 bytes in 0 blocks
+==58880== Reachable blocks (those to which a pointer was found) are not shown.
+==58880== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==58880== 
+==58880== Use --track-origins=yes to see where uninitialised values come from
+==58880== For lists of detected and suppressed errors, rerun with: -s
+==58880== ERROR SUMMARY: 12 errors from 8 contexts (suppressed: 398 from 10)
+"cd .. ; pwd"
+==58888== Memcheck, a memory error detector
+==58888== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==58888== Using Valgrind-3.17.0.GIT and LibVEX; rerun with -h for copyright info
+==58888== Command: ./minishell
+==58888== 
+[0;34mminishell$ [0m==58888== Syscall param stat64(path) points to unaddressable byte(s)
+==58888==    at 0x1004F4EDA: stat$INODE64 (in /usr/lib/system/libsystem_kernel.dylib)
+==58888==    by 0x100007CB5: is_dir (in ./minishell)
+==58888==    by 0x1000045B9: redir_error (in ./minishell)
+==58888==    by 0x100004A8E: do_redir (in ./minishell)
+==58888==    by 0x1000042D6: minishell_launch (in ./minishell)
+==58888==    by 0x100004F44: execute_commands (in ./minishell)
+==58888==    by 0x100007B92: execute_pipes (in ./minishell)
+==58888==    by 0x1000012D9: minishell_start (in ./minishell)
+==58888==    by 0x100001544: main (in ./minishell)
+==58888==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==58888== 
+==58888== Conditional jump or move depends on uninitialised value(s)
+==58888==    at 0x100007CCF: is_dir (in ./minishell)
+==58888==    by 0x1000045B9: redir_error (in ./minishell)
+==58888==    by 0x100004A8E: do_redir (in ./minishell)
+==58888==    by 0x1000042D6: minishell_launch (in ./minishell)
+==58888==    by 0x100004F44: execute_commands (in ./minishell)
+==58888==    by 0x100007B92: execute_pipes (in ./minishell)
+==58888==    by 0x1000012D9: minishell_start (in ./minishell)
+==58888==    by 0x100001544: main (in ./minishell)
+==58888== 
+==58889== 
+==58889== HEAP SUMMARY:
+==58889==     in use at exit: 31,341 bytes in 246 blocks
+==58889==   total heap usage: 486 allocs, 240 frees, 50,624 bytes allocated
+==58889== 
+==58889== 2,064 (16 direct, 2,048 indirect) bytes in 1 blocks are definitely lost in loss record 69 of 73
+==58889==    at 0x1000E5995: malloc (in /Users/frthierr/.brew/Cellar/valgrind/HEAD-3ab1ae5/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==58889==    by 0x1004D5B17: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58889==    by 0x1004D5AE8: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58889==    by 0x100536AAA: _os_once_callout (in /usr/lib/system/libsystem_platform.dylib)
+==58889==    by 0x100536A6E: _os_alloc_once (in /usr/lib/system/libsystem_platform.dylib)
+==58889==    by 0x1004D6D29: _notify_fork_child (in /usr/lib/system/libsystem_notify.dylib)
+==58889==    by 0x1000F1B12: libSystem_atfork_child (in /usr/lib/libSystem.B.dylib)
+==58889==    by 0x1002F5D96: fork (in /usr/lib/system/libsystem_c.dylib)
+==58889==    by 0x100004372: minishell_launch (in ./minishell)
+==58889==    by 0x100004F44: execute_commands (in ./minishell)
+==58889==    by 0x100007B92: execute_pipes (in ./minishell)
+==58889==    by 0x1000012D9: minishell_start (in ./minishell)
+==58889== 
+==58889== 2,064 (16 direct, 2,048 indirect) bytes in 1 blocks are definitely lost in loss record 70 of 73
+==58889==    at 0x1000E5995: malloc (in /Users/frthierr/.brew/Cellar/valgrind/HEAD-3ab1ae5/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==58889==    by 0x1004D5B17: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58889==    by 0x1004D5AF6: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58889==    by 0x100536AAA: _os_once_callout (in /usr/lib/system/libsystem_platform.dylib)
+==58889==    by 0x100536A6E: _os_alloc_once (in /usr/lib/system/libsystem_platform.dylib)
+==58889==    by 0x1004D6D29: _notify_fork_child (in /usr/lib/system/libsystem_notify.dylib)
+==58889==    by 0x1000F1B12: libSystem_atfork_child (in /usr/lib/libSystem.B.dylib)
+==58889==    by 0x1002F5D96: fork (in /usr/lib/system/libsystem_c.dylib)
+==58889==    by 0x100004372: minishell_launch (in ./minishell)
+==58889==    by 0x100004F44: execute_commands (in ./minishell)
+==58889==    by 0x100007B92: execute_pipes (in ./minishell)
+==58889==    by 0x1000012D9: minishell_start (in ./minishell)
+==58889== 
+==58889== LEAK SUMMARY:
+==58889==    definitely lost: 32 bytes in 2 blocks
+==58889==    indirectly lost: 4,096 bytes in 2 blocks
+==58889==      possibly lost: 8,904 bytes in 8 blocks
+==58889==    still reachable: 18,309 bytes in 234 blocks
+==58889==         suppressed: 0 bytes in 0 blocks
+==58889== Reachable blocks (those to which a pointer was found) are not shown.
+==58889== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==58889== 
+==58889== Use --track-origins=yes to see where uninitialised values come from
+==58889== For lists of detected and suppressed errors, rerun with: -s
+==58889== ERROR SUMMARY: 13 errors from 11 contexts (suppressed: 398 from 10)
+exit
+==58888== 
+==58888== HEAP SUMMARY:
+==58888==     in use at exit: 19,654 bytes in 193 blocks
+==58888==   total heap usage: 478 allocs, 285 frees, 40,076 bytes allocated
+==58888== 
+==58888== LEAK SUMMARY:
+==58888==    definitely lost: 0 bytes in 0 blocks
+==58888==    indirectly lost: 0 bytes in 0 blocks
+==58888==      possibly lost: 8,840 bytes in 7 blocks
+==58888==    still reachable: 10,814 bytes in 186 blocks
+==58888==         suppressed: 0 bytes in 0 blocks
+==58888== Reachable blocks (those to which a pointer was found) are not shown.
+==58888== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==58888== 
+==58888== Use --track-origins=yes to see where uninitialised values come from
+==58888== For lists of detected and suppressed errors, rerun with: -s
+==58888== ERROR SUMMARY: 12 errors from 8 contexts (suppressed: 398 from 10)
+"cd /Users ; pwd"
+==58896== Memcheck, a memory error detector
+==58896== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==58896== Using Valgrind-3.17.0.GIT and LibVEX; rerun with -h for copyright info
+==58896== Command: ./minishell
+==58896== 
+[0;34mminishell$ [0m==58896== Syscall param stat64(path) points to unaddressable byte(s)
+==58896==    at 0x1004F4EDA: stat$INODE64 (in /usr/lib/system/libsystem_kernel.dylib)
+==58896==    by 0x100007CB5: is_dir (in ./minishell)
+==58896==    by 0x1000045B9: redir_error (in ./minishell)
+==58896==    by 0x100004A8E: do_redir (in ./minishell)
+==58896==    by 0x1000042D6: minishell_launch (in ./minishell)
+==58896==    by 0x100004F44: execute_commands (in ./minishell)
+==58896==    by 0x100007B92: execute_pipes (in ./minishell)
+==58896==    by 0x1000012D9: minishell_start (in ./minishell)
+==58896==    by 0x100001544: main (in ./minishell)
+==58896==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==58896== 
+==58896== Conditional jump or move depends on uninitialised value(s)
+==58896==    at 0x100007CCF: is_dir (in ./minishell)
+==58896==    by 0x1000045B9: redir_error (in ./minishell)
+==58896==    by 0x100004A8E: do_redir (in ./minishell)
+==58896==    by 0x1000042D6: minishell_launch (in ./minishell)
+==58896==    by 0x100004F44: execute_commands (in ./minishell)
+==58896==    by 0x100007B92: execute_pipes (in ./minishell)
+==58896==    by 0x1000012D9: minishell_start (in ./minishell)
+==58896==    by 0x100001544: main (in ./minishell)
+==58896== 
+==58905== 
+==58905== HEAP SUMMARY:
+==58905==     in use at exit: 31,304 bytes in 242 blocks
+==58905==   total heap usage: 480 allocs, 238 frees, 51,599 bytes allocated
+==58905== 
+==58905== 2,064 (16 direct, 2,048 indirect) bytes in 1 blocks are definitely lost in loss record 69 of 73
+==58905==    at 0x1000E5995: malloc (in /Users/frthierr/.brew/Cellar/valgrind/HEAD-3ab1ae5/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==58905==    by 0x1004D5B17: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58905==    by 0x1004D5AE8: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58905==    by 0x100536AAA: _os_once_callout (in /usr/lib/system/libsystem_platform.dylib)
+==58905==    by 0x100536A6E: _os_alloc_once (in /usr/lib/system/libsystem_platform.dylib)
+==58905==    by 0x1004D6D29: _notify_fork_child (in /usr/lib/system/libsystem_notify.dylib)
+==58905==    by 0x1000F1B12: libSystem_atfork_child (in /usr/lib/libSystem.B.dylib)
+==58905==    by 0x1002F5D96: fork (in /usr/lib/system/libsystem_c.dylib)
+==58905==    by 0x100004372: minishell_launch (in ./minishell)
+==58905==    by 0x100004F44: execute_commands (in ./minishell)
+==58905==    by 0x100007B92: execute_pipes (in ./minishell)
+==58905==    by 0x1000012D9: minishell_start (in ./minishell)
+==58905== 
+==58905== 2,064 (16 direct, 2,048 indirect) bytes in 1 blocks are definitely lost in loss record 70 of 73
+==58905==    at 0x1000E5995: malloc (in /Users/frthierr/.brew/Cellar/valgrind/HEAD-3ab1ae5/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==58905==    by 0x1004D5B17: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58905==    by 0x1004D5AF6: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58905==    by 0x100536AAA: _os_once_callout (in /usr/lib/system/libsystem_platform.dylib)
+==58905==    by 0x100536A6E: _os_alloc_once (in /usr/lib/system/libsystem_platform.dylib)
+==58905==    by 0x1004D6D29: _notify_fork_child (in /usr/lib/system/libsystem_notify.dylib)
+==58905==    by 0x1000F1B12: libSystem_atfork_child (in /usr/lib/libSystem.B.dylib)
+==58905==    by 0x1002F5D96: fork (in /usr/lib/system/libsystem_c.dylib)
+==58905==    by 0x100004372: minishell_launch (in ./minishell)
+==58905==    by 0x100004F44: execute_commands (in ./minishell)
+==58905==    by 0x100007B92: execute_pipes (in ./minishell)
+==58905==    by 0x1000012D9: minishell_start (in ./minishell)
+==58905== 
+==58905== LEAK SUMMARY:
+==58905==    definitely lost: 32 bytes in 2 blocks
+==58905==    indirectly lost: 4,096 bytes in 2 blocks
+==58905==      possibly lost: 8,904 bytes in 8 blocks
+==58905==    still reachable: 18,272 bytes in 230 blocks
+==58905==         suppressed: 0 bytes in 0 blocks
+==58905== Reachable blocks (those to which a pointer was found) are not shown.
+==58905== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==58905== 
+==58905== Use --track-origins=yes to see where uninitialised values come from
+==58905== For lists of detected and suppressed errors, rerun with: -s
+==58905== ERROR SUMMARY: 13 errors from 11 contexts (suppressed: 398 from 10)
+exit
+==58896== 
+==58896== HEAP SUMMARY:
+==58896==     in use at exit: 19,608 bytes in 189 blocks
+==58896==   total heap usage: 472 allocs, 283 frees, 41,042 bytes allocated
+==58896== 
+==58896== LEAK SUMMARY:
+==58896==    definitely lost: 0 bytes in 0 blocks
+==58896==    indirectly lost: 0 bytes in 0 blocks
+==58896==      possibly lost: 8,840 bytes in 7 blocks
+==58896==    still reachable: 10,768 bytes in 182 blocks
+==58896==         suppressed: 0 bytes in 0 blocks
+==58896== Reachable blocks (those to which a pointer was found) are not shown.
+==58896== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==58896== 
+==58896== Use --track-origins=yes to see where uninitialised values come from
+==58896== For lists of detected and suppressed errors, rerun with: -s
+==58896== ERROR SUMMARY: 12 errors from 8 contexts (suppressed: 398 from 10)
+"cd ; pwd"
+==58912== Memcheck, a memory error detector
+==58912== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==58912== Using Valgrind-3.17.0.GIT and LibVEX; rerun with -h for copyright info
+==58912== Command: ./minishell
+==58912== 
+[0;34mminishell$ [0m==58912== Syscall param stat64(path) points to unaddressable byte(s)
+==58912==    at 0x1004F4EDA: stat$INODE64 (in /usr/lib/system/libsystem_kernel.dylib)
+==58912==    by 0x100007CB5: is_dir (in ./minishell)
+==58912==    by 0x1000045B9: redir_error (in ./minishell)
+==58912==    by 0x100004A8E: do_redir (in ./minishell)
+==58912==    by 0x1000042D6: minishell_launch (in ./minishell)
+==58912==    by 0x100004F44: execute_commands (in ./minishell)
+==58912==    by 0x100007B92: execute_pipes (in ./minishell)
+==58912==    by 0x1000012D9: minishell_start (in ./minishell)
+==58912==    by 0x100001544: main (in ./minishell)
+==58912==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==58912== 
+==58912== Conditional jump or move depends on uninitialised value(s)
+==58912==    at 0x100007CCF: is_dir (in ./minishell)
+==58912==    by 0x1000045B9: redir_error (in ./minishell)
+==58912==    by 0x100004A8E: do_redir (in ./minishell)
+==58912==    by 0x1000042D6: minishell_launch (in ./minishell)
+==58912==    by 0x100004F44: execute_commands (in ./minishell)
+==58912==    by 0x100007B92: execute_pipes (in ./minishell)
+==58912==    by 0x1000012D9: minishell_start (in ./minishell)
+==58912==    by 0x100001544: main (in ./minishell)
+==58912== 
+==58915== 
+==58915== HEAP SUMMARY:
+==58915==     in use at exit: 32,179 bytes in 319 blocks
+==58915==   total heap usage: 871 allocs, 552 frees, 68,533 bytes allocated
+==58915== 
+==58915== 2,064 (16 direct, 2,048 indirect) bytes in 1 blocks are definitely lost in loss record 69 of 73
+==58915==    at 0x1000E5995: malloc (in /Users/frthierr/.brew/Cellar/valgrind/HEAD-3ab1ae5/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==58915==    by 0x1004D5B17: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58915==    by 0x1004D5AE8: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58915==    by 0x100536AAA: _os_once_callout (in /usr/lib/system/libsystem_platform.dylib)
+==58915==    by 0x100536A6E: _os_alloc_once (in /usr/lib/system/libsystem_platform.dylib)
+==58915==    by 0x1004D6D29: _notify_fork_child (in /usr/lib/system/libsystem_notify.dylib)
+==58915==    by 0x1000F1B12: libSystem_atfork_child (in /usr/lib/libSystem.B.dylib)
+==58915==    by 0x1002F5D96: fork (in /usr/lib/system/libsystem_c.dylib)
+==58915==    by 0x100004372: minishell_launch (in ./minishell)
+==58915==    by 0x100004F44: execute_commands (in ./minishell)
+==58915==    by 0x100007B92: execute_pipes (in ./minishell)
+==58915==    by 0x1000012D9: minishell_start (in ./minishell)
+==58915== 
+==58915== 2,064 (16 direct, 2,048 indirect) bytes in 1 blocks are definitely lost in loss record 70 of 73
+==58915==    at 0x1000E5995: malloc (in /Users/frthierr/.brew/Cellar/valgrind/HEAD-3ab1ae5/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==58915==    by 0x1004D5B17: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58915==    by 0x1004D5AF6: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58915==    by 0x100536AAA: _os_once_callout (in /usr/lib/system/libsystem_platform.dylib)
+==58915==    by 0x100536A6E: _os_alloc_once (in /usr/lib/system/libsystem_platform.dylib)
+==58915==    by 0x1004D6D29: _notify_fork_child (in /usr/lib/system/libsystem_notify.dylib)
+==58915==    by 0x1000F1B12: libSystem_atfork_child (in /usr/lib/libSystem.B.dylib)
+==58915==    by 0x1002F5D96: fork (in /usr/lib/system/libsystem_c.dylib)
+==58915==    by 0x100004372: minishell_launch (in ./minishell)
+==58915==    by 0x100004F44: execute_commands (in ./minishell)
+==58915==    by 0x100007B92: execute_pipes (in ./minishell)
+==58915==    by 0x1000012D9: minishell_start (in ./minishell)
+==58915== 
+==58915== LEAK SUMMARY:
+==58915==    definitely lost: 32 bytes in 2 blocks
+==58915==    indirectly lost: 4,096 bytes in 2 blocks
+==58915==      possibly lost: 8,904 bytes in 8 blocks
+==58915==    still reachable: 19,147 bytes in 307 blocks
+==58915==         suppressed: 0 bytes in 0 blocks
+==58915== Reachable blocks (those to which a pointer was found) are not shown.
+==58915== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==58915== 
+==58915== Use --track-origins=yes to see where uninitialised values come from
+==58915== For lists of detected and suppressed errors, rerun with: -s
+==58915== ERROR SUMMARY: 19 errors from 11 contexts (suppressed: 398 from 10)
+==58916== 
+==58916== HEAP SUMMARY:
+==58916==     in use at exit: 32,181 bytes in 319 blocks
+==58916==   total heap usage: 1,096 allocs, 777 frees, 83,107 bytes allocated
+==58916== 
+==58916== 2,064 (16 direct, 2,048 indirect) bytes in 1 blocks are definitely lost in loss record 69 of 73
+==58916==    at 0x1000E5995: malloc (in /Users/frthierr/.brew/Cellar/valgrind/HEAD-3ab1ae5/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==58916==    by 0x1004D5B17: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58916==    by 0x1004D5AE8: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58916==    by 0x100536AAA: _os_once_callout (in /usr/lib/system/libsystem_platform.dylib)
+==58916==    by 0x100536A6E: _os_alloc_once (in /usr/lib/system/libsystem_platform.dylib)
+==58916==    by 0x1004D6D29: _notify_fork_child (in /usr/lib/system/libsystem_notify.dylib)
+==58916==    by 0x1000F1B12: libSystem_atfork_child (in /usr/lib/libSystem.B.dylib)
+==58916==    by 0x1002F5D96: fork (in /usr/lib/system/libsystem_c.dylib)
+==58916==    by 0x100004372: minishell_launch (in ./minishell)
+==58916==    by 0x100004F44: execute_commands (in ./minishell)
+==58916==    by 0x100007B92: execute_pipes (in ./minishell)
+==58916==    by 0x1000012D9: minishell_start (in ./minishell)
+==58916== 
+==58916== 2,064 (16 direct, 2,048 indirect) bytes in 1 blocks are definitely lost in loss record 70 of 73
+==58916==    at 0x1000E5995: malloc (in /Users/frthierr/.brew/Cellar/valgrind/HEAD-3ab1ae5/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==58916==    by 0x1004D5B17: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58916==    by 0x1004D5AF6: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58916==    by 0x100536AAA: _os_once_callout (in /usr/lib/system/libsystem_platform.dylib)
+==58916==    by 0x100536A6E: _os_alloc_once (in /usr/lib/system/libsystem_platform.dylib)
+==58916==    by 0x1004D6D29: _notify_fork_child (in /usr/lib/system/libsystem_notify.dylib)
+==58916==    by 0x1000F1B12: libSystem_atfork_child (in /usr/lib/libSystem.B.dylib)
+==58916==    by 0x1002F5D96: fork (in /usr/lib/system/libsystem_c.dylib)
+==58916==    by 0x100004372: minishell_launch (in ./minishell)
+==58916==    by 0x100004F44: execute_commands (in ./minishell)
+==58916==    by 0x100007B92: execute_pipes (in ./minishell)
+==58916==    by 0x1000012D9: minishell_start (in ./minishell)
+==58916== 
+==58916== LEAK SUMMARY:
+==58916==    definitely lost: 32 bytes in 2 blocks
+==58916==    indirectly lost: 4,096 bytes in 2 blocks
+==58916==      possibly lost: 8,904 bytes in 8 blocks
+==58916==    still reachable: 19,149 bytes in 307 blocks
+==58916==         suppressed: 0 bytes in 0 blocks
+==58916== Reachable blocks (those to which a pointer was found) are not shown.
+==58916== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==58916== 
+==58916== Use --track-origins=yes to see where uninitialised values come from
+==58916== For lists of detected and suppressed errors, rerun with: -s
+==58916== ERROR SUMMARY: 23 errors from 11 contexts (suppressed: 398 from 10)
+==58917== 
+==58917== HEAP SUMMARY:
+==58917==     in use at exit: 32,168 bytes in 319 blocks
+==58917==   total heap usage: 1,321 allocs, 1,002 frees, 97,640 bytes allocated
+==58917== 
+==58917== 2,064 (16 direct, 2,048 indirect) bytes in 1 blocks are definitely lost in loss record 69 of 73
+==58917==    at 0x1000E5995: malloc (in /Users/frthierr/.brew/Cellar/valgrind/HEAD-3ab1ae5/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==58917==    by 0x1004D5B17: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58917==    by 0x1004D5AE8: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58917==    by 0x100536AAA: _os_once_callout (in /usr/lib/system/libsystem_platform.dylib)
+==58917==    by 0x100536A6E: _os_alloc_once (in /usr/lib/system/libsystem_platform.dylib)
+==58917==    by 0x1004D6D29: _notify_fork_child (in /usr/lib/system/libsystem_notify.dylib)
+==58917==    by 0x1000F1B12: libSystem_atfork_child (in /usr/lib/libSystem.B.dylib)
+==58917==    by 0x1002F5D96: fork (in /usr/lib/system/libsystem_c.dylib)
+==58917==    by 0x100004372: minishell_launch (in ./minishell)
+==58917==    by 0x100004F44: execute_commands (in ./minishell)
+==58917==    by 0x100007B92: execute_pipes (in ./minishell)
+==58917==    by 0x1000012D9: minishell_start (in ./minishell)
+==58917== 
+==58917== 2,064 (16 direct, 2,048 indirect) bytes in 1 blocks are definitely lost in loss record 70 of 73
+==58917==    at 0x1000E5995: malloc (in /Users/frthierr/.brew/Cellar/valgrind/HEAD-3ab1ae5/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==58917==    by 0x1004D5B17: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58917==    by 0x1004D5AF6: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58917==    by 0x100536AAA: _os_once_callout (in /usr/lib/system/libsystem_platform.dylib)
+==58917==    by 0x100536A6E: _os_alloc_once (in /usr/lib/system/libsystem_platform.dylib)
+==58917==    by 0x1004D6D29: _notify_fork_child (in /usr/lib/system/libsystem_notify.dylib)
+==58917==    by 0x1000F1B12: libSystem_atfork_child (in /usr/lib/libSystem.B.dylib)
+==58917==    by 0x1002F5D96: fork (in /usr/lib/system/libsystem_c.dylib)
+==58917==    by 0x100004372: minishell_launch (in ./minishell)
+==58917==    by 0x100004F44: execute_commands (in ./minishell)
+==58917==    by 0x100007B92: execute_pipes (in ./minishell)
+==58917==    by 0x1000012D9: minishell_start (in ./minishell)
+==58917== 
+==58917== LEAK SUMMARY:
+==58917==    definitely lost: 32 bytes in 2 blocks
+==58917==    indirectly lost: 4,096 bytes in 2 blocks
+==58917==      possibly lost: 8,904 bytes in 8 blocks
+==58917==    still reachable: 19,136 bytes in 307 blocks
+==58917==         suppressed: 0 bytes in 0 blocks
+==58917== Reachable blocks (those to which a pointer was found) are not shown.
+==58917== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==58917== 
+==58917== Use --track-origins=yes to see where uninitialised values come from
+==58917== For lists of detected and suppressed errors, rerun with: -s
+==58917== ERROR SUMMARY: 27 errors from 11 contexts (suppressed: 398 from 10)
+exit
+==58912== 
+==58912== HEAP SUMMARY:
+==58912==     in use at exit: 20,428 bytes in 266 blocks
+==58912==   total heap usage: 1,313 allocs, 1,047 frees, 87,039 bytes allocated
+==58912== 
+==58912== LEAK SUMMARY:
+==58912==    definitely lost: 0 bytes in 0 blocks
+==58912==    indirectly lost: 0 bytes in 0 blocks
+==58912==      possibly lost: 8,840 bytes in 7 blocks
+==58912==    still reachable: 11,588 bytes in 259 blocks
+==58912==         suppressed: 0 bytes in 0 blocks
+==58912== Reachable blocks (those to which a pointer was found) are not shown.
+==58912== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==58912== 
+==58912== Use --track-origins=yes to see where uninitialised values come from
+==58912== For lists of detected and suppressed errors, rerun with: -s
+==58912== ERROR SUMMARY: 26 errors from 8 contexts (suppressed: 398 from 10)
+"mkdir test_dir ; cd test_dir ; rm -rf ../test_dir ; cd . ; pwd ; cd . ; pwd ; cd .. ; pwd"
+==58926== Memcheck, a memory error detector
+==58926== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==58926== Using Valgrind-3.17.0.GIT and LibVEX; rerun with -h for copyright info
+==58926== Command: ./minishell
+==58926== 
+[0;34mminishell$ [0m==58926== Syscall param stat64(path) points to unaddressable byte(s)
+==58926==    at 0x1004F4EDA: stat$INODE64 (in /usr/lib/system/libsystem_kernel.dylib)
+==58926==    by 0x100007CB5: is_dir (in ./minishell)
+==58926==    by 0x1000045B9: redir_error (in ./minishell)
+==58926==    by 0x100004A8E: do_redir (in ./minishell)
+==58926==    by 0x1000042D6: minishell_launch (in ./minishell)
+==58926==    by 0x100004F44: execute_commands (in ./minishell)
+==58926==    by 0x100007B92: execute_pipes (in ./minishell)
+==58926==    by 0x1000012D9: minishell_start (in ./minishell)
+==58926==    by 0x100001544: main (in ./minishell)
+==58926==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==58926== 
+==58926== Conditional jump or move depends on uninitialised value(s)
+==58926==    at 0x100007CCF: is_dir (in ./minishell)
+==58926==    by 0x1000045B9: redir_error (in ./minishell)
+==58926==    by 0x100004A8E: do_redir (in ./minishell)
+==58926==    by 0x1000042D6: minishell_launch (in ./minishell)
+==58926==    by 0x100004F44: execute_commands (in ./minishell)
+==58926==    by 0x100007B92: execute_pipes (in ./minishell)
+==58926==    by 0x1000012D9: minishell_start (in ./minishell)
+==58926==    by 0x100001544: main (in ./minishell)
+==58926== 
+cat: tests/lorem.txt: No such file or directory
+exit
+==58926== 
+==58926== HEAP SUMMARY:
+==58926==     in use at exit: 19,834 bytes in 210 blocks
+==58926==   total heap usage: 410 allocs, 200 frees, 33,663 bytes allocated
+==58926== 
+==58926== LEAK SUMMARY:
+==58926==    definitely lost: 0 bytes in 0 blocks
+==58926==    indirectly lost: 0 bytes in 0 blocks
+==58926==      possibly lost: 8,840 bytes in 7 blocks
+==58926==    still reachable: 10,994 bytes in 203 blocks
+==58926==         suppressed: 0 bytes in 0 blocks
+==58926== Reachable blocks (those to which a pointer was found) are not shown.
+==58926== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==58926== 
+==58926== Use --track-origins=yes to see where uninitialised values come from
+==58926== For lists of detected and suppressed errors, rerun with: -s
+==58926== ERROR SUMMARY: 14 errors from 8 contexts (suppressed: 398 from 10)
+"cat tests/lorem.txt | grep arcu | cat -e"
+==58939== Memcheck, a memory error detector
+==58939== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==58939== Using Valgrind-3.17.0.GIT and LibVEX; rerun with -h for copyright info
+==58939== Command: ./minishell
+==58939== 
+[0;34mminishell$ [0m==58939== Syscall param stat64(path) points to unaddressable byte(s)
+==58939==    at 0x1004F4EDA: stat$INODE64 (in /usr/lib/system/libsystem_kernel.dylib)
+==58939==    by 0x100007CB5: is_dir (in ./minishell)
+==58939==    by 0x1000045B9: redir_error (in ./minishell)
+==58939==    by 0x100004A8E: do_redir (in ./minishell)
+==58939==    by 0x1000042D6: minishell_launch (in ./minishell)
+==58939==    by 0x100004F44: execute_commands (in ./minishell)
+==58939==    by 0x100007B92: execute_pipes (in ./minishell)
+==58939==    by 0x1000012D9: minishell_start (in ./minishell)
+==58939==    by 0x100001544: main (in ./minishell)
+==58939==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==58939== 
+==58939== Conditional jump or move depends on uninitialised value(s)
+==58939==    at 0x100007CCF: is_dir (in ./minishell)
+==58939==    by 0x1000045B9: redir_error (in ./minishell)
+==58939==    by 0x100004A8E: do_redir (in ./minishell)
+==58939==    by 0x1000042D6: minishell_launch (in ./minishell)
+==58939==    by 0x100004F44: execute_commands (in ./minishell)
+==58939==    by 0x100007B92: execute_pipes (in ./minishell)
+==58939==    by 0x1000012D9: minishell_start (in ./minishell)
+==58939==    by 0x100001544: main (in ./minishell)
+==58939== 
+==58940== 
+==58940== HEAP SUMMARY:
+==58940==     in use at exit: 92,196 bytes in 6,362 blocks
+==58940==   total heap usage: 6,401 allocs, 39 frees, 114,319 bytes allocated
+==58940== 
+==58940== 2,064 (16 direct, 2,048 indirect) bytes in 1 blocks are definitely lost in loss record 65 of 76
+==58940==    at 0x1000E5995: malloc (in /Users/frthierr/.brew/Cellar/valgrind/HEAD-3ab1ae5/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==58940==    by 0x1004D5B17: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58940==    by 0x1004D5AE8: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58940==    by 0x100536AAA: _os_once_callout (in /usr/lib/system/libsystem_platform.dylib)
+==58940==    by 0x100536A6E: _os_alloc_once (in /usr/lib/system/libsystem_platform.dylib)
+==58940==    by 0x1004D6D29: _notify_fork_child (in /usr/lib/system/libsystem_notify.dylib)
+==58940==    by 0x1000F1B12: libSystem_atfork_child (in /usr/lib/libSystem.B.dylib)
+==58940==    by 0x1002F5D96: fork (in /usr/lib/system/libsystem_c.dylib)
+==58940==    by 0x100004372: minishell_launch (in ./minishell)
+==58940==    by 0x100004F44: execute_commands (in ./minishell)
+==58940==    by 0x100007B92: execute_pipes (in ./minishell)
+==58940==    by 0x1000012D9: minishell_start (in ./minishell)
+==58940== 
+==58940== 2,064 (16 direct, 2,048 indirect) bytes in 1 blocks are definitely lost in loss record 66 of 76
+==58940==    at 0x1000E5995: malloc (in /Users/frthierr/.brew/Cellar/valgrind/HEAD-3ab1ae5/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==58940==    by 0x1004D5B17: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58940==    by 0x1004D5AF6: notify_set_state (in /usr/lib/system/libsystem_notify.dylib)
+==58940==    by 0x100536AAA: _os_once_callout (in /usr/lib/system/libsystem_platform.dylib)
+==58940==    by 0x100536A6E: _os_alloc_once (in /usr/lib/system/libsystem_platform.dylib)
+==58940==    by 0x1004D6D29: _notify_fork_child (in /usr/lib/system/libsystem_notify.dylib)
+==58940==    by 0x1000F1B12: libSystem_atfork_child (in /usr/lib/libSystem.B.dylib)
+==58940==    by 0x1002F5D96: fork (in /usr/lib/system/libsystem_c.dylib)
+==58940==    by 0x100004372: minishell_launch (in ./minishell)
+==58940==    by 0x100004F44: execute_commands (in ./minishell)
+==58940==    by 0x100007B92: execute_pipes (in ./minishell)
+==58940==    by 0x1000012D9: minishell_start (in ./minishell)
+==58940== 
+==58940== LEAK SUMMARY:
+==58940==    definitely lost: 32 bytes in 2 blocks
+==58940==    indirectly lost: 4,096 bytes in 2 blocks
+==58940==      possibly lost: 8,904 bytes in 8 blocks
+==58940==    still reachable: 79,164 bytes in 6,350 blocks
+==58940==         suppressed: 0 bytes in 0 blocks
+==58940== Reachable blocks (those to which a pointer was found) are not shown.
+==58940== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==58940== 
+==58940== Use --track-origins=yes to see where uninitialised values come from
+==58940== For lists of detected and suppressed errors, rerun with: -s
+==58940== ERROR SUMMARY: 11 errors from 11 contexts (suppressed: 398 from 10)
+exit
+==58939== 
+==58939== HEAP SUMMARY:
+==58939==     in use at exit: 60,620 bytes in 4,506 blocks
+==58939==   total heap usage: 21,154 allocs, 16,648 frees, 482,138 bytes allocated
+==58939== 
+==58939== LEAK SUMMARY:
+==58939==    definitely lost: 0 bytes in 0 blocks
+==58939==    indirectly lost: 0 bytes in 0 blocks
+==58939==      possibly lost: 8,840 bytes in 7 blocks
+==58939==    still reachable: 51,780 bytes in 4,499 blocks
+==58939==         suppressed: 0 bytes in 0 blocks
+==58939== Reachable blocks (those to which a pointer was found) are not shown.
+==58939== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==58939== 
+==58939== Use --track-origins=yes to see where uninitialised values come from
+==58939== For lists of detected and suppressed errors, rerun with: -s
+==58939== ERROR SUMMARY: 730 errors from 8 contexts (suppressed: 398 from 10)
+"echo test | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e| cat -e| cat -e| cat -e| cat -e| cat -e| cat -e| cat -e| cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e|cat -e"
+==59676== Memcheck, a memory error detector
+==59676== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==59676== Using Valgrind-3.17.0.GIT and LibVEX; rerun with -h for copyright info
+==59676== Command: ./minishell
+==59676== 
+[0;34mminishell$ [0m==59676== Syscall param stat64(path) points to unaddressable byte(s)
+==59676==    at 0x1004F4EDA: stat$INODE64 (in /usr/lib/system/libsystem_kernel.dylib)
+==59676==    by 0x100007CB5: is_dir (in ./minishell)
+==59676==    by 0x1000045B9: redir_error (in ./minishell)
+==59676==    by 0x100004A8E: do_redir (in ./minishell)
+==59676==    by 0x1000042D6: minishell_launch (in ./minishell)
+==59676==    by 0x100004F44: execute_commands (in ./minishell)
+==59676==    by 0x100007B92: execute_pipes (in ./minishell)
+==59676==    by 0x1000012D9: minishell_start (in ./minishell)
+==59676==    by 0x100001544: main (in ./minishell)
+==59676==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==59676== 
+==59676== Conditional jump or move depends on uninitialised value(s)
+==59676==    at 0x100007CCF: is_dir (in ./minishell)
+==59676==    by 0x1000045B9: redir_error (in ./minishell)
+==59676==    by 0x100004A8E: do_redir (in ./minishell)
+==59676==    by 0x1000042D6: minishell_launch (in ./minishell)
+==59676==    by 0x100004F44: execute_commands (in ./minishell)
+==59676==    by 0x100007B92: execute_pipes (in ./minishell)
+==59676==    by 0x1000012D9: minishell_start (in ./minishell)
+==59676==    by 0x100001544: main (in ./minishell)
+==59676== 

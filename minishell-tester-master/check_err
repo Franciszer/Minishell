@@ -72,3 +72,122 @@ Error: too many arguments
 exit
 [0;34mminishell$ [0mError: unknown command
 exit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0m[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mcat: tests/lorem.txt: No such file or directory
+exit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0m[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0m[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0m[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mcat: tests/lorem.txt: No such file or directory
+exit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0m[0;34mminishell$ [0m[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mcat: tests/lorem.txt: No such file or directory
+exit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0m[0;34mminishell$ [0m[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0m[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mcat: tests/lorem.txt: No such file or directory
+exit
+[0;34mminishell$ [0mexit
+exit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0m[0;34mminishell$ [0m[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mcat: tests/lorem.txt: No such file or directory
+exit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mError: invalid argument
+exit
+[0;34mminishell$ [0mError: invalid argument
+exit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mError: invalid argument
+exit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mError: invalid argument
+exit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mcat: tests/lorem.txt: No such file or directory
+exit
+[0;34mminishell$ [0mError: Syntax error: near '|' ot ';'
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mError: Syntax error: near '|' ot ';'
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mError: syntax error near unexpected token `<'
+exit
+[0;34mminishell$ [0mError: Syntax error: near '|' ot ';'
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mError: syntax error near unexpected token `newline'
+exit
+[0;34mminishell$ [0mexit
+[0;34mminishell$ [0mexit
+Error: too many arguments
+[0;34mminishell$ [0mError: unknown command
+exit
+exit
