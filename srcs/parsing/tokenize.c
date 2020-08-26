@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 16:27:14 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/25 17:38:50 by qfeuilla         ###   ########.fr       */
+/*   Updated: 2020/08/26 12:26:26 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,35 +48,30 @@ int		expand_quote_set_vals_env(char *tk, t_expand_tk_dt *d)
 char	*expand_env_var(char *tk, t_expand_tk_dt d)
 {
 	char	*tmp;
+	int		save;
 
 	if (!expand_quote_set_vals_env(tk, &d))
 		return (!d.is_err ? d.final_token : NULL);
 	while (tk[d.ij.a])
 	{
-		tk[d.ij.a] == '\'' && d.qt.dq == -1 && (!d.pb || d.qt.q == 1)
-				? d.qt.q *= -1 : 0;
-		tk[d.ij.a] == '\"' && d.qt.q == -1 && !d.pb
-				? d.qt.dq *= -1 : 0;
-		if (d.qt.q == -1 && tk[d.ij.a] == '$' && tk[d.ij.a + 1] &&
-			!d.pb && ft_isalnum(tk[d.ij.a + 1]))
+		do_quotes(&d, tk);
+		if (!d.pb && d.qt.q == -1 && tk[d.ij.a] == '$' && tk[d.ij.a + 1]
+			&& ft_isalnum(tk[d.ij.a + 1]))
 		{
 			if (!(tmp = eev(tk, d.final_token, &d.ij.a, &d.ij.b)))
 				return (NULL);
 			else
-			{
-				free(d.final_token);
-				d.final_token = tmp;
-			}
+				manage_tmp(&d, tmp, tk);
 		}
-		if (tk[d.ij.a] == '\\' && !d.pb && d.qt.q == -1)
+		if (((save = d.pb) + 1) && tk[d.ij.a] == '\\' && !d.pb && d.qt.q == -1)
 			d.pb = 1;
 		else
 			d.pb = 0;
-		if (tk[d.ij.a] && !(!d.pb && tk[d.ij.a] == '$' && d.qt.q == -1 && tk[d.ij.a + 1]))
+		if (tk[d.ij.a] && !(!save && tk[d.ij.a] == '$' && d.qt.q == -1 &&
+			tk[d.ij.a + 1] && ft_isalnum(tk[d.ij.a + 1])))
 			d.final_token[d.ij.b++] = tk[d.ij.a++];
 	}
-	d.final_token[d.ij.b] = '\0';
-	return (d.final_token);
+	return (!(d.final_token[d.ij.b] = '\0') ? d.final_token : d.final_token);
 }
 
 t_list	*tokenize(char *line)

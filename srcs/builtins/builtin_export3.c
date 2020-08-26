@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 13:58:47 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/25 15:11:25 by qfeuilla         ###   ########.fr       */
+/*   Updated: 2020/08/26 12:23:30 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int			replace_envvar_util(t_list *nav, char *arg)
-{
-	char	*current_env;
-	size_t	len;
-
-	current_env = (char*)nav->content;
-	len = ft_strlen(current_env);
-	if (current_env[len - 1] != '=' &&\
-		!ft_strncmp(current_env, arg, ft_strlen(current_env)))
-	{
-		free(nav->content);
-		if (!(nav->content = ft_strdup(arg)))
-			return (-1);
-		return (1);
-	}
-	return (0);
-}
 
 int			replace_envar_free(t_list **env_list, char *new_arg, int replaced)
 {

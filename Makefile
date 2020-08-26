@@ -1,4 +1,4 @@
-FLAGS=-Wall -Wextra  -Werror# -fsanitize=address
+FLAGS=-Wall -Wextra  -Werror #-fsanitize=address
 # -static-libasan -fPIE -pie
 # VARIABLES
 
@@ -12,6 +12,7 @@ SRCS=	srcs/parsing/prompt_loop.c\
 		srcs/parsing/token_len.c\
 		srcs/parsing/token_len_utils.c\
 		srcs/parsing/tokenize.c\
+		srcs/parsing/tokenize_utils.c\
 		srcs/parsing/syntax_check.c\
 		srcs/commands/search_path.c\
 		srcs/token_expansion/get_env.c\
