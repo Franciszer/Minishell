@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 13:39:32 by frthierr          #+#    #+#             */
-/*   Updated: 2020/08/26 18:56:44 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/08/26 19:00:16 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,29 +39,6 @@ void	minishell_start(void)
 		return ;
 }
 
-int		copy_env(char ***env)
-{
-	size_t	i;
-	char	**new_env;
-
-	i = 0;
-	while ((*env)[i])
-		i++;
-	if (!(new_env = (char**)malloc(sizeof(char*) * (i + 1))))
-		return (0);
-	i = 0;
-	while ((*env)[i])
-	{
-		if (!(new_env[i] = ft_strdup((*env)[i])))
-			return (0);
-		i++;
-	}
-	new_env[i] = NULL;
-	g_env = new_env;
-	g_env_modified = 1;
-	return (1);
-}
-
 int		main(int argc, char **argv, char **env)
 {
 	g_open_pipe = 0;
@@ -75,8 +52,7 @@ int		main(int argc, char **argv, char **env)
 		ft_perror("ERR_TOO_MANY_ARGS");
 		return (1);
 	}
-	if (!copy_env(&env))
-		return (!ft_perror("allocation error") ? 1 : 1);
+	g_env = env;
 	while (1)
 	{
 		signal(SIGINT, sigint_handler);
