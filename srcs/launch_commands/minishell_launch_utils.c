@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_launch_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qfeuilla <qfeuilla@student.42.fr>          +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 00:58:12 by qfeuilla          #+#    #+#             */
-/*   Updated: 2020/08/24 18:39:07 by qfeuilla         ###   ########.fr       */
+/*   Updated: 2020/08/26 17:34:21 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	child(t_int2 save_last, int contain_putfile,
 	if ((builtin_id = is_builtin_child((*argv)[0])) >= 0)
 	{
 		g_exit_status = launch_builtin_child(builtin_id, (*argv));
-		fclose(stdout);
+		close(STDOUT_FILENO);
 		exit(g_exit_status);
 	}
 	else if (execve((*argv)[0], (*argv), g_env) == -1)

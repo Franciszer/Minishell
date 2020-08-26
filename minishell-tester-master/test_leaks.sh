@@ -45,29 +45,11 @@ chmod 755 minishell
 
 function exec_test()
 {
-	TEST1=$(echo $@ "; exit" | ./minishell 2>>check_err)
+	TEST1=$(echo $@ "; exit" | valgrind --leak-check=full --show-leak-kinds=definite ./minishell 2>>leak_check)
 	ES_1=$?
 	TEST2=$(echo $@ "; exit" | bash 2>&-)
 	ES_2=$?
-	if [ "$TEST1" == "$TEST2" ] && [ "$ES_1" == "$ES_2" ]; then
-		printf " $BOLDGREEN%s$RESET" "✓ "
-	else
-		printf " $BOLDRED%s$RESET" "✗ "
-	fi
-	printf "$CYAN \"$@\" $RESET"
-	if [ "$TEST1" != "$TEST2" ]; then
-		echo
-		echo
-		printf $BOLDRED"Your output : \n%.20s\n$BOLDRED$TEST1\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
-		printf $BOLDGREEN"Expected output : \n%.20s\n$BOLDGREEN$TEST2\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
-	fi
-	if [ "$ES_1" != "$ES_2" ]; then
-		echo
-		echo
-		printf $BOLDRED"Your exit status : $BOLDRED$ES_1$RESET\n"
-		printf $BOLDGREEN"Expected exit status : $BOLDGREEN$ES_2$RESET\n"
-	fi
-	echo
+	echo \"$@\" >> leak_check
 	sleep 0.1
 }
 
@@ -78,6 +60,8 @@ printf "| |\/| | | | | . \` | | |  \___ \|  __  |  __| | |    | |     \n"
 printf "| |  | |_| |_| |\  |_| |_ ____) | |  | | |____| |____| |____ \n"
 printf "|_|  |_|_____|_| \_|_____|_____/|_|  |_|______|______|______|\n$RESET"
 echo
+
+rm leak_check
 
 # ECHO TESTS
 exec_test 'echo test tout'
@@ -171,3 +155,4 @@ exec_test "exit 42 53 68"
 exec_test "ls -la | wtf"
 
 rm lol ls test
+grep "definitely lost:" leak_check | grep -v 32
